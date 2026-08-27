@@ -1,11 +1,420 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>GramLeek</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05070a" />
+
+  <title>GramLeek — Not a Vegetable.</title>
+  <meta
+    name="description"
+    content="GramLeek — Not a vegetable. Website under construction."
+  />
+
+  <style>
+    :root {
+      --bg: #05070a;
+      --line: rgba(255,255,255,.10);
+      --text: #f5f7f8;
+      --muted: #929ba3;
+      --green: #a6ff2f;
+      --blue: #28b9ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+    }
+
+    body {
+      color: var(--text);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Inter,
+        Arial,
+        sans-serif;
+
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(
+          circle at 22% 18%,
+          rgba(137,255,45,.16),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 26%,
+          rgba(0,162,255,.17),
+          transparent 32%
+        ),
+        linear-gradient(
+          145deg,
+          #030405 0%,
+          #070b0d 45%,
+          #04070b 100%
+        );
+    }
+
+    .page {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      min-height: 100svh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 48px 22px;
+      position: relative;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 760px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glow {
+      position: absolute;
+      left: 50%;
+      top: 38%;
+
+      transform: translate(-50%, -50%);
+
+      width: min(74vw, 580px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 35% 50%,
+          rgba(166,255,47,.18),
+          transparent 52%
+        ),
+        radial-gradient(
+          circle at 70% 50%,
+          rgba(40,185,255,.20),
+          transparent 58%
+        );
+
+      filter: blur(35px);
+      opacity: .85;
+      z-index: -1;
+
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      50% {
+        transform: translate(-50%, -50%) scale(1.06);
+        opacity: .68;
+      }
+    }
+
+    .logo-wrap {
+      width: 170px;
+      height: 170px;
+
+      margin: 0 auto 28px;
+
+      border-radius: 50%;
+      padding: 5px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(166,255,47,.95),
+          rgba(40,185,255,.95)
+        );
+
+      box-shadow:
+        0 0 46px rgba(166,255,47,.16),
+        0 0 56px rgba(40,185,255,.18);
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+
+      background: #071016;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+
+      color: var(--green);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      letter-spacing: .32em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+
+      font-size: clamp(58px, 11vw, 116px);
+      line-height: .85;
+
+      letter-spacing: -.065em;
+      font-weight: 850;
+
+      background:
+        linear-gradient(
+          100deg,
+          #efffe8 2%,
+          #adff3d 33%,
+          #66f2bf 55%,
+          #3ebfff 78%,
+          #e9f8ff 100%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+
+      filter:
+        drop-shadow(
+          0 0 26px rgba(77,210,255,.10)
+        );
+    }
+
+    .tagline {
+      margin: 22px 0 0;
+
+      color: #cbd3d7;
+
+      font-size: clamp(16px, 2vw, 20px);
+
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+
+      margin: 42px auto 0;
+      max-width: 610px;
+    }
+
+    .btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      min-height: 86px;
+      padding: 18px 22px;
+
+      border-radius: 28px;
+
+      text-decoration: none;
+      color: #fff;
+
+      border: 1px solid var(--line);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.075),
+          rgba(255,255,255,.025)
+        );
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      transition: .22s ease;
+    }
+
+    .btn.green {
+      border-color: rgba(166,255,47,.46);
+
+      box-shadow:
+        0 0 30px rgba(166,255,47,.10),
+        inset 0 1px rgba(255,255,255,.05);
+    }
+
+    .btn.blue {
+      border-color: rgba(40,185,255,.48);
+
+      box-shadow:
+        0 0 30px rgba(40,185,255,.11),
+        inset 0 1px rgba(255,255,255,.05);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      border-color: rgba(255,255,255,.34);
+    }
+
+    .btn strong {
+      font-size: 15px;
+      letter-spacing: .025em;
+    }
+
+    .btn span {
+      margin-top: 7px;
+
+      color: #a9b3b8;
+
+      font-size: 11px;
+
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .construction {
+      max-width: 610px;
+
+      margin: 28px auto 0;
+      padding: 22px 24px;
+
+      border-radius: 24px;
+
+      border: 1px solid var(--line);
+
+      background: rgba(255,255,255,.025);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .construction-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      letter-spacing: .14em;
+      text-transform: uppercase;
+
+      color: #dfe5e8;
+    }
+
+    .construction p {
+      margin: 10px 0 0;
+
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        padding: 38px 18px;
+      }
+
+      .logo-wrap {
+        width: 132px;
+        height: 132px;
+        margin-bottom: 24px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
+        margin-top: 34px;
+      }
+
+      .btn {
+        min-height: 80px;
+      }
+
+      .construction {
+        margin-top: 16px;
+      }
+
+      .tagline {
+        letter-spacing: .13em;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>GramLeek</h1>
-    <p>CA: EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw</p>
-    <p>Not a vegetable.</p>
+
+  <main class="page">
+
+    <section class="wrap">
+
+      <div class="glow"></div>
+
+      <div class="logo-wrap">
+        <img
+          class="logo"
+          src="Logo.png"
+          alt="GramLeek logo"
+        />
+      </div>
+
+      <p class="eyebrow">Built on GRAM</p>
+
+      <h1>GRAMLEEK</h1>
+
+      <p class="tagline">Not a vegetable.</p>
+
+      <div class="buttons">
+
+        <a
+          class="btn green"
+          href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>ENTER THE KITCHEN →</strong>
+          <span>View LEEK on DeDust</span>
+        </a>
+
+        <a
+          class="btn blue"
+          href="https://t.me/LeekCafe"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>ENTER CAFÉ →</strong>
+          <span>Join the community</span>
+        </a>
+
+      </div>
+
+      <div class="construction">
+
+        <div class="construction-title">
+          🚧 Website under construction
+        </div>
+
+        <p>
+          The kitchen is still being built.
+          We’re cooking the full GramLeek experience behind the scenes.
+          For now, grab a seat in the cafe and stay tuned.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
 </body>
 </html>

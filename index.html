@@ -20,6 +20,7 @@
       --muted: #929ba3;
       --green: #a6ff2f;
       --blue: #28b9ff;
+      --orange: #ff9d2e;
     }
 
     *,
@@ -348,6 +349,163 @@
       text-transform: uppercase;
     }
 
+    /* TRANSPARENCY */
+
+    .transparency {
+      width: 100%;
+      max-width: 610px;
+
+      margin: 32px auto 0;
+    }
+
+    .transparency-head {
+      margin-bottom: 16px;
+
+      color: var(--green);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      letter-spacing: .30em;
+
+      text-transform: uppercase;
+    }
+
+    .wallet {
+      width: 100%;
+
+      margin-top: 10px;
+      padding: 18px 20px;
+
+      border-radius: 22px;
+
+      text-align: left;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.05),
+          rgba(255,255,255,.018)
+        );
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .wallet.dev {
+      border: 1px solid rgba(166,255,47,.42);
+
+      box-shadow:
+        0 0 24px rgba(166,255,47,.055),
+        inset 0 1px rgba(255,255,255,.04);
+    }
+
+    .wallet.community {
+      border: 1px solid rgba(40,185,255,.44);
+
+      box-shadow:
+        0 0 24px rgba(40,185,255,.055),
+        inset 0 1px rgba(255,255,255,.04);
+    }
+
+    .wallet.burn {
+      border: 1px solid rgba(255,157,46,.44);
+
+      box-shadow:
+        0 0 24px rgba(255,157,46,.05),
+        inset 0 1px rgba(255,255,255,.04);
+    }
+
+    .wallet-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 16px;
+    }
+
+    .wallet-name {
+      font-size: 12px;
+      font-weight: 800;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+    }
+
+    .wallet.dev .wallet-name {
+      color: var(--green);
+    }
+
+    .wallet.community .wallet-name {
+      color: var(--blue);
+    }
+
+    .wallet.burn .wallet-name {
+      color: var(--orange);
+    }
+
+    .wallet-amount {
+      flex-shrink: 0;
+
+      color: #f5f7f8;
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .wallet-address {
+      display: block;
+
+      width: 100%;
+
+      margin-top: 11px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      color: var(--muted);
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+      font-size: 11px;
+
+      text-decoration: none;
+
+      transition: color .2s ease;
+    }
+
+    .wallet.dev .wallet-address:hover {
+      color: var(--green);
+    }
+
+    .wallet.community .wallet-address:hover {
+      color: var(--blue);
+    }
+
+    .wallet.burn .wallet-address:hover {
+      color: var(--orange);
+    }
+
+    .transparency-note {
+      margin: 16px 0 0;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    /* CONSTRUCTION */
+
     .construction {
       width: 100%;
       max-width: 610px;
@@ -434,10 +592,6 @@
       h1 {
         width: 100%;
 
-        /*
-          Scales with viewport width instead of a
-          specific iPhone/Android model.
-        */
         font-size: clamp(42px, 14vw, 68px);
 
         letter-spacing: -.055em;
@@ -473,11 +627,47 @@
         padding-right: 16px;
       }
 
+      .transparency {
+        width: 100%;
+        max-width: 100%;
+
+        margin-top: 28px;
+      }
+
+      .transparency-head {
+        font-size: 10px;
+        letter-spacing: .26em;
+      }
+
+      .wallet {
+        padding: 17px 18px;
+      }
+
+      .wallet-top {
+        gap: 10px;
+      }
+
+      .wallet-name {
+        font-size: 11px;
+      }
+
+      .wallet-amount {
+        font-size: 13px;
+      }
+
+      .wallet-address {
+        font-size: 10px;
+      }
+
+      .transparency-note {
+        font-size: 11px;
+      }
+
       .construction {
         width: 100%;
         max-width: 100%;
 
-        margin-top: 16px;
+        margin-top: 20px;
 
         padding: 21px 18px;
       }
@@ -521,6 +711,14 @@
       .btn span {
         font-size: 10px;
         letter-spacing: .12em;
+      }
+
+      .wallet-name {
+        font-size: 10px;
+      }
+
+      .wallet-amount {
+        font-size: 12px;
       }
 
       .construction-title {
@@ -577,6 +775,96 @@
 
       </div>
 
+
+      <!-- TRANSPARENCY -->
+
+      <div class="transparency">
+
+        <div class="transparency-head">
+          TRANSPARENCY
+        </div>
+
+        <div class="wallet dev">
+
+          <div class="wallet-top">
+            <div class="wallet-name">
+              DEV WALLET
+            </div>
+
+            <div class="wallet-amount">
+              50M LEEK · 5%
+            </div>
+          </div>
+
+          <a
+            class="wallet-address"
+            href="https://tonviewer.com/UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn
+          </a>
+
+        </div>
+
+
+        <div class="wallet community">
+
+          <div class="wallet-top">
+            <div class="wallet-name">
+              COMMUNITY FUND
+            </div>
+
+            <div class="wallet-amount">
+              50M LEEK · 5%
+            </div>
+          </div>
+
+          <a
+            class="wallet-address"
+            href="https://tonviewer.com/UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy
+          </a>
+
+        </div>
+
+
+        <div class="wallet burn">
+
+          <div class="wallet-top">
+            <div class="wallet-name">
+              BURNED
+            </div>
+
+            <div class="wallet-amount">
+              15M LEEK · 1.5%
+            </div>
+          </div>
+
+          <a
+            class="wallet-address"
+            href="https://tonviewer.com/UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ
+          </a>
+
+        </div>
+
+
+        <p class="transparency-note">
+          Public wallets. Everything on-chain. Verify it yourself.
+        </p>
+
+      </div>
+
+
+      <!-- WEBSITE UNDER CONSTRUCTION -->
+
       <div class="construction">
 
         <div class="construction-title">
@@ -585,7 +873,8 @@
 
         <p>
           Yes, the website is a little poor right now.<br>
-          Friendly reminder: <strong>we're a $2K market cap leek.</strong>
+          Friendly reminder:
+          <strong>we're a $2K market cap leek.</strong>
           <br><br>
           Give us a minute. We’ll make it beautiful.
         </p>

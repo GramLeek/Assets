@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#05070a" />
+<title>GramLeek — Not a Vegetable.</title>
+<meta name="description" content="GramLeek — Not a vegetable. Experimental MemeFi layer on TON." />
+<script src="https://unpkg.com/@tonconnect/ui@3.0.0/dist/tonconnect-ui.min.js"></script>
+<style>
+:root{--bg:#05070a;--line:rgba(255,255,255,.10);--text:#f5f7f8;--muted:#929ba3;--green:#a6ff2f;--blue:#28b9ff;--orange:#ff9d2e}
+*,*::before,*::after{box-sizing:border-box}
+html{width:100%;max-width:100%;min-height:100%;overflow-x:hidden;background:var(--bg)}
+body{margin:0;width:100%;max-width:100%;min-height:100%;overflow-x:hidden;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;background:radial-gradient(circle at 22% 18%,rgba(137,255,45,.16),transparent 30%),radial-gradient(circle at 80% 26%,rgba(0,162,255,.17),transparent 32%),linear-gradient(145deg,#030405 0%,#070b0d 45%,#04070b 100%)}
+img,video,svg,canvas{display:block;max-width:100%}
+button,input,select{font:inherit}
+.page{width:100%;max-width:1100px;min-height:100svh;margin:0 auto;padding:48px max(22px,env(safe-area-inset-right)) 48px max(22px,env(safe-area-inset-left));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.wrap{width:100%;max-width:760px;min-width:0;margin:0 auto;text-align:center;position:relative;z-index:1}
+.topbar{position:absolute;top:0;right:0;z-index:5}.lang-switch{display:inline-flex;gap:4px;padding:5px;border:1px solid rgba(255,255,255,.10);border-radius:999px;background:rgba(255,255,255,.035);backdrop-filter:blur(14px)}
+.lang-btn{min-width:44px;height:30px;border:0;border-radius:999px;color:#8d989f;background:transparent;font-size:10px;font-weight:850;letter-spacing:.12em;cursor:pointer}.lang-btn.active{color:#071006;background:linear-gradient(135deg,var(--green),#72f5b9);box-shadow:0 0 18px rgba(166,255,47,.16)}
+.glow{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:min(74vw,580px);max-width:580px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 50%,rgba(166,255,47,.18),transparent 52%),radial-gradient(circle at 70% 50%,rgba(40,185,255,.20),transparent 58%);filter:blur(35px);opacity:.85;z-index:-1;pointer-events:none;animation:breathe 5s ease-in-out infinite}
+@keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.06);opacity:.68}}
+.logo-wrap{width:170px;height:170px;max-width:100%;margin:0 auto 28px;border-radius:50%;padding:5px;background:linear-gradient(135deg,rgba(166,255,47,.95),rgba(40,185,255,.95));box-shadow:0 0 46px rgba(166,255,47,.16),0 0 56px rgba(40,185,255,.18);overflow:hidden}
+.logo{width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;background:#071016}
+.eyebrow{margin:0 0 14px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.32em;text-transform:uppercase}
+h1{margin:0 auto;width:100%;max-width:100%;font-size:clamp(48px,10vw,116px);line-height:.88;letter-spacing:-.065em;font-weight:850;white-space:nowrap;background:linear-gradient(100deg,#efffe8 2%,#adff3d 33%,#66f2bf 55%,#3ebfff 78%,#e9f8ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 26px rgba(77,210,255,.10))}
+.tagline{margin:22px 0 0;color:#cbd3d7;font-size:clamp(16px,2vw,20px);letter-spacing:.18em;text-transform:uppercase}
+.contract-box{width:100%;max-width:610px;margin:28px auto 0;padding:1px;border-radius:22px;position:relative;overflow:hidden;background:linear-gradient(115deg,rgba(166,255,47,.55),rgba(40,185,255,.48),rgba(166,255,47,.18));box-shadow:0 0 28px rgba(40,185,255,.06),0 0 26px rgba(166,255,47,.06)}
+.contract-box::before{content:"";position:absolute;inset:-140% -30%;background:linear-gradient(90deg,transparent 42%,rgba(255,255,255,.24) 49%,rgba(166,255,47,.35) 52%,transparent 59%);transform:rotate(14deg);animation:contractSweep 4.6s linear infinite;pointer-events:none}
+@keyframes contractSweep{from{transform:translateX(-55%) rotate(14deg)}to{transform:translateX(55%) rotate(14deg)}}
+.contract-inner{position:relative;z-index:1;border-radius:21px;padding:15px 16px;background:linear-gradient(180deg,rgba(8,15,17,.97),rgba(5,9,11,.97))}
+.contract-label{margin-bottom:10px;color:var(--green);font-size:9px;font-weight:850;letter-spacing:.28em;text-transform:uppercase}
+.contract-row{display:flex;align-items:center;gap:12px}.contract-address{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;color:#d8e1e4;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px}
+.copy-btn{flex-shrink:0;min-width:92px;height:38px;border:1px solid rgba(166,255,47,.34);border-radius:14px;color:var(--green);background:rgba(166,255,47,.06);font-size:10px;font-weight:850;letter-spacing:.10em;cursor:pointer;transition:.2s ease}.copy-btn.copied{color:#061006;background:var(--green);box-shadow:0 0 24px rgba(166,255,47,.22)}
+.buttons{width:100%;max-width:610px;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px auto 0}
+.btn{width:100%;min-width:0;min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 22px;border-radius:28px;text-decoration:none;color:#fff;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));backdrop-filter:blur(16px);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.btn.green{border-color:rgba(166,255,47,.46);box-shadow:0 0 30px rgba(166,255,47,.10),inset 0 1px rgba(255,255,255,.05)}.btn.blue{border-color:rgba(40,185,255,.48);box-shadow:0 0 30px rgba(40,185,255,.11),inset 0 1px rgba(255,255,255,.05)}.btn:hover{transform:translateY(-3px) scale(1.01);border-color:rgba(255,255,255,.34)}.btn strong{font-size:15px;letter-spacing:.025em}.btn span{margin-top:7px;color:#a9b3b8;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.transparency{width:100%;max-width:610px;margin:32px auto 0}.transparency-head{margin-bottom:16px;color:var(--green);font-size:11px;font-weight:800;letter-spacing:.30em;text-transform:uppercase}
+.wallet{width:100%;margin-top:10px;padding:18px 20px;border-radius:22px;text-align:left;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.018));backdrop-filter:blur(12px)}.wallet.dev{border:1px solid rgba(166,255,47,.42)}.wallet.community{border:1px solid rgba(40,185,255,.44)}.wallet.burn{border:1px solid rgba(255,157,46,.44)}
+.wallet-top{display:flex;align-items:center;justify-content:space-between;gap:16px}.wallet-name{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}.wallet.dev .wallet-name{color:var(--green)}.wallet.community .wallet-name{color:var(--blue)}.wallet.burn .wallet-name{color:var(--orange)}.wallet-amount{flex-shrink:0;color:#f5f7f8;font-size:14px;font-weight:700}
+.wallet-address{display:block;width:100%;margin-top:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px;text-decoration:none}.transparency-note{margin:16px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+.supply-scan{width:100%;max-width:610px;margin:28px auto 0;padding:1px;border-radius:26px;position:relative;overflow:hidden;background:linear-gradient(125deg,rgba(255,157,46,.44),rgba(166,255,47,.36),rgba(40,185,255,.28));box-shadow:0 0 34px rgba(255,157,46,.05),0 0 34px rgba(166,255,47,.05)}
+.supply-scan::before{content:"";position:absolute;inset:-80% -20%;background:linear-gradient(90deg,transparent 44%,rgba(255,255,255,.10) 50%,transparent 56%);transform:rotate(12deg);animation:supplySweep 6.4s linear infinite;pointer-events:none}
+@keyframes supplySweep{from{transform:translateX(-50%) rotate(12deg)}to{transform:translateX(50%) rotate(12deg)}}
+.supply-inner{position:relative;z-index:1;padding:24px;border-radius:25px;background:radial-gradient(circle at 0% 0%,rgba(255,157,46,.08),transparent 34%),radial-gradient(circle at 100% 100%,rgba(166,255,47,.07),transparent 34%),rgba(5,9,11,.96)}
+.supply-kicker{color:var(--orange);font-size:10px;font-weight:850;letter-spacing:.28em;text-transform:uppercase}.supply-title{margin-top:10px;font-size:25px;font-weight:850;letter-spacing:-.035em}.supply-copy{margin:9px auto 0;color:var(--muted);font-size:12px;line-height:1.6;max-width:470px}
+.supply-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.supply-stat{padding:16px 12px;border:1px solid rgba(255,255,255,.07);border-radius:17px;background:rgba(255,255,255,.025)}.supply-stat.full{grid-column:1/-1;padding:19px 14px}.supply-stat span{display:block;color:#77827e;font-size:8px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.supply-stat strong{display:block;margin-top:8px;color:#f5f7f8;font-size:18px}.supply-stat.full strong{font-size:clamp(26px,6vw,38px);letter-spacing:-.045em;background:linear-gradient(100deg,#fff,#a6ff2f 55%,#66d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.burn-meter{margin-top:16px;padding:14px;border:1px solid rgba(255,157,46,.14);border-radius:16px;background:rgba(255,157,46,.025)}.burn-meter-top{display:flex;justify-content:space-between;gap:12px;align-items:center;color:#8d9994;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.burn-meter-top b{color:var(--orange);font-size:11px}.burn-track{height:7px;margin-top:10px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.06)}.burn-fill{width:0;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--orange),var(--green));box-shadow:0 0 18px rgba(166,255,47,.25);transition:width 1.25s cubic-bezier(.2,.8,.2,1)}
+.supply-status{margin-top:14px;color:#78857e;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:10px;line-height:1.65;text-align:left}.supply-status b{color:var(--green)}
+
+/* LEEKSCAN */
+.leekscan{width:100%;max-width:610px;margin:28px auto 0;padding:1px;border-radius:28px;background:linear-gradient(130deg,rgba(166,255,47,.55),rgba(40,185,255,.43),rgba(255,157,46,.18));box-shadow:0 0 40px rgba(166,255,47,.05),0 0 40px rgba(40,185,255,.05)}
+.leekscan-inner{padding:24px;border-radius:27px;background:radial-gradient(circle at 10% 0%,rgba(166,255,47,.08),transparent 33%),radial-gradient(circle at 100% 15%,rgba(40,185,255,.09),transparent 34%),rgba(5,9,11,.97)}
+.scan-kicker{color:var(--green);font-size:10px;font-weight:850;letter-spacing:.28em;text-transform:uppercase}
+.scan-title{margin-top:10px;color:#f4f8f8;font-size:28px;font-weight:900;letter-spacing:-.045em}
+.scan-copy{max-width:500px;margin:10px auto 0;color:var(--muted);font-size:13px;line-height:1.65}
+#ton-connect{display:flex;justify-content:center;margin-top:18px}
+.scan-terminal{margin-top:18px;padding:16px;min-height:86px;border:1px solid rgba(255,255,255,.08);border-radius:18px;text-align:left;background:#030607;color:#91a09b;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:11px;line-height:1.8}.scan-terminal b{color:var(--green)}
+.scan-result{display:none;margin-top:16px;text-align:left}.scan-result.show{display:block}
+.leek-card{--a:#a6ff2f;--b:#28b9ff;--c:#ff9d2e;position:relative;overflow:hidden;border:1px solid rgba(166,255,47,.28);border-radius:24px;background:radial-gradient(circle at 78% 18%,color-mix(in srgb,var(--b) 18%,transparent),transparent 34%),radial-gradient(circle at 12% 88%,color-mix(in srgb,var(--a) 13%,transparent),transparent 38%),linear-gradient(145deg,#070908,#0d1110 58%,#050706);box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.leek-card::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.11;background:radial-gradient(circle,rgba(255,255,255,.32) .55px,transparent .8px);background-size:12px 12px;mix-blend-mode:overlay}
+.leek-card::after{content:"";position:absolute;inset:9px;border:1px solid color-mix(in srgb,var(--a) 22%,transparent);border-radius:18px;pointer-events:none}
+.card-top{position:relative;z-index:3;padding:16px 17px 8px;display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card-top-left{display:grid;gap:5px}.card-micro,.card-house{font:800 8px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em}.card-micro{color:var(--a)}.card-house{color:#737d76}
+.card-rarity{font:900 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.13em;padding:7px 8px;border:1px solid color-mix(in srgb,var(--a) 30%,transparent);border-radius:999px;color:var(--a)}
+.card-visual{position:relative;height:285px;margin:4px 13px 0;border:1px solid rgba(255,255,255,.055);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.015)}
+.card-visual::before{content:"";position:absolute;left:50%;top:53%;width:190px;height:190px;border-radius:50%;transform:translate(-50%,-50%);border:1px solid color-mix(in srgb,var(--b) 24%,transparent);box-shadow:0 0 52px color-mix(in srgb,var(--b) 10%,transparent)}
+.card-aura{position:absolute;inset:0;z-index:0}.aura-gold .card-aura{background:radial-gradient(circle at 50% 55%,rgba(255,211,74,.20),transparent 35%),radial-gradient(circle at 25% 20%,rgba(255,255,255,.09),transparent 2%) 0 0/28px 28px}.aura-frost .card-aura{background:radial-gradient(circle at 50% 55%,rgba(120,207,255,.18),transparent 38%),repeating-linear-gradient(135deg,transparent 0 22px,rgba(184,230,255,.025) 22px 24px)}.aura-static .card-aura{background:repeating-linear-gradient(180deg,transparent 0 4px,rgba(255,255,255,.025) 4px 5px),radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--b) 18%,transparent),transparent 37%)}.aura-void .card-aura{background:radial-gradient(circle at 50% 55%,transparent 0 25%,rgba(0,0,0,.35) 44%,rgba(0,0,0,.80) 78%),radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--b) 12%,transparent),transparent 48%)}.aura-flame .card-aura{background:radial-gradient(ellipse at 50% 78%,color-mix(in srgb,var(--c) 25%,transparent),transparent 32%),radial-gradient(ellipse at 38% 80%,color-mix(in srgb,var(--a) 16%,transparent),transparent 24%),radial-gradient(ellipse at 65% 82%,color-mix(in srgb,var(--b) 12%,transparent),transparent 24%)}
+.card-leek{position:absolute;inset:0;z-index:2}.card-leek svg{width:100%;height:100%;filter:drop-shadow(0 18px 25px rgba(0,0,0,.46))}
+.card-badge{position:absolute;right:12px;bottom:12px;z-index:4;padding:7px 9px;border:1px solid color-mix(in srgb,var(--a) 34%,transparent);border-radius:10px;background:rgba(4,7,6,.72);backdrop-filter:blur(10px);color:var(--a);font:900 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.10em}
+.card-identity{position:relative;z-index:3;padding:16px 17px 8px}.card-name{margin:0;font-size:29px;line-height:.92;letter-spacing:-.05em;font-weight:950}.card-trigger{margin:8px 0 0;color:#a8b0aa;font-size:11px;line-height:1.45}.card-roast{margin:9px 0 0;color:#77817a;font-size:10px;line-height:1.45}
+.card-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:8px 17px 12px;position:relative;z-index:3}.card-stat{border-top:1px solid rgba(255,255,255,.075);padding-top:9px}.card-stat b{display:block;font-size:13px}.card-stat span{display:block;margin-top:3px;color:#727c76;font:800 7px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.10em}.card-stat i{display:block;height:4px;margin-top:7px;border-radius:999px;background:rgba(255,255,255,.055);overflow:hidden}.card-stat em{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--b))}
+.card-chain{margin:0 17px;padding:11px 0;border-top:1px solid rgba(255,255,255,.07);display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.chain-item span{display:block;color:#68736c;font:800 7px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.10em}.chain-item b{display:block;margin-top:5px;color:#dfe7e1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-dna{padding:0 17px 16px;display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:3}.card-dna span{padding:6px 7px;border:1px solid rgba(255,255,255,.055);border-radius:8px;color:#606b64;background:rgba(255,255,255,.018);font:700 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace}
+.scan-note{margin-top:12px;color:#68766e;font-size:10px;line-height:1.55}
+@media(prefers-reduced-motion:no-preference){.aura-static .card-aura{animation:flicker 2.8s steps(2,end) infinite}.aura-gold .card-aura{animation:drift 7s ease-in-out infinite}}
+@keyframes flicker{50%{opacity:.72}52%{opacity:.42}54%{opacity:.9}}@keyframes drift{50%{transform:translateY(-5px)}}
+
+.construction{width:100%;max-width:610px;margin:20px auto 0;padding:22px 24px;border-radius:24px;border:1px solid var(--line);background:rgba(255,255,255,.025);backdrop-filter:blur(12px)}.construction-title{display:flex;align-items:center;justify-content:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#dfe5e8}.construction p{margin:12px 0 0;color:var(--muted);font-size:14px;line-height:1.65}.construction strong{color:#f5f7f8}
+@media(max-width:620px){.page{padding-top:72px;padding-bottom:38px;padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}.logo-wrap{width:132px;height:132px;margin-bottom:24px}.eyebrow{font-size:10px;letter-spacing:.28em}h1{font-size:clamp(42px,14vw,68px);letter-spacing:-.055em;line-height:.9}.tagline{margin-top:18px;font-size:15px;letter-spacing:.13em}.contract-address{font-size:10px}.copy-btn{min-width:82px;height:36px;font-size:9px}.buttons{grid-template-columns:minmax(0,1fr);margin-top:26px}.btn{min-height:80px}.transparency{margin-top:28px}.wallet{padding:17px 18px}.wallet-name{font-size:11px}.wallet-amount{font-size:13px}.wallet-address{font-size:10px}.supply-inner{padding:20px 17px}.supply-title{font-size:23px}.supply-grid{grid-template-columns:1fr}.supply-stat.full{grid-column:auto}.leekscan-inner{padding:20px 17px}.scan-title{font-size:24px}.card-visual{height:270px}.card-name{font-size:27px}.construction{padding:21px 18px}.glow{width:92vw}}
+@media(max-width:360px){h1{font-size:12.5vw}.tagline{font-size:13px}.wallet-name{font-size:10px}.wallet-amount{font-size:12px}.card-chain{grid-template-columns:1fr}.card-stats{gap:5px}}
+</style>
+</head>
+<body>
+<main class="page"><section class="wrap">
+<div class="topbar"><div class="lang-switch"><button class="lang-btn active" id="langEn">EN</button><button class="lang-btn" id="langRu">RU</button></div></div>
+<div class="glow"></div>
+<div class="logo-wrap"><img class="logo" src="Logo.png" alt="GramLeek logo" /></div>
+<p class="eyebrow" data-i18n="eyebrow">Built on GRAM</p>
+<h1>GRAMLEEK</h1>
+<p class="tagline" data-i18n="tagline">Not a vegetable.</p>
+
+<div class="contract-box"><div class="contract-inner"><div class="contract-label" data-i18n="contractLabel">OFFICIAL LEEK CONTRACT</div><div class="contract-row"><div class="contract-address">EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw</div><button class="copy-btn" id="copyContract" data-i18n="copy">COPY CA</button></div></div></div>
+
+<div class="buttons">
+<a class="btn green" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer"><strong data-i18n="kitchen">ENTER THE KITCHEN →</strong><span data-i18n="dedust">View LEEK on DeDust</span></a>
+<a class="btn blue" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer"><strong data-i18n="cafe">ENTER CAFÉ →</strong><span data-i18n="community">Join the community</span></a>
+</div>
+
+<div class="transparency">
+<div class="transparency-head" data-i18n="transparency">TRANSPARENCY</div>
+<div class="wallet dev"><div class="wallet-top"><div class="wallet-name" data-i18n="devWallet">DEV WALLET</div><div class="wallet-amount">50M LEEK · 5%</div></div><a class="wallet-address" href="https://tonviewer.com/UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn" target="_blank">UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn</a></div>
+<div class="wallet community"><div class="wallet-top"><div class="wallet-name" data-i18n="communityFund">COMMUNITY FUND</div><div class="wallet-amount">50M LEEK · 5%</div></div><a class="wallet-address" href="https://tonviewer.com/UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy" target="_blank">UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy</a></div>
+<div class="wallet burn"><div class="wallet-top"><div class="wallet-name" data-i18n="burned">BURNED</div><div class="wallet-amount" id="burnWalletAmount">15M LEEK · 1.5%</div></div><a class="wallet-address" href="https://tonviewer.com/UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ" target="_blank">UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ</a></div>
+<p class="transparency-note" data-i18n="verify">Public wallets. Everything on-chain. Verify it yourself.</p>
+</div>
+
+<div class="supply-scan"><div class="supply-inner">
+<div class="supply-kicker" data-i18n="supplyKicker">ON-CHAIN SUPPLY SCAN</div>
+<div class="supply-title" data-i18n="supplyTitle">LEEK SUPPLY DIAGNOSTICS</div>
+<p class="supply-copy" data-i18n="supplyCopy">Reading the burn wallet directly from TON. No spreadsheet vegetables.</p>
+<div class="supply-grid">
+<div class="supply-stat"><span data-i18n="originalSupply">ORIGINAL SPECIMENS</span><strong id="originalSupply">1.00B LEEK</strong></div>
+<div class="supply-stat"><span data-i18n="lostSupply">THROWN INTO THE VOID</span><strong id="burnedSupply">SCANNING...</strong></div>
+<div class="supply-stat full"><span data-i18n="effectiveSupply">CURRENT EFFECTIVE SUPPLY</span><strong id="effectiveSupply">SCANNING...</strong></div>
+</div>
+<div class="burn-meter"><div class="burn-meter-top"><span data-i18n="burnRate">BURN RATE</span><b id="burnPercent">—</b></div><div class="burn-track"><div class="burn-fill" id="burnFill"></div></div></div>
+<div class="supply-status" id="supplyStatus"><b>&gt;</b> <span data-i18n="supplyScanning">scanning burn wallet...</span></div>
+</div></div>
+
+<div class="leekscan">
+<div class="leekscan-inner">
+<div class="scan-kicker" data-i18n="scanKicker">EXPERIMENTAL WALLET DNA</div>
+<div class="scan-title" data-i18n="scanTitle">WHO THE FUCK ARE YOU?</div>
+<p class="scan-copy" data-i18n="scanCopy">Connect your TON wallet. GramLeek reads public on-chain data and gives your wallet a deterministic Leek identity.</p>
+<div id="ton-connect"></div>
+<div class="scan-terminal" id="scanTerminal"><b>&gt;</b> <span data-i18n="scanWaiting">waiting for wallet...</span><br><b>&gt;</b> <span data-i18n="scanMode">mode: READ ONLY</span><br><b>&gt;</b> <span data-i18n="scanCustody">custody: ZERO</span></div>
+
+<div class="scan-result" id="scanResult">
+<article class="leek-card" id="leekCard">
+<div class="card-top"><div class="card-top-left"><span class="card-micro" id="cardMicro">LEEKSCAN //</span><span class="card-house" id="cardHouse">HOUSE —</span></div><span class="card-rarity" id="cardRarity">—</span></div>
+<div class="card-visual" id="cardVisual"><div class="card-aura"></div><div class="card-leek" id="cardLeek"></div><div class="card-badge" id="cardBadge">—</div></div>
+<div class="card-identity"><h2 class="card-name" id="cardName">—</h2><p class="card-trigger" id="cardTrigger">—</p><p class="card-roast" id="cardRoast">—</p></div>
+<div class="card-stats">
+<div class="card-stat"><b id="faithValue">—</b><span data-i18n="faith">FAITH</span><i><em id="faithBar"></em></i></div>
+<div class="card-stat"><b id="riskValue">—</b><span data-i18n="risk">RISK</span><i><em id="riskBar"></em></i></div>
+<div class="card-stat"><b id="chaosValue">—</b><span data-i18n="chaos">CHAOS</span><i><em id="chaosBar"></em></i></div>
+</div>
+<div class="card-chain">
+<div class="chain-item"><span data-i18n="leekBalanceLabel">LEEK BALANCE</span><b id="cardBalance">—</b></div>
+<div class="chain-item"><span data-i18n="holderRankLabel">HOLDER RANK</span><b id="cardRank">—</b></div>
+<div class="chain-item"><span data-i18n="walletLabel">WALLET</span><b id="cardWallet">—</b></div>
+</div>
+<div class="card-dna"><span id="dnaCode">DNA —</span><span id="evoCode">EVO —</span><span id="populationCode">SPECIMEN —</span></div>
+</article>
+</div>
+<div class="scan-note" data-i18n="scanNote">Same wallet = same base DNA. Your LEEK position can influence the classification. No seed phrase. No approvals. Funds untouched.</div>
+</div>
+</div>
+
+<div class="construction"><div class="construction-title" data-i18n="constructionTitle">🚧 WEBSITE UNDER CONSTRUCTION</div><p data-i18n-html="constructionCopy">Yes, the website is a little poor right now.<br>Friendly reminder: <strong>we're a $2K market cap leek.</strong><br><br>Give us a minute. We’ll make it beautiful.</p></div>
+</section></main>
+
+<script>
+const CONTRACT="EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw",
+BURN_WALLET="UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ",
+TOTAL_SUPPLY=1000000000,
+DECIMALS=9,
+HOLDER_API="https://toncenter.com/api/v3/jetton/wallets";
+
+const translations={
+en:{
+eyebrow:"Built on GRAM",tagline:"Not a vegetable.",contractLabel:"OFFICIAL LEEK CONTRACT",copy:"COPY CA",copied:"COPIED ✓",kitchen:"ENTER THE KITCHEN →",dedust:"View LEEK on DeDust",cafe:"ENTER CAFÉ →",community:"Join the community",transparency:"TRANSPARENCY",devWallet:"DEV WALLET",communityFund:"COMMUNITY FUND",burned:"BURNED",verify:"Public wallets. Everything on-chain. Verify it yourself.",supplyKicker:"ON-CHAIN SUPPLY SCAN",supplyTitle:"LEEK SUPPLY DIAGNOSTICS",supplyCopy:"Reading the burn wallet directly from TON. No spreadsheet vegetables.",originalSupply:"ORIGINAL SPECIMENS",lostSupply:"THROWN INTO THE VOID",effectiveSupply:"CURRENT EFFECTIVE SUPPLY",burnRate:"BURN RATE",supplyScanning:"scanning burn wallet...",supplyLive:"burn wallet synced. population adjusted.",supplyError:"TON API unavailable. supply scan paused.",
+scanKicker:"EXPERIMENTAL WALLET DNA",scanTitle:"WHO THE FUCK ARE YOU?",scanCopy:"Connect your TON wallet. GramLeek reads public on-chain data and gives your wallet a deterministic Leek identity.",scanWaiting:"waiting for wallet...",scanMode:"mode: READ ONLY",scanCustody:"custody: ZERO",scanReading:"reading wallet DNA...",scanDetected:"wallet detected. generating specimen...",scanDone:"specimen generated. financial dignity not found.",scanError:"TON API unavailable. DNA generated from wallet seed only.",faith:"FAITH",risk:"RISK",chaos:"CHAOS",leekBalanceLabel:"LEEK BALANCE",holderRankLabel:"HOLDER RANK",walletLabel:"WALLET",scanNote:"Same wallet = same base DNA. Your LEEK position can influence the classification. No seed phrase. No approvals. Funds untouched.",constructionTitle:"🚧 WEBSITE UNDER CONSTRUCTION",constructionCopy:'Yes, the website is a little poor right now.<br>Friendly reminder: <strong>we\'re a $2K market cap leek.</strong><br><br>Give us a minute. We’ll make it beautiful.'
+},
+ru:{
+eyebrow:"Создано на GRAM",tagline:"Не овощ.",contractLabel:"ОФИЦИАЛЬНЫЙ КОНТРАКТ LEEK",copy:"КОПИРОВАТЬ",copied:"СКОПИРОВАНО ✓",kitchen:"НА КУХНЮ →",dedust:"Посмотреть LEEK на DeDust",cafe:"В LEEK CAFÉ →",community:"Вступить в сообщество",transparency:"ПРОЗРАЧНОСТЬ",devWallet:"КОШЕЛЁК DEV",communityFund:"ФОНД СООБЩЕСТВА",burned:"СОЖЖЕНО",verify:"Публичные кошельки. Всё ончейн. Проверь сам.",supplyKicker:"ОНЧЕЙН-СКАН SUPPLY",supplyTitle:"ДИАГНОСТИКА SUPPLY LEEK",supplyCopy:"Читаем burn-кошелёк напрямую из TON. Никаких овощных таблиц.",originalSupply:"ИЗНАЧАЛЬНО СОЗДАНО",lostSupply:"ОТПРАВЛЕНО В ПУСТОТУ",effectiveSupply:"ТЕКУЩИЙ ЭФФЕКТИВНЫЙ SUPPLY",burnRate:"BURN RATE",supplyScanning:"сканируем burn-кошелёк...",supplyLive:"burn-кошелёк синхронизирован. supply обновлён.",supplyError:"TON API недоступен. скан supply приостановлен.",
+scanKicker:"ЭКСПЕРИМЕНТАЛЬНАЯ ДНК КОШЕЛЬКА",scanTitle:"КТО ТЫ, БЛЯТЬ, ТАКОЙ?",scanCopy:"Подключи TON-кошелёк. GramLeek читает публичные ончейн-данные и создаёт детерминированную LEEK-личность.",scanWaiting:"ожидание кошелька...",scanMode:"режим: ТОЛЬКО ЧТЕНИЕ",scanCustody:"кастоди: НОЛЬ",scanReading:"читаем ДНК кошелька...",scanDetected:"кошелёк найден. выращиваем экземпляр...",scanDone:"экземпляр создан. финансовое достоинство не найдено.",scanError:"TON API недоступен. ДНК создана только из seed кошелька.",faith:"ВЕРА",risk:"РИСК",chaos:"ХАОС",leekBalanceLabel:"БАЛАНС LEEK",holderRankLabel:"МЕСТО ХОЛДЕРА",walletLabel:"КОШЕЛЁК",scanNote:"Один кошелёк = одна базовая ДНК. Позиция LEEK может влиять на классификацию. Без seed-фразы. Без approve. Средства не трогаем.",constructionTitle:"🚧 САЙТ ЕЩЁ СТРОИТСЯ",constructionCopy:'Да, пока сайт немного бедный.<br>Напоминание: <strong>у нас всё ещё лук-порей с капитализацией около $2K.</strong><br><br>Дайте минуту. Сделаем красиво.'
+}
+};
+
+let currentLang=localStorage.getItem("gramleek-lang")||"en",holdersCache=[],connectedWalletAddress=null,lastIdentity=null;
+const t=k=>translations[currentLang][k]||k,byId=id=>document.getElementById(id);
+
+function setLanguage(lang){
+ currentLang=lang;localStorage.setItem("gramleek-lang",lang);document.documentElement.lang=lang;
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(translations[lang][k])el.textContent=translations[lang][k]});
+ document.querySelectorAll("[data-i18n-html]").forEach(el=>{const k=el.dataset.i18nHtml;if(translations[lang][k])el.innerHTML=translations[lang][k]});
+ byId("langEn").classList.toggle("active",lang==="en");byId("langRu").classList.toggle("active",lang==="ru");
+ if(!byId("copyContract").classList.contains("copied"))byId("copyContract").textContent=t("copy")
+}
+byId("langEn").onclick=()=>setLanguage("en");
+byId("langRu").onclick=()=>setLanguage("ru");
+setLanguage(currentLang);
+loadSupply();
+
+byId("copyContract").onclick=async()=>{
+ try{await navigator.clipboard.writeText(CONTRACT)}
+ catch(e){const a=document.createElement("textarea");a.value=CONTRACT;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove()}
+ byId("copyContract").classList.add("copied");byId("copyContract").textContent=t("copied");
+ setTimeout(()=>{byId("copyContract").classList.remove("copied");byId("copyContract").textContent=t("copy")},1700)
+};
+
+const rawToNumber=raw=>Number(raw||"0")/(10**DECIMALS);
+const human=n=>n>=1e9?(n/1e9).toFixed(2)+"B":n>=1e6?(n/1e6).toFixed(2)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n);
+
+async function loadHolders(){
+ const u=`${HOLDER_API}?jetton_address=${encodeURIComponent(CONTRACT)}&exclude_zero_balance=true&limit=1000&offset=0&sort=desc`;
+ const r=await fetch(u,{headers:{accept:"application/json"}});
+ if(!r.ok)throw Error("TON API unavailable");
+ const d=await r.json();holdersCache=d.jetton_wallets||[];return holdersCache
+}
+async function loadSupply(){
+ try{
+  byId("supplyStatus").innerHTML=`<b>&gt;</b> ${t("supplyScanning")}`;
+  const u=`${HOLDER_API}?owner_address=${encodeURIComponent(BURN_WALLET)}&jetton_address=${encodeURIComponent(CONTRACT)}&limit=10&offset=0`;
+  const r=await fetch(u,{headers:{accept:"application/json"}});if(!r.ok)throw Error("TON API unavailable");
+  const d=await r.json(),rows=d.jetton_wallets||[],burned=rows.length?rawToNumber(rows[0].balance):0,effective=Math.max(0,TOTAL_SUPPLY-burned),pct=TOTAL_SUPPLY?burned/TOTAL_SUPPLY*100:0;
+  byId("burnedSupply").textContent=human(burned)+" LEEK";byId("effectiveSupply").textContent=human(effective)+" LEEK";byId("burnPercent").textContent=pct.toFixed(2)+"%";byId("burnFill").style.width=Math.min(100,pct)+"%";byId("burnWalletAmount").textContent=human(burned)+" LEEK · "+pct.toFixed(2)+"%";byId("supplyStatus").innerHTML=`<b>&gt;</b> ${t("supplyLive")}`;
+ }catch(e){
+  byId("burnedSupply").textContent="—";byId("effectiveSupply").textContent="—";byId("burnPercent").textContent="—";byId("supplyStatus").innerHTML=`<b>&gt;</b> ${t("supplyError")}`;console.error(e)
+ }
+}
+
+const archetypes=[
+{name:"THE EARLY LEEK",house:"HOUSE GENESIS",badge:"GENESIS",trigger:"Bought before the group had a logo.",roast:"You were early enough to be wrong in peace.",aura:"gold"},
+{name:"THE EXIT LIQUIDITY",house:"HOUSE VOID",badge:"TOP SIGNAL",trigger:"Arrives exactly when influencers do.",roast:"Your entry was somebody else's retirement plan.",aura:"void"},
+{name:"THE CULTIST",house:"HOUSE ACID",badge:"DEVOTION",trigger:"There is no sell button. Only devotion.",roast:"Diversification rejected on religious grounds.",aura:"flame"},
+{name:"THE DEGEN",house:"HOUSE STATIC",badge:"UNHINGED",trigger:"Portfolio diversified between questionable decisions.",roast:"Risk management left the chat.",aura:"static"},
+{name:"THE NPC",house:"HOUSE MILK",badge:"SAFE MODE",trigger:"Waiting for the perfect entry since forever.",roast:"Financially hydrated. Emotionally unavailable.",aura:"frost"},
+{name:"THE WHALEEK",house:"HOUSE GOLD",badge:"WHALEEK",trigger:"Moves markets by breathing.",roast:"Your wallet has opinions.",aura:"gold"},
+{name:"THE ROTATOR",house:"HOUSE STATIC",badge:"ADHD",trigger:"Married to the trade. Divorced by the candle.",roast:"Commitment issues, but on-chain.",aura:"static"},
+{name:"THE DIAMOND HAND",house:"HOUSE FROST",badge:"DIAMOND",trigger:"Forgot the sell button. Became a legend.",roast:"At this point conviction is a medical condition.",aura:"frost"},
+{name:"THE APE",house:"HOUSE RUST",badge:"APE",trigger:"If it has a logo, I have a position.",roast:"Due diligence outsourced to vibes.",aura:"flame"},
+{name:"THE GHOST",house:"HOUSE VOID",badge:"GHOST",trigger:"Barely moves. Somehow still here.",roast:"Your wallet remembers another market cycle.",aura:"void"},
+{name:"THE MAXIMALIST",house:"HOUSE ACID",badge:"MAXI",trigger:"There is no second best.",roast:"Diversification disabled by ideology.",aura:"gold"},
+{name:"THE INFLUENCER",house:"HOUSE SIGNAL",badge:"POSTING",trigger:"Not financial advice, but I just aped.",roast:"Owns bags and opinions in equal quantities.",aura:"static"},
+{name:"THE GAMBLER",house:"HOUSE RUST",badge:"HIGH FREQ",trigger:"Leverage is a lifestyle.",roast:"You call it a thesis. The casino calls it retention.",aura:"flame"},
+{name:"THE SNIPER",house:"HOUSE ZERO",badge:"PRECISION",trigger:"Few moves. Annoyingly precise.",roast:"Waited six weeks to click buy once.",aura:"frost"},
+{name:"THE FARMER",house:"HOUSE MOSS",badge:"FARMER",trigger:"Yield everywhere. Peace nowhere.",roast:"Your wallet is a greenhouse with APR.",aura:"gold"},
+{name:"THE BAG COLLECTOR",house:"HOUSE SIGNAL",badge:"CURATOR",trigger:"Every token deserves a chance. Apparently.",roast:"A museum of unfinished narratives.",aura:"static"},
+{name:"THE BURNER",house:"HOUSE EMBER",badge:"BURNER",trigger:"Turns bad decisions into scarcity.",roast:"Losses, but make them deflationary.",aura:"flame"},
+{name:"THE QUANT LEEK",house:"HOUSE ZERO",badge:"MODELLED",trigger:"Pretends this is all mathematics.",roast:"Spreadsheet open. Emotions hidden.",aura:"frost"},
+{name:"THE JEET",house:"HOUSE MILK",badge:"PAPER",trigger:"Sold the bottom. Again.",roast:"Conviction usually arrives after the rebound.",aura:"void"},
+{name:"THE QUESTIONABLE",house:"HOUSE ???",badge:"UNKNOWN",trigger:"No model could explain this wallet.",roast:"Financial autopsy inconclusive.",aura:"static"}
+];
+const palettes=[
+["#d7ff38","#1ec8ff","#ffce4b"],["#9bff25","#7f58ff","#ff4f7b"],["#b5ff2a","#ff6847","#18d0ff"],["#a4ff2a","#2ee7ff","#ff3bb2"],["#f4f1d4","#91c8ff","#b6ff75"],["#f6d373","#d9ffe1","#8dbbff"],["#cbff24","#00ddba","#ffffff"],["#d8f4ff","#8cb6ff","#f5fbff"],["#bbff29","#ff8248","#61e6ff"],["#a9ffc0","#677c8c","#d8e0ff"],["#d7ff35","#8bff68","#f0fff0"],["#85ffef","#58a7ff","#ff66d9"],["#d7ff2f","#ff5538","#ffb62f"],["#aeff36","#55e8ff","#eef7ff"],["#d4ff33","#73c873","#f1e5b2"],["#fbffbb","#ff88d6","#70c9ff"],["#baff2c","#ff7a31","#ffd76d"],["#bfffe6","#65cfff","#d1ff4d"],["#eff0e7","#97ff43","#ff8181"],["#c8ff35","#6e58ff","#ff5b89"]
+];
+
+function hash32(str){
+ let h=2166136261>>>0;
+ for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}
+ return h>>>0
+}
+function seeded(seed){
+ let s=seed>>>0;
+ return()=>{s=(Math.imul(s,1664525)+1013904223)>>>0;return s/4294967296}
+}
+function shortWallet(a){return a?`${a.slice(0,5)}…${a.slice(-4)}`:"—"}
+function hex8(n){return (n>>>0).toString(16).padStart(8,"0").toUpperCase()}
+function rarityFrom(balance,rank,seed){
+ if(rank&&rank<=3)return"MYTHIC";
+ if(rank&&rank<=10)return"LEGENDARY";
+ if(balance>=10000000)return"EPIC";
+ return["COMMON","UNCOMMON","RARE","EPIC"][seed%4]
+}
+function chooseArchetype(balance,rank,seed){
+ if(rank&&rank<=3)return archetypes[5];
+ if(balance>=25000000)return archetypes[2];
+ if(balance>=10000000)return archetypes[10];
+ if(balance>=1000000)return archetypes[7];
+ return archetypes[seed%archetypes.length]
+}
+function leafPath(x,y,w,h,rot,color){
+ return `<path d="M ${x} ${y+h} C ${x-w*.75} ${y+h*.55}, ${x-w*.22} ${y+h*.08}, ${x} ${y} C ${x+w*.22} ${y+h*.08}, ${x+w*.75} ${y+h*.55}, ${x} ${y+h} Z" fill="${color}" transform="rotate(${rot} ${x} ${y+h})"/>`
+}
+function makeLeekSVG(seed,a,b,c){
+ const rnd=seeded(seed),leafCount=5+(seed%5),leaves=[];
+ for(let i=0;i<leafCount;i++){
+  const x=168+(i-(leafCount-1)/2)*9+(rnd()*8-4),y=22+rnd()*10,h=78+rnd()*48,w=22+rnd()*13,rot=-45+rnd()*90,color=[a,b,c][i%3];
+  leaves.push(leafPath(x,y,w,h,rot,color))
+ }
+ const hue=68+(seed%32),light=56+(seed%12),bodyPaths=[
+ "M121 111 Q168 87 215 111 L213 231 Q168 253 123 231 Z",
+ "M115 115 Q168 82 221 115 L216 235 Q168 267 120 235 Z",
+ "M126 108 Q168 91 210 108 L220 231 Q168 244 116 231 Z",
+ "M122 112 Q168 89 214 112 L210 225 Q168 258 126 225 Z",
+ "M118 114 Q168 84 218 114 L226 232 Q168 270 110 232 Z"];
+ let face="";
+ switch(seed%4){
+  case 0:face=`<rect x="111" y="151" width="55" height="24" rx="8" fill="#050b0e"/><rect x="171" y="151" width="55" height="24" rx="8" fill="#050b0e"/><rect x="162" y="158" width="13" height="6" rx="3" fill="#050b0e"/>`;break;
+  case 1:face=`<path d="M108 150h58l-7 29h-37zM170 150h59l-13 29h-39z" fill="#050b0e"/><path d="M160 157h17" stroke="${a}" stroke-width="4"/>`;break;
+  case 2:face=`<circle cx="140" cy="161" r="18" fill="#050b0e" stroke="${b}" stroke-width="4"/><circle cx="196" cy="161" r="18" fill="#050b0e" stroke="${b}" stroke-width="4"/><path d="M158 161h20" stroke="${a}" stroke-width="4"/>`;break;
+  default:face=`<path d="M113 151l49 5-6 23-38-4zM174 156l50-5-4 24-39 4z" fill="#050b0e"/><path d="M160 160h18" stroke="${c}" stroke-width="4"/>`
+ }
+ const mouths=["M150 201 Q168 214 187 201","M150 203 L168 195 L186 203","M151 202 Q168 189 185 202","M152 201 L185 201","M151 199 Q168 207 185 199"];
+ const outfits=[
+ `<path d="M94 240 Q168 197 242 240 L251 340 H85Z" fill="#091114"/><path d="M115 239l53 45 53-45" fill="none" stroke="${b}" stroke-width="10"/>`,
+ `<path d="M91 241 Q168 195 245 241 L252 340 H84Z" fill="#141618"/><path d="M126 237l21 56h42l21-56" fill="${a}" opacity=".27"/>`,
+ `<path d="M90 246 Q168 192 246 246 L252 340 H84Z" fill="#17120e"/><path d="M104 266h129" stroke="${c}" stroke-width="8" stroke-dasharray="9 7"/>`,
+ `<path d="M92 240 Q168 200 244 240 L252 340 H84Z" fill="#06110f"/><circle cx="168" cy="289" r="33" fill="none" stroke="${b}" stroke-width="5"/><path d="M149 289h38" stroke="${a}" stroke-width="7"/>`,
+ `<path d="M91 243 Q168 197 245 243 L252 340 H84Z" fill="#171717"/><path d="M106 246l31 94M230 246l-31 94" stroke="${a}" stroke-width="6" opacity=".75"/>`,
+ `<path d="M89 243 Q168 190 247 243 L252 340 H84Z" fill="#070a0b"/><path d="M101 250h134v61H101z" fill="none" stroke="${c}" stroke-width="4"/><path d="M115 264h106M115 278h72M115 292h91" stroke="${b}" stroke-width="4" opacity=".7"/>`
+ ];
+ const props=[
+ `<path d="M238 260l39-44 14 14-43 41z" fill="${b}"/><circle cx="285" cy="217" r="10" fill="${a}"/>`,
+ `<rect x="240" y="248" width="47" height="69" rx="8" fill="#0b1115" stroke="${a}" stroke-width="3"/><path d="M249 271h29M249 284h21" stroke="${b}" stroke-width="4"/>`,
+ `<circle cx="266" cy="282" r="28" fill="${a}" opacity=".18" stroke="${a}" stroke-width="4"/><path d="M253 282h26M266 269v26" stroke="${a}" stroke-width="5"/>`,
+ `<path d="M248 315l27-59 17 9-27 59z" fill="#5b3e20"/><path d="M251 258h43" stroke="${a}" stroke-width="7"/>`,
+ `<path d="M247 305l13-57h44l-7 57z" fill="#101318" stroke="${c}" stroke-width="3"/><path d="M258 262h35M256 275h28" stroke="${b}" stroke-width="4"/>`,
+ `<path d="M242 298q23-54 48-8q11 21-2 31h-40q-16-5-6-23z" fill="${c}" opacity=".65"/><path d="M251 292h28" stroke="#0a1110" stroke-width="5"/>`
+ ];
+ return `<svg viewBox="0 0 336 360" aria-hidden="true"><defs><linearGradient id="body${seed}" x1="0" x2="1"><stop stop-color="hsl(${hue} 74% ${light}%)"/><stop offset="1" stop-color="#eff7bf"/></linearGradient></defs><g>${leaves.join("")}<path d="${bodyPaths[seed%bodyPaths.length]}" fill="url(#body${seed})"/><path d="M126 117 Q168 96 210 117" stroke="rgba(255,255,255,.34)" stroke-width="5" fill="none"/>${face}<path d="${mouths[seed%mouths.length]}" stroke="#163546" stroke-width="6" fill="none" stroke-linecap="round"/>${outfits[seed%outfits.length]}<circle cx="168" cy="289" r="19" fill="#081013" stroke="${b}" stroke-width="4"/><path d="M160 280l8 18 8-18z" fill="none" stroke="${a}" stroke-width="3"/>${props[seed%props.length]}</g></svg>`
+}
+function buildIdentity(address,balance,rank){
+ const seed=hash32(address),archetype=chooseArchetype(balance,rank,seed),palette=palettes[seed%palettes.length];
+ let faith=22+((seed>>>3)%72),risk=18+((seed>>>9)%78),chaos=16+((seed>>>15)%80);
+ if(balance>=1000000)faith=Math.min(99,faith+15);
+ if(balance>=10000000)faith=Math.min(99,faith+12);
+ if(rank&&rank<=10)faith=Math.min(99,faith+8);
+ const rarity=rarityFrom(balance,rank,seed),dna=hex8(seed),evo=hex8(hash32(address+"|"+Math.round(balance)+"|"+(rank||0))).slice(0,6);
+ return{seed,archetype,palette,faith,risk,chaos,rarity,dna,evo,balance,rank,address}
+}
+function renderIdentity(x){
+ lastIdentity=x;
+ const [a,b,c]=x.palette,card=byId("leekCard");
+ card.style.setProperty("--a",a);card.style.setProperty("--b",b);card.style.setProperty("--c",c);
+ byId("cardVisual").className=`card-visual aura-${x.archetype.aura}`;
+ byId("cardLeek").innerHTML=makeLeekSVG(x.seed,a,b,c);
+ byId("cardMicro").textContent=`LEEKSCAN // ${x.dna.slice(0,4)}`;
+ byId("cardHouse").textContent=x.archetype.house;
+ byId("cardRarity").textContent=x.rarity;
+ byId("cardBadge").textContent=x.archetype.badge;
+ byId("cardName").textContent=x.archetype.name;
+ byId("cardTrigger").textContent=x.archetype.trigger;
+ byId("cardRoast").textContent=`“${x.archetype.roast}”`;
+ byId("faithValue").textContent=x.faith;byId("riskValue").textContent=x.risk;byId("chaosValue").textContent=x.chaos;
+ byId("faithBar").style.width=x.faith+"%";byId("riskBar").style.width=x.risk+"%";byId("chaosBar").style.width=x.chaos+"%";
+ byId("cardBalance").textContent=human(x.balance)+" LEEK";byId("cardRank").textContent=x.rank?"#"+x.rank:"—";byId("cardWallet").textContent=shortWallet(x.address);
+ byId("dnaCode").textContent="DNA "+x.dna;byId("evoCode").textContent="EVO "+x.evo;byId("populationCode").textContent="SPECIMEN "+((x.seed%9999)+1).toString().padStart(4,"0");
+ byId("scanResult").classList.add("show")
+}
+async function identifyWallet(address){
+ byId("scanTerminal").innerHTML=`<b>&gt;</b> ${t("scanReading")}<br><b>&gt;</b> ${t("scanMode")}<br><b>&gt;</b> ${t("scanCustody")}`;
+ let balance=0,rank=null,apiOk=true;
+ try{
+  if(!holdersCache.length)await loadHolders();
+  const lower=address.toLowerCase();
+  const row=holdersCache.find(w=>(w.owner||"").toLowerCase()===lower);
+  if(row){balance=rawToNumber(row.balance);rank=holdersCache.indexOf(row)+1}
+ }catch(e){apiOk=false;console.error(e)}
+ byId("scanTerminal").innerHTML=`<b>&gt;</b> ${apiOk?t("scanDetected"):t("scanError")}<br><b>&gt;</b> ${t("scanDone")}<br><b>&gt;</b> DNA: ${hex8(hash32(address))}`;
+ renderIdentity(buildIdentity(address,balance,rank))
+}
+
+const tonConnectUI=new TON_CONNECT_UI.TonConnectUI({manifestUrl:location.origin+"/tonconnect-manifest.json",buttonRootId:"ton-connect"});
+tonConnectUI.onStatusChange(wallet=>{
+ connectedWalletAddress=wallet?.account?.address||null;
+ if(connectedWalletAddress)identifyWallet(connectedWalletAddress);
+ else{
+  byId("scanResult").classList.remove("show");
+  byId("scanTerminal").innerHTML=`<b>&gt;</b> ${t("scanWaiting")}<br><b>&gt;</b> ${t("scanMode")}<br><b>&gt;</b> ${t("scanCustody")}`
+ }
+});
+</script>
+</body>
+</html>

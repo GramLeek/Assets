@@ -1,0 +1,4318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#030506" />
+
+<title>GramLeek — Hotline GRAM</title>
+
+<meta
+  name="description"
+  content="GramLeek — Not a vegetable. Experimental MemeFi layer on GRAM."
+/>
+
+<style>
+
+:root{
+  --bg:#030506;
+  --panel:#070a0b;
+  --panel2:#0b0f10;
+  --text:#f5f7f8;
+  --muted:#84908c;
+
+  --green:#b7ff18;
+  --green2:#75ff21;
+
+  --pink:#ff2c9c;
+  --purple:#b43cff;
+
+  --blue:#22c8ff;
+  --orange:#ff9d2e;
+  --red:#ff315c;
+
+  --line:rgba(255,255,255,.10);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html{
+  width:100%;
+  max-width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+  background:var(--bg);
+}
+
+body{
+  margin:0;
+
+  width:100%;
+  max-width:100%;
+  min-height:100%;
+
+  overflow-x:hidden;
+
+  color:var(--text);
+
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(183,255,24,.11),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 82% 30%,
+      rgba(255,44,156,.09),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 55% 78%,
+      rgba(34,200,255,.07),
+      transparent 32%
+    ),
+    #030506;
+}
+
+
+/* CRT scanline overlay */
+
+body::before{
+  content:"";
+
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  opacity:.075;
+
+  z-index:100;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.08) 0px,
+      rgba(255,255,255,.08) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+
+  mix-blend-mode:overlay;
+}
+
+
+img,
+svg,
+canvas,
+video{
+  display:block;
+  max-width:100%;
+}
+
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+
+a{
+  color:inherit;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+
+  width:100%;
+  max-width:1180px;
+
+  margin:0 auto;
+
+  padding:
+    54px max(22px,env(safe-area-inset-right))
+    60px max(22px,env(safe-area-inset-left));
+
+  position:relative;
+}
+
+
+.wrap{
+
+  width:100%;
+  max-width:800px;
+
+  margin:0 auto;
+
+  text-align:center;
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+.topbar{
+
+  display:flex;
+  justify-content:flex-end;
+
+  margin-bottom:24px;
+}
+
+
+.lang-switch{
+
+  display:inline-flex;
+
+  padding:4px;
+
+  gap:4px;
+
+  border:
+    1px solid rgba(183,255,24,.18);
+
+  background:#050807;
+
+  border-radius:5px;
+}
+
+
+.lang-btn{
+
+  min-width:42px;
+  height:29px;
+
+  border:0;
+
+  border-radius:3px;
+
+  color:#657069;
+
+  background:transparent;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.12em;
+
+  cursor:pointer;
+}
+
+
+.lang-btn.active{
+
+  color:#071000;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 18px rgba(183,255,24,.25);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+  position:relative;
+
+  padding-top:10px;
+}
+
+
+.hero::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:470px;
+  height:470px;
+
+  max-width:90vw;
+
+  left:50%;
+  top:34%;
+
+  transform:
+    translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(183,255,24,.12),
+      transparent 55%
+    );
+
+  filter:blur(28px);
+
+  pointer-events:none;
+}
+
+
+.logo-wrap{
+
+  position:relative;
+
+  z-index:2;
+
+  width:156px;
+  height:156px;
+
+  margin:
+    0 auto 26px;
+
+  border-radius:50%;
+
+  padding:4px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--green),
+      var(--blue)
+    );
+
+  box-shadow:
+    0 0 25px rgba(183,255,24,.16),
+    0 0 40px rgba(34,200,255,.12);
+}
+
+
+.logo{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  border-radius:50%;
+
+  background:#071016;
+}
+
+
+.eyebrow{
+
+  position:relative;
+
+  z-index:2;
+
+  margin:
+    0 0 12px;
+
+  color:var(--green);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.30em;
+}
+
+
+h1{
+
+  position:relative;
+
+  z-index:2;
+
+  margin:0;
+
+  font-family:
+    Impact,
+    Haettenschweiler,
+    "Arial Narrow Bold",
+    sans-serif;
+
+  font-style:italic;
+
+  font-size:
+    clamp(58px,13vw,116px);
+
+  line-height:.82;
+
+  letter-spacing:-.045em;
+
+  transform:
+    skew(-3deg);
+
+  color:var(--green);
+
+  text-shadow:
+    3px 3px 0 rgba(85,130,0,.55),
+    0 0 25px rgba(183,255,24,.20);
+}
+
+
+.tagline{
+
+  position:relative;
+
+  z-index:2;
+
+  margin:
+    24px 0 0;
+
+  color:#cdd3d0;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  letter-spacing:.20em;
+}
+
+
+.tagline span{
+  color:var(--pink);
+}
+
+
+/* =========================================================
+   CONTRACT
+========================================================= */
+
+.contract-box{
+
+  width:100%;
+
+  margin:
+    30px auto 0;
+
+  border:
+    1px solid rgba(183,255,24,.42);
+
+  border-radius:7px;
+
+  padding:5px;
+
+  background:#030504;
+
+  box-shadow:
+    0 0 24px rgba(183,255,24,.06),
+    inset 0 0 20px rgba(183,255,24,.025);
+}
+
+
+.contract-inner{
+
+  padding:15px;
+
+  border:
+    1px solid rgba(255,255,255,.06);
+
+  background:#080b0a;
+}
+
+
+.contract-label{
+
+  margin-bottom:10px;
+
+  color:var(--green);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.22em;
+}
+
+
+.contract-row{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+}
+
+
+.contract-address{
+
+  flex:1;
+
+  min-width:0;
+
+  overflow:hidden;
+
+  white-space:nowrap;
+
+  text-overflow:ellipsis;
+
+  text-align:left;
+
+  color:#aeb9b3;
+
+  font-size:10px;
+}
+
+
+.copy-btn{
+
+  flex-shrink:0;
+
+  height:36px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid var(--green);
+
+  border-radius:3px;
+
+  background:#0b1008;
+
+  color:var(--green);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+
+.copy-btn:hover,
+.copy-btn.copied{
+
+  color:#061000;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 20px rgba(183,255,24,.25);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:12px;
+
+  margin-top:18px;
+}
+
+
+.btn{
+
+  min-height:76px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:15px;
+
+  text-decoration:none;
+
+  border-radius:5px;
+
+  background:#080b0c;
+
+  transition:.18s ease;
+}
+
+
+.btn.green{
+
+  border:
+    1px solid rgba(183,255,24,.55);
+}
+
+
+.btn.blue{
+
+  border:
+    1px solid rgba(34,200,255,.55);
+}
+
+
+.btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  background:#0d1212;
+}
+
+
+.btn strong{
+
+  font-size:13px;
+
+  letter-spacing:.03em;
+}
+
+
+.btn.green strong{
+  color:var(--green);
+}
+
+
+.btn.blue strong{
+  color:var(--blue);
+}
+
+
+.btn span{
+
+  margin-top:7px;
+
+  color:#66716c;
+
+  font-size:9px;
+
+  letter-spacing:.12em;
+}
+
+
+/* =========================================================
+   TRANSPARENCY
+========================================================= */
+
+.transparency{
+
+  margin-top:36px;
+}
+
+
+.section-label{
+
+  margin-bottom:15px;
+
+  color:var(--green);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.30em;
+}
+
+
+.wallet{
+
+  margin-top:8px;
+
+  padding:
+    16px 18px;
+
+  text-align:left;
+
+  background:#070a09;
+
+  border-radius:5px;
+}
+
+
+.wallet.dev{
+
+  border:
+    1px solid rgba(183,255,24,.36);
+}
+
+
+.wallet.community{
+
+  border:
+    1px solid rgba(34,200,255,.36);
+}
+
+
+.wallet.burn{
+
+  border:
+    1px solid rgba(255,157,46,.36);
+}
+
+
+.wallet-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:14px;
+}
+
+
+.wallet-name{
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+}
+
+
+.wallet.dev .wallet-name{
+  color:var(--green);
+}
+
+
+.wallet.community .wallet-name{
+  color:var(--blue);
+}
+
+
+.wallet.burn .wallet-name{
+  color:var(--orange);
+}
+
+
+.wallet-amount{
+
+  flex-shrink:0;
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+
+.wallet-address{
+
+  display:block;
+
+  margin-top:10px;
+
+  overflow:hidden;
+
+  white-space:nowrap;
+
+  text-overflow:ellipsis;
+
+  color:#66716c;
+
+  font-size:9px;
+
+  text-decoration:none;
+}
+
+
+.transparency-note{
+
+  color:#66716c;
+
+  font-size:10px;
+}
+
+
+/* =========================================================
+   SUPPLY
+========================================================= */
+
+.supply-scan{
+
+  margin-top:26px;
+
+  padding:5px;
+
+  border:
+    1px solid rgba(255,157,46,.40);
+
+  border-radius:7px;
+
+  background:#030504;
+}
+
+
+.supply-inner{
+
+  padding:22px;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(255,157,46,.05),
+      transparent 35%
+    ),
+    #070a09;
+
+  border:
+    1px solid rgba(255,255,255,.05);
+}
+
+
+.supply-kicker{
+
+  color:var(--orange);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.24em;
+}
+
+
+.supply-title{
+
+  margin-top:9px;
+
+  font-family:
+    Impact,
+    sans-serif;
+
+  font-style:italic;
+
+  font-size:27px;
+
+  letter-spacing:.02em;
+}
+
+
+.supply-copy{
+
+  color:#77827c;
+
+  font-size:11px;
+
+  line-height:1.6;
+}
+
+
+.supply-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:8px;
+
+  margin-top:17px;
+}
+
+
+.supply-stat{
+
+  padding:15px;
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  background:#050706;
+}
+
+
+.supply-stat.full{
+
+  grid-column:
+    1 / -1;
+}
+
+
+.supply-stat span{
+
+  display:block;
+
+  color:#657069;
+
+  font-size:7px;
+
+  font-weight:900;
+
+  letter-spacing:.13em;
+}
+
+
+.supply-stat strong{
+
+  display:block;
+
+  margin-top:8px;
+
+  color:#fff;
+
+  font-size:17px;
+}
+
+
+.supply-stat.full strong{
+
+  color:var(--green);
+
+  font-size:30px;
+}
+
+
+.burn-meter{
+
+  margin-top:12px;
+}
+
+
+.burn-meter-top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  font-size:8px;
+
+  color:#69736d;
+}
+
+
+.burn-meter-top b{
+  color:var(--orange);
+}
+
+
+.burn-track{
+
+  height:7px;
+
+  margin-top:8px;
+
+  background:#101411;
+
+  overflow:hidden;
+}
+
+
+.burn-fill{
+
+  width:0;
+
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--orange),
+      var(--green)
+    );
+
+  box-shadow:
+    0 0 15px rgba(183,255,24,.25);
+
+  transition:
+    width 1.2s ease;
+}
+
+
+.supply-status{
+
+  margin-top:12px;
+
+  color:#68736d;
+
+  font-size:9px;
+
+  text-align:left;
+}
+
+
+.supply-status b{
+  color:var(--green);
+}
+
+
+/* =========================================================
+   HOTLINE GRAM
+========================================================= */
+
+.game{
+
+  margin-top:30px;
+
+  position:relative;
+
+  border:
+    1px solid rgba(183,255,24,.52);
+
+  border-radius:8px;
+
+  padding:5px;
+
+  background:#020303;
+
+  box-shadow:
+    0 0 35px rgba(183,255,24,.08),
+    0 0 50px rgba(255,44,156,.04);
+}
+
+
+.game-shell{
+
+  position:relative;
+
+  overflow:hidden;
+
+  border:
+    1px solid rgba(255,255,255,.055);
+
+  border-radius:5px;
+
+  background:#060809;
+}
+
+
+/* =========================================================
+   GAME HEADER
+========================================================= */
+
+.game-head{
+
+  padding:
+    22px 20px 17px;
+
+  text-align:left;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.07);
+
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(255,44,156,.13),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 10% 50%,
+      rgba(183,255,24,.08),
+      transparent 35%
+    ),
+    #070909;
+}
+
+
+.game-kicker{
+
+  color:var(--pink);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.24em;
+}
+
+
+.game-title{
+
+  margin-top:6px;
+
+  color:var(--green);
+
+  font-family:
+    Impact,
+    sans-serif;
+
+  font-style:italic;
+
+  font-size:
+    clamp(42px,10vw,70px);
+
+  line-height:.82;
+
+  letter-spacing:-.025em;
+
+  transform:
+    skew(-3deg);
+
+  text-shadow:
+    3px 3px 0 #3a5005,
+    0 0 20px rgba(183,255,24,.18);
+}
+
+
+.game-subtitle{
+
+  margin-top:12px;
+
+  color:#87918c;
+
+  font-size:10px;
+
+  line-height:1.55;
+}
+
+
+.game-subtitle strong{
+  color:#fff;
+}
+
+
+/* =========================================================
+   GAME ARENA
+========================================================= */
+
+.arena{
+
+  position:relative;
+
+  height:390px;
+
+  overflow:hidden;
+
+  background:
+
+    linear-gradient(
+      rgba(183,255,24,.025) 1px,
+      transparent 1px
+    ),
+
+    linear-gradient(
+      90deg,
+      rgba(183,255,24,.025) 1px,
+      transparent 1px
+    ),
+
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255,44,156,.12),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      circle at 25% 80%,
+      rgba(34,200,255,.09),
+      transparent 27%
+    ),
+
+    #090b0c;
+
+  background-size:
+    32px 32px,
+    32px 32px,
+    auto,
+    auto,
+    auto;
+}
+
+
+/* rooms */
+
+.room{
+
+  position:absolute;
+
+  border:
+    2px solid #151b1b;
+
+  background:
+    rgba(10,13,14,.70);
+}
+
+
+.room.one{
+
+  left:3%;
+  top:7%;
+
+  width:43%;
+  height:39%;
+}
+
+
+.room.two{
+
+  right:3%;
+  top:7%;
+
+  width:43%;
+  height:55%;
+}
+
+
+.room.three{
+
+  left:3%;
+  bottom:5%;
+
+  width:57%;
+  height:40%;
+}
+
+
+.room.four{
+
+  right:3%;
+  bottom:5%;
+
+  width:34%;
+  height:28%;
+}
+
+
+/* walls */
+
+.wall{
+
+  position:absolute;
+
+  background:#151a19;
+
+  box-shadow:
+    inset 0 0 0 1px #202725,
+    0 0 10px rgba(0,0,0,.8);
+}
+
+
+.wall.a{
+
+  width:8px;
+  height:105px;
+
+  left:45%;
+  top:15%;
+}
+
+
+.wall.b{
+
+  height:8px;
+  width:180px;
+
+  left:25%;
+  top:46%;
+}
+
+
+.wall.c{
+
+  height:8px;
+  width:150px;
+
+  right:12%;
+  top:65%;
+}
+
+
+/* =========================================================
+   FLOOR DETAILS
+========================================================= */
+
+.neon-sign{
+
+  position:absolute;
+
+  top:9%;
+  left:7%;
+
+  color:var(--pink);
+
+  font-family:
+    Impact,
+    sans-serif;
+
+  font-size:24px;
+
+  letter-spacing:.10em;
+
+  text-shadow:
+    0 0 7px var(--pink),
+    0 0 16px var(--pink);
+}
+
+
+.graffiti{
+
+  position:absolute;
+
+  right:8%;
+  top:41%;
+
+  transform:
+    rotate(-7deg);
+
+  color:var(--green);
+
+  opacity:.7;
+
+  font-family:
+    Impact,
+    sans-serif;
+
+  font-size:18px;
+
+  text-align:left;
+}
+
+
+.exit{
+
+  position:absolute;
+
+  right:9%;
+  bottom:7%;
+
+  color:#8cff45;
+
+  font-size:9px;
+
+  letter-spacing:.15em;
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player{
+
+  position:absolute;
+
+  left:47%;
+  top:51%;
+
+  width:58px;
+  height:72px;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index:8;
+
+  filter:
+    drop-shadow(
+      0 10px 8px rgba(0,0,0,.65)
+    );
+}
+
+
+.player-head{
+
+  position:absolute;
+
+  left:17px;
+  top:4px;
+
+  width:25px;
+  height:30px;
+
+  border-radius:4px;
+
+  background:#e5efad;
+}
+
+
+.player-leaf{
+
+  position:absolute;
+
+  width:8px;
+  height:29px;
+
+  border-radius:
+    80% 10% 70% 10%;
+
+  background:var(--green);
+
+  transform-origin:bottom;
+}
+
+
+.player-leaf.l1{
+
+  left:21px;
+  top:-18px;
+
+  transform:
+    rotate(-24deg);
+}
+
+
+.player-leaf.l2{
+
+  left:28px;
+  top:-20px;
+
+  transform:
+    rotate(5deg);
+}
+
+
+.player-leaf.l3{
+
+  left:35px;
+  top:-16px;
+
+  transform:
+    rotate(29deg);
+}
+
+
+.glasses{
+
+  position:absolute;
+
+  left:14px;
+  top:11px;
+
+  width:31px;
+  height:8px;
+
+  background:#050505;
+
+  transform:
+    rotate(-2deg);
+}
+
+
+.player-body{
+
+  position:absolute;
+
+  left:10px;
+  top:32px;
+
+  width:39px;
+  height:34px;
+
+  border-radius:
+    7px 7px 3px 3px;
+
+  background:#080909;
+
+  border:
+    2px solid #171c1a;
+}
+
+
+.player-body::after{
+
+  content:"L";
+
+  position:absolute;
+
+  left:13px;
+  top:6px;
+
+  color:var(--green);
+
+  font-size:15px;
+
+  font-weight:900;
+}
+
+
+.gun{
+
+  position:absolute;
+
+  width:38px;
+  height:7px;
+
+  left:40px;
+  top:41px;
+
+  background:#161b1a;
+
+  transform:
+    rotate(-9deg);
+}
+
+
+.muzzle{
+
+  position:absolute;
+
+  left:73px;
+  top:33px;
+
+  width:25px;
+  height:25px;
+
+  clip-path:
+    polygon(
+      0 45%,
+      55% 34%,
+      40% 0,
+      67% 31%,
+      100% 13%,
+      73% 45%,
+      100% 64%,
+      65% 57%,
+      44% 100%,
+      54% 61%,
+      0 55%
+    );
+
+  background:#ffd52b;
+
+  filter:
+    drop-shadow(
+      0 0 7px #ff8c00
+    );
+}
+
+
+/* =========================================================
+   ENEMIES
+========================================================= */
+
+.enemy{
+
+  position:absolute;
+
+  width:32px;
+  height:32px;
+
+  border-radius:50%;
+
+  border:
+    3px solid #090a0a;
+
+  box-shadow:
+    0 7px 9px rgba(0,0,0,.5);
+}
+
+
+.enemy::before{
+
+  content:"!";
+
+  position:absolute;
+
+  left:50%;
+  top:-25px;
+
+  transform:
+    translateX(-50%);
+
+  color:#ff375b;
+
+  font-size:19px;
+
+  font-weight:900;
+}
+
+
+.enemy.e1{
+
+  left:20%;
+  top:25%;
+
+  background:#8b36ff;
+}
+
+
+.enemy.e2{
+
+  right:20%;
+  top:27%;
+
+  background:#ff773c;
+}
+
+
+.enemy.e3{
+
+  left:27%;
+  bottom:18%;
+
+  background:#19a5a3;
+}
+
+
+.enemy.e4{
+
+  right:13%;
+  bottom:19%;
+
+  background:#d5298f;
+}
+
+
+.enemy.e5{
+
+  left:62%;
+  bottom:32%;
+
+  background:#6f9e36;
+}
+
+
+/* =========================================================
+   DEAD ENEMY
+========================================================= */
+
+.dead{
+
+  position:absolute;
+
+  left:34%;
+  top:45%;
+
+  width:43px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:#522043;
+
+  transform:
+    rotate(21deg);
+}
+
+
+.blood{
+
+  position:absolute;
+
+  width:62px;
+  height:42px;
+
+  left:31%;
+  top:42%;
+
+  opacity:.7;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 50%,
+      #d11742 0 12%,
+      transparent 13%
+    ),
+
+    radial-gradient(
+      circle at 20% 70%,
+      #9d1030 0 9%,
+      transparent 10%
+    ),
+
+    radial-gradient(
+      circle at 80% 25%,
+      #c8183e 0 7%,
+      transparent 8%
+    ),
+
+    radial-gradient(
+      circle at 73% 82%,
+      #7d0b26 0 10%,
+      transparent 11%
+    );
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.hud{
+
+  position:absolute;
+
+  z-index:20;
+
+  left:14px;
+  top:14px;
+
+  padding:
+    11px 12px;
+
+  border-left:
+    3px solid var(--green);
+
+  background:
+    rgba(2,4,4,.82);
+
+  text-align:left;
+}
+
+
+.hud-row{
+
+  margin-top:5px;
+
+  color:#89948e;
+
+  font-size:8px;
+}
+
+
+.hud-row:first-child{
+  margin-top:0;
+}
+
+
+.hud-row b{
+  color:#fff;
+}
+
+
+.hud-row .lime{
+  color:var(--green);
+}
+
+
+.hud-row .pink{
+  color:var(--pink);
+}
+
+
+/* =========================================================
+   MINIMAP
+========================================================= */
+
+.minimap{
+
+  position:absolute;
+
+  z-index:20;
+
+  top:14px;
+  right:14px;
+
+  width:96px;
+  height:78px;
+
+  padding:8px;
+
+  border:
+    1px solid rgba(255,255,255,.20);
+
+  background:
+    rgba(2,4,4,.85);
+}
+
+
+.minimap-title{
+
+  color:#d9dfdc;
+
+  font-size:7px;
+
+  text-align:left;
+}
+
+
+.map-shape{
+
+  position:relative;
+
+  width:60px;
+  height:42px;
+
+  margin:
+    7px auto 0;
+
+  border:
+    1px solid #37413d;
+}
+
+
+.map-shape::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:19px;
+  height:18px;
+
+  right:-10px;
+  bottom:3px;
+
+  border:
+    1px solid #37413d;
+}
+
+
+.map-player{
+
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  left:25px;
+  top:16px;
+
+  background:var(--green);
+}
+
+
+.map-enemy{
+
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:var(--pink);
+}
+
+
+/* =========================================================
+   LOWER HUD
+========================================================= */
+
+.arena-bottom{
+
+  position:absolute;
+
+  z-index:20;
+
+  left:14px;
+  right:14px;
+  bottom:12px;
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:space-between;
+}
+
+
+.health{
+
+  display:flex;
+
+  gap:4px;
+}
+
+
+.heart{
+
+  color:#ff3c82;
+
+  font-size:18px;
+
+  text-shadow:
+    0 0 8px rgba(255,60,130,.3);
+}
+
+
+.ammo{
+
+  padding:
+    8px 10px;
+
+  color:#fff;
+
+  background:
+    rgba(3,5,5,.80);
+
+  border:
+    1px solid rgba(183,255,24,.28);
+
+  font-size:9px;
+}
+
+
+/* =========================================================
+   GAME STATS
+========================================================= */
+
+.game-stats{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  border-top:
+    1px solid rgba(255,255,255,.06);
+}
+
+
+.game-stat{
+
+  padding:
+    17px 8px;
+
+  border-right:
+    1px solid rgba(255,255,255,.06);
+
+  background:#050707;
+}
+
+
+.game-stat:last-child{
+  border-right:0;
+}
+
+
+.game-stat span{
+
+  display:block;
+
+  color:#69736d;
+
+  font-size:7px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+}
+
+
+.game-stat strong{
+
+  display:block;
+
+  margin-top:7px;
+
+  color:var(--green);
+
+  font-size:20px;
+}
+
+
+.game-stat:nth-child(2) strong{
+  color:var(--pink);
+}
+
+
+.game-stat:nth-child(3) strong{
+  color:var(--orange);
+}
+
+
+/* =========================================================
+   RUG DENS
+========================================================= */
+
+.dens{
+
+  padding:
+    22px 18px;
+
+  border-top:
+    1px solid rgba(255,255,255,.06);
+
+  background:#060808;
+}
+
+
+.dens-title{
+
+  color:var(--green);
+
+  font-family:
+    Impact,
+    sans-serif;
+
+  font-style:italic;
+
+  font-size:24px;
+
+  text-align:left;
+}
+
+
+.den-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:8px;
+
+  margin-top:14px;
+}
+
+
+.den{
+
+  position:relative;
+
+  min-height:110px;
+
+  padding:
+    12px 8px;
+
+  border:
+    1px solid rgba(255,255,255,.10);
+
+  background:#090b0c;
+
+  text-align:center;
+
+  transition:.18s ease;
+}
+
+
+.den:hover{
+
+  border-color:var(--green);
+
+  transform:
+    translateY(-2px);
+}
+
+
+.den-icon{
+
+  width:44px;
+  height:44px;
+
+  margin:
+    0 auto;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:#050706;
+
+  background:var(--green);
+
+  font-size:21px;
+
+  font-weight:900;
+}
+
+
+.den:nth-child(2) .den-icon{
+  background:var(--orange);
+}
+
+
+.den:nth-child(3) .den-icon{
+  background:var(--pink);
+}
+
+
+.den:nth-child(4) .den-icon{
+  background:var(--purple);
+}
+
+
+.den:nth-child(5) .den-icon{
+  background:var(--blue);
+}
+
+
+.den.locked .den-icon{
+
+  background:#222827;
+
+  color:#69736d;
+}
+
+
+.den-name{
+
+  margin-top:9px;
+
+  color:#fff;
+
+  font-size:8px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+}
+
+
+.den:nth-child(1) .den-name{
+  color:var(--green);
+}
+
+
+.den:nth-child(2) .den-name{
+  color:var(--orange);
+}
+
+
+.den:nth-child(3) .den-name{
+  color:var(--pink);
+}
+
+
+.den:nth-child(4) .den-name{
+  color:var(--purple);
+}
+
+
+.den:nth-child(5) .den-name{
+  color:var(--blue);
+}
+
+
+.den-desc{
+
+  margin-top:5px;
+
+  color:#59635e;
+
+  font-size:7px;
+}
+
+
+/* =========================================================
+   BURN PANEL
+========================================================= */
+
+.burn-panel{
+
+  padding:
+    22px 18px;
+
+  border-top:
+    1px solid rgba(255,255,255,.06);
+
+  background:
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(255,44,156,.08),
+      transparent 40%
+    ),
+    #050707;
+}
+
+
+.burn-rule{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  color:var(--green);
+
+  font-family:
+    Impact,
+    sans-serif;
+
+  font-style:italic;
+
+  font-size:25px;
+}
+
+
+.burn-rule .skull{
+  color:var(--pink);
+}
+
+
+.burn-explain{
+
+  max-width:480px;
+
+  margin:
+    10px auto 0;
+
+  color:#707b75;
+
+  font-size:9px;
+
+  line-height:1.6;
+}
+
+
+.pending{
+
+  margin-top:17px;
+
+  padding:16px;
+
+  border:
+    1px solid rgba(183,255,24,.24);
+
+  background:#080b09;
+}
+
+
+.pending span{
+
+  display:block;
+
+  color:#6c776f;
+
+  font-size:8px;
+
+  letter-spacing:.16em;
+}
+
+
+.pending strong{
+
+  display:block;
+
+  margin-top:7px;
+
+  color:var(--green);
+
+  font-size:28px;
+
+  text-shadow:
+    0 0 15px rgba(183,255,24,.16);
+}
+
+
+.game-cta{
+
+  width:100%;
+
+  min-height:58px;
+
+  margin-top:12px;
+
+  border:
+    1px solid var(--pink);
+
+  border-radius:3px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,44,156,.13),
+      rgba(183,255,24,.05)
+    );
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:.08em;
+
+  cursor:pointer;
+
+  transition:.18s ease;
+}
+
+
+.game-cta:hover{
+
+  color:#071000;
+
+  border-color:var(--green);
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 30px rgba(183,255,24,.20);
+}
+
+
+/* =========================================================
+   CONSTRUCTION
+========================================================= */
+
+.construction{
+
+  margin-top:20px;
+
+  padding:20px;
+
+  border:
+    1px dashed rgba(183,255,24,.25);
+
+  background:#050706;
+}
+
+
+.construction-title{
+
+  color:var(--green);
+
+  font-size:10px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+}
+
+
+.construction p{
+
+  margin:
+    11px 0 0;
+
+  color:#6f7a74;
+
+  font-size:11px;
+
+  line-height:1.6;
+}
+
+
+.construction strong{
+  color:#fff;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:620px){
+
+  .page{
+
+    padding-top:34px;
+
+    padding-left:
+      max(
+        14px,
+        env(safe-area-inset-left)
+      );
+
+    padding-right:
+      max(
+        14px,
+        env(safe-area-inset-right)
+      );
+
+  }
+
+
+  .logo-wrap{
+
+    width:126px;
+    height:126px;
+  }
+
+
+  h1{
+    font-size:16vw;
+  }
+
+
+  .tagline{
+    font-size:12px;
+  }
+
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+
+  .supply-grid{
+    grid-template-columns:1fr;
+  }
+
+
+  .supply-stat.full{
+    grid-column:auto;
+  }
+
+
+  .arena{
+    height:360px;
+  }
+
+
+  .den-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+
+  .game-title{
+    font-size:48px;
+  }
+
+
+  .game-stats{
+    grid-template-columns:
+      1fr 1fr 1fr;
+  }
+
+
+  .game-stat strong{
+    font-size:16px;
+  }
+
+
+  .minimap{
+
+    width:83px;
+    height:70px;
+  }
+
+
+  .player{
+
+    left:48%;
+    top:53%;
+  }
+
+}
+
+
+@media(max-width:360px){
+
+  .contract-row{
+    gap:7px;
+  }
+
+
+  .copy-btn{
+
+    padding:
+      0 9px;
+  }
+
+
+  .wallet-top{
+
+    flex-direction:column;
+
+    gap:5px;
+  }
+
+
+  .game-title{
+    font-size:42px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="page">
+
+<section class="wrap">
+
+
+<!-- =====================================================
+     LANGUAGE
+===================================================== -->
+
+<div class="topbar">
+
+  <div class="lang-switch">
+
+    <button
+      class="lang-btn active"
+      id="langEn">
+      EN
+    </button>
+
+    <button
+      class="lang-btn"
+      id="langRu">
+      RU
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+
+<div class="logo-wrap">
+
+  <img
+    class="logo"
+    src="Logo.png"
+    alt="GramLeek logo"
+  />
+
+</div>
+
+
+<p
+  class="eyebrow"
+  data-i18n="eyebrow">
+  BUILT ON GRAM
+</p>
+
+
+<h1>
+  GRAMLEEK
+</h1>
+
+
+<p
+  class="tagline"
+  data-i18n-html="tagline">
+  NOT A <span>VEGETABLE.</span>
+</p>
+
+
+
+<!-- CONTRACT -->
+
+<div class="contract-box">
+
+<div class="contract-inner">
+
+
+<div
+  class="contract-label"
+  data-i18n="contractLabel">
+  OFFICIAL LEEK CONTRACT
+</div>
+
+
+<div class="contract-row">
+
+
+<div class="contract-address">
+
+EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw
+
+</div>
+
+
+<button
+  class="copy-btn"
+  id="copyContract">
+
+COPY CA
+
+</button>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+
+<a
+class="btn green"
+href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw"
+target="_blank"
+rel="noopener noreferrer">
+
+<strong data-i18n="kitchen">
+ENTER THE KITCHEN →
+</strong>
+
+<span data-i18n="dedust">
+VIEW LEEK ON DEDUST
+</span>
+
+</a>
+
+
+
+<a
+class="btn blue"
+href="https://t.me/LeekCafe"
+target="_blank"
+rel="noopener noreferrer">
+
+<strong data-i18n="cafe">
+ENTER CAFÉ →
+</strong>
+
+<span data-i18n="community">
+JOIN THE COMMUNITY
+</span>
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     TRANSPARENCY
+===================================================== -->
+
+<section class="transparency">
+
+
+<div
+  class="section-label"
+  data-i18n="transparency">
+  TRANSPARENCY
+</div>
+
+
+
+<!-- DEV -->
+
+<div class="wallet dev">
+
+<div class="wallet-top">
+
+
+<div
+  class="wallet-name"
+  data-i18n="devWallet">
+  DEV WALLET
+</div>
+
+
+<div class="wallet-amount">
+
+50M LEEK · 5%
+
+</div>
+
+
+</div>
+
+
+<a
+class="wallet-address"
+href="https://tonviewer.com/UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn"
+target="_blank"
+rel="noopener noreferrer">
+
+UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn
+
+</a>
+
+</div>
+
+
+
+<!-- COMMUNITY -->
+
+<div class="wallet community">
+
+<div class="wallet-top">
+
+
+<div
+  class="wallet-name"
+  data-i18n="communityFund">
+  COMMUNITY FUND
+</div>
+
+
+<div class="wallet-amount">
+
+50M LEEK · 5%
+
+</div>
+
+
+</div>
+
+
+<a
+class="wallet-address"
+href="https://tonviewer.com/UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy"
+target="_blank"
+rel="noopener noreferrer">
+
+UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy
+
+</a>
+
+</div>
+
+
+
+<!-- BURN -->
+
+<div class="wallet burn">
+
+<div class="wallet-top">
+
+
+<div
+  class="wallet-name"
+  data-i18n="burned">
+  BURNED
+</div>
+
+
+<div
+  class="wallet-amount"
+  id="burnWalletAmount">
+
+15M LEEK · 1.5%
+
+</div>
+
+
+</div>
+
+
+<a
+class="wallet-address"
+href="https://tonviewer.com/UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ"
+target="_blank"
+rel="noopener noreferrer">
+
+UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ
+
+</a>
+
+</div>
+
+
+
+<p
+  class="transparency-note"
+  data-i18n="verify">
+
+Public wallets.
+Everything on-chain.
+Verify it yourself.
+
+</p>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     SUPPLY SCAN
+===================================================== -->
+
+<section class="supply-scan">
+
+<div class="supply-inner">
+
+
+<div
+  class="supply-kicker"
+  data-i18n="supplyKicker">
+
+ON-CHAIN SUPPLY SCAN
+
+</div>
+
+
+<div
+  class="supply-title"
+  data-i18n="supplyTitle">
+
+LEEK SUPPLY DIAGNOSTICS
+
+</div>
+
+
+<p
+  class="supply-copy"
+  data-i18n="supplyCopy">
+
+Reading the burn wallet directly from TON.
+No spreadsheet vegetables.
+
+</p>
+
+
+
+<div class="supply-grid">
+
+
+<div class="supply-stat">
+
+<span data-i18n="originalSupply">
+ORIGINAL SPECIMENS
+</span>
+
+<strong>
+1.00B LEEK
+</strong>
+
+</div>
+
+
+
+<div class="supply-stat">
+
+<span data-i18n="lostSupply">
+THROWN INTO THE VOID
+</span>
+
+<strong id="burnedSupply">
+SCANNING...
+</strong>
+
+</div>
+
+
+
+<div class="supply-stat full">
+
+<span data-i18n="effectiveSupply">
+CURRENT EFFECTIVE SUPPLY
+</span>
+
+<strong id="effectiveSupply">
+SCANNING...
+</strong>
+
+</div>
+
+
+</div>
+
+
+
+<div class="burn-meter">
+
+
+<div class="burn-meter-top">
+
+<span data-i18n="burnRate">
+BURN RATE
+</span>
+
+<b id="burnPercent">
+—
+</b>
+
+</div>
+
+
+<div class="burn-track">
+
+<div
+  class="burn-fill"
+  id="burnFill">
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<div
+class="supply-status"
+id="supplyStatus">
+
+<b>&gt;</b>
+
+<span data-i18n="supplyScanning">
+scanning burn wallet...
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOTLINE GRAM
+===================================================== -->
+
+<section class="game">
+
+<div class="game-shell">
+
+
+
+<!-- HEADER -->
+
+<div class="game-head">
+
+
+<div
+  class="game-kicker"
+  data-i18n="gameKicker">
+
+GRAMLEEK PRESENTS
+
+</div>
+
+
+<div class="game-title">
+
+HOTLINE GRAM
+
+</div>
+
+
+<div
+  class="game-subtitle"
+  data-i18n-html="gameSubtitle">
+
+Enter the worst neighborhoods on Telegram.
+<strong>Clean the rug dens.</strong>
+Every confirmed kill feeds the burn counter.
+
+</div>
+
+
+</div>
+
+
+
+<!-- ARENA -->
+
+<div class="arena">
+
+
+<div class="room one"></div>
+<div class="room two"></div>
+<div class="room three"></div>
+<div class="room four"></div>
+
+
+<div class="wall a"></div>
+<div class="wall b"></div>
+<div class="wall c"></div>
+
+
+
+<div class="neon-sign">
+
+RUG
+
+</div>
+
+
+<div class="graffiti">
+
+EXIT<br>
+LIQUIDITY
+
+</div>
+
+
+<div class="exit">
+
+&gt; FIND THE DEV
+
+</div>
+
+
+
+<!-- HUD -->
+
+<div class="hud">
+
+
+<div class="hud-row">
+
+SCORE
+
+<b>
+21,420
+</b>
+
+</div>
+
+
+<div class="hud-row">
+
+KILLS
+
+<b class="lime">
+247
+</b>
+
+</div>
+
+
+<div class="hud-row">
+
+COMBO
+
+<b class="pink">
+33X
+</b>
+
+</div>
+
+
+<div class="hud-row">
+
+LEEK BURNED
+
+<b class="lime">
+247
+</b>
+
+</div>
+
+
+</div>
+
+
+
+<!-- MINIMAP -->
+
+<div class="minimap">
+
+
+<div class="minimap-title">
+
+FLOOR 1-2
+
+</div>
+
+
+<div class="map-shape">
+
+
+<div class="map-player"></div>
+
+
+<div
+  class="map-enemy"
+  style="
+  left:9px;
+  top:7px;">
+</div>
+
+
+<div
+  class="map-enemy"
+  style="
+  right:9px;
+  top:13px;">
+</div>
+
+
+<div
+  class="map-enemy"
+  style="
+  right:20px;
+  bottom:5px;">
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- BLOOD -->
+
+<div class="blood"></div>
+
+<div class="dead"></div>
+
+
+
+<!-- ENEMIES -->
+
+<div class="enemy e1"></div>
+
+<div class="enemy e2"></div>
+
+<div class="enemy e3"></div>
+
+<div class="enemy e4"></div>
+
+<div class="enemy e5"></div>
+
+
+
+<!-- PLAYER -->
+
+<div class="player">
+
+
+<div class="player-leaf l1"></div>
+
+<div class="player-leaf l2"></div>
+
+<div class="player-leaf l3"></div>
+
+
+<div class="player-head">
+
+<div class="glasses"></div>
+
+</div>
+
+
+<div class="player-body"></div>
+
+
+<div class="gun"></div>
+
+<div class="muzzle"></div>
+
+
+</div>
+
+
+
+<!-- LOWER HUD -->
+
+<div class="arena-bottom">
+
+
+<div class="health">
+
+
+<div class="heart">
+♥
+</div>
+
+
+<div class="heart">
+♥
+</div>
+
+
+<div class="heart">
+♥
+</div>
+
+
+<div class="heart">
+♥
+</div>
+
+
+</div>
+
+
+
+<div class="ammo">
+
+▰▰▰ 12 / 24
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     SESSION STATS
+===================================================== -->
+
+<div class="game-stats">
+
+
+<div class="game-stat">
+
+<span data-i18n="sessionKills">
+SESSION KILLS
+</span>
+
+<strong>
+247
+</strong>
+
+</div>
+
+
+
+<div class="game-stat">
+
+<span data-i18n="bestCombo">
+BEST COMBO
+</span>
+
+<strong>
+33X
+</strong>
+
+</div>
+
+
+
+<div class="game-stat">
+
+<span data-i18n="accuracy">
+ACCURACY
+</span>
+
+<strong>
+83%
+</strong>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     RUG DENS
+===================================================== -->
+
+<div class="dens">
+
+
+<div
+  class="dens-title"
+  data-i18n="selectDen">
+
+SELECT RUG DEN
+
+</div>
+
+
+
+<div class="den-grid">
+
+
+
+<!-- KOL -->
+
+<div class="den">
+
+<div class="den-icon">
+K
+</div>
+
+<div class="den-name">
+THE KOL HOUSE
+</div>
+
+<div class="den-desc">
+Difficulty: suspicious
+</div>
+
+</div>
+
+
+
+<!-- PRESALE -->
+
+<div class="den">
+
+<div class="den-icon">
+P
+</div>
+
+<div class="den-name">
+THE PRESALE
+</div>
+
+<div class="den-desc">
+Wallets already funded
+</div>
+
+</div>
+
+
+
+<!-- DEV -->
+
+<div class="den">
+
+<div class="den-icon">
+D
+</div>
+
+<div class="den-name">
+THE DEV LAIR
+</div>
+
+<div class="den-desc">
+Last seen selling
+</div>
+
+</div>
+
+
+
+<!-- CABAL -->
+
+<div class="den">
+
+<div class="den-icon">
+C
+</div>
+
+<div class="den-name">
+THE CABAL
+</div>
+
+<div class="den-desc">
+Nobody knows anybody
+</div>
+
+</div>
+
+
+
+<!-- INFLUENCER -->
+
+<div class="den">
+
+<div class="den-icon">
+I
+</div>
+
+<div class="den-name">
+THE INFLUENCER
+</div>
+
+<div class="den-desc">
+Not financial advice
+</div>
+
+</div>
+
+
+
+<!-- LOCKED -->
+
+<div class="den locked">
+
+<div class="den-icon">
+?
+</div>
+
+<div class="den-name">
+LOCKED
+</div>
+
+<div class="den-desc">
+The CEX backroom
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     BURN PANEL
+===================================================== -->
+
+<div class="burn-panel">
+
+
+<div class="burn-rule">
+
+
+<span class="skull">
+☠
+</span>
+
+
+<span data-i18n="killBurn">
+1 KILL = 1 LEEK
+</span>
+
+
+</div>
+
+
+
+<div
+  class="burn-explain"
+  data-i18n="burnExplain">
+
+Game kills accumulate into the public burn counter.
+On-chain burns can be executed in batches
+and linked publicly.
+
+</div>
+
+
+
+<div class="pending">
+
+
+<span data-i18n="pendingBurn">
+
+PENDING BURN POOL
+
+</span>
+
+
+<strong id="pendingBurn">
+
+8,421 LEEK
+
+</strong>
+
+
+</div>
+
+
+
+<button
+class="game-cta"
+id="playGame"
+data-i18n="playGame">
+
+PLAY PROTOTYPE →
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONSTRUCTION
+===================================================== -->
+
+<section class="construction">
+
+
+<div
+  class="construction-title"
+  data-i18n="constructionTitle">
+
+🚧 GRAMLEEK IS COOKING
+
+</div>
+
+
+<p
+  data-i18n-html="constructionCopy">
+
+The website is still evolving.
+Friendly reminder:
+<strong>we're still a tiny fucking leek.</strong>
+<br><br>
+Give us a minute.
+
+</p>
+
+
+</section>
+
+
+</section>
+
+</main>
+
+
+
+<script>
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const CONTRACT =
+"EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw";
+
+
+const BURN_WALLET =
+"UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ";
+
+
+const TOTAL_SUPPLY =
+1000000000;
+
+
+const DECIMALS =
+9;
+
+
+const HOLDER_API =
+"https://toncenter.com/api/v3/jetton/wallets";
+
+
+
+/* =========================================================
+   TRANSLATIONS
+========================================================= */
+
+const translations = {
+
+
+en:{
+
+eyebrow:
+"BUILT ON GRAM",
+
+tagline:
+'NOT A <span>VEGETABLE.</span>',
+
+contractLabel:
+"OFFICIAL LEEK CONTRACT",
+
+copy:
+"COPY CA",
+
+copied:
+"COPIED ✓",
+
+kitchen:
+"ENTER THE KITCHEN →",
+
+dedust:
+"VIEW LEEK ON DEDUST",
+
+cafe:
+"ENTER CAFÉ →",
+
+community:
+"JOIN THE COMMUNITY",
+
+transparency:
+"TRANSPARENCY",
+
+devWallet:
+"DEV WALLET",
+
+communityFund:
+"COMMUNITY FUND",
+
+burned:
+"BURNED",
+
+verify:
+"Public wallets. Everything on-chain. Verify it yourself.",
+
+supplyKicker:
+"ON-CHAIN SUPPLY SCAN",
+
+supplyTitle:
+"LEEK SUPPLY DIAGNOSTICS",
+
+supplyCopy:
+"Reading the burn wallet directly from TON. No spreadsheet vegetables.",
+
+originalSupply:
+"ORIGINAL SPECIMENS",
+
+lostSupply:
+"THROWN INTO THE VOID",
+
+effectiveSupply:
+"CURRENT EFFECTIVE SUPPLY",
+
+burnRate:
+"BURN RATE",
+
+supplyScanning:
+"scanning burn wallet...",
+
+supplyLive:
+"burn wallet synced. population adjusted.",
+
+supplyError:
+"TON API unavailable. scan paused.",
+
+gameKicker:
+"GRAMLEEK PRESENTS",
+
+gameSubtitle:
+'Enter the worst neighborhoods on Telegram. <strong>Clean the rug dens.</strong> Every confirmed kill feeds the burn counter.',
+
+sessionKills:
+"SESSION KILLS",
+
+bestCombo:
+"BEST COMBO",
+
+accuracy:
+"ACCURACY",
+
+selectDen:
+"SELECT RUG DEN",
+
+killBurn:
+"1 KILL = 1 LEEK",
+
+burnExplain:
+"Game kills accumulate into the public burn counter. On-chain burns can be executed in batches and linked publicly.",
+
+pendingBurn:
+"PENDING BURN POOL",
+
+playGame:
+"PLAY PROTOTYPE →",
+
+constructionTitle:
+"🚧 GRAMLEEK IS COOKING",
+
+constructionCopy:
+'The website is still evolving. Friendly reminder: <strong>we\'re still a tiny fucking leek.</strong><br><br>Give us a minute.'
+
+},
+
+
+
+ru:{
+
+eyebrow:
+"СОЗДАНО НА GRAM",
+
+tagline:
+'НЕ <span>ОВОЩ.</span>',
+
+contractLabel:
+"ОФИЦИАЛЬНЫЙ КОНТРАКТ LEEK",
+
+copy:
+"КОПИРОВАТЬ",
+
+copied:
+"СКОПИРОВАНО ✓",
+
+kitchen:
+"НА КУХНЮ →",
+
+dedust:
+"LEEK НА DEDUST",
+
+cafe:
+"В LEEK CAFÉ →",
+
+community:
+"ВСТУПИТЬ В СООБЩЕСТВО",
+
+transparency:
+"ПРОЗРАЧНОСТЬ",
+
+devWallet:
+"КОШЕЛЁК DEV",
+
+communityFund:
+"ФОНД СООБЩЕСТВА",
+
+burned:
+"СОЖЖЕНО",
+
+verify:
+"Публичные кошельки. Всё ончейн. Проверь сам.",
+
+supplyKicker:
+"ОНЧЕЙН-СКАН SUPPLY",
+
+supplyTitle:
+"ДИАГНОСТИКА SUPPLY LEEK",
+
+supplyCopy:
+"Читаем burn-кошелёк напрямую из TON. Никаких овощных таблиц.",
+
+originalSupply:
+"ИЗНАЧАЛЬНО СОЗДАНО",
+
+lostSupply:
+"ОТПРАВЛЕНО В ПУСТОТУ",
+
+effectiveSupply:
+"ТЕКУЩИЙ ЭФФЕКТИВНЫЙ SUPPLY",
+
+burnRate:
+"BURN RATE",
+
+supplyScanning:
+"сканируем burn-кошелёк...",
+
+supplyLive:
+"burn-кошелёк синхронизирован. supply обновлён.",
+
+supplyError:
+"TON API недоступен. скан остановлен.",
+
+gameKicker:
+"GRAMLEEK ПРЕДСТАВЛЯЕТ",
+
+gameSubtitle:
+'Заходи в худшие районы Telegram. <strong>Зачищай rug dens.</strong> Каждое подтверждённое убийство пополняет burn counter.',
+
+sessionKills:
+"УБИЙСТВА",
+
+bestCombo:
+"ЛУЧШЕЕ КОМБО",
+
+accuracy:
+"ТОЧНОСТЬ",
+
+selectDen:
+"ВЫБЕРИ RUG DEN",
+
+killBurn:
+"1 УБИЙСТВО = 1 LEEK",
+
+burnExplain:
+"Убийства в игре накапливаются в публичном burn counter. Ончейн-burn можно выполнять пакетами и публично привязывать к транзакциям.",
+
+pendingBurn:
+"ОЖИДАЕТ СЖИГАНИЯ",
+
+playGame:
+"ИГРАТЬ В ПРОТОТИП →",
+
+constructionTitle:
+"🚧 GRAMLEEK ГОТОВИТ",
+
+constructionCopy:
+'Сайт всё ещё развивается. Напоминание: <strong>мы всё ещё маленький грёбаный лук-порей.</strong><br><br>Дайте минуту.'
+
+}
+
+};
+
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+let currentLang =
+localStorage.getItem(
+"gramleek-lang"
+) || "en";
+
+
+const byId =
+id =>
+document.getElementById(id);
+
+
+const t =
+key =>
+translations[currentLang][key]
+|| key;
+
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function setLanguage(lang){
+
+currentLang =
+lang;
+
+
+localStorage.setItem(
+"gramleek-lang",
+lang
+);
+
+
+document.documentElement.lang =
+lang;
+
+
+document
+.querySelectorAll(
+"[data-i18n]"
+)
+.forEach(
+el=>{
+
+const key =
+el.dataset.i18n;
+
+
+if(
+translations[lang][key]
+){
+
+el.textContent =
+translations[lang][key];
+
+}
+
+}
+);
+
+
+document
+.querySelectorAll(
+"[data-i18n-html]"
+)
+.forEach(
+el=>{
+
+const key =
+el.dataset.i18nHtml;
+
+
+if(
+translations[lang][key]
+){
+
+el.innerHTML =
+translations[lang][key];
+
+}
+
+}
+);
+
+
+byId("langEn")
+.classList
+.toggle(
+"active",
+lang === "en"
+);
+
+
+byId("langRu")
+.classList
+.toggle(
+"active",
+lang === "ru"
+);
+
+
+if(
+!byId("copyContract")
+.classList
+.contains("copied")
+){
+
+byId("copyContract")
+.textContent =
+t("copy");
+
+}
+
+}
+
+
+
+byId("langEn")
+.addEventListener(
+"click",
+()=>setLanguage("en")
+);
+
+
+byId("langRu")
+.addEventListener(
+"click",
+()=>setLanguage("ru")
+);
+
+
+setLanguage(
+currentLang
+);
+
+
+
+/* =========================================================
+   COPY CONTRACT
+========================================================= */
+
+byId("copyContract")
+.addEventListener(
+"click",
+async ()=>{
+
+
+try{
+
+
+await navigator
+.clipboard
+.writeText(
+CONTRACT
+);
+
+
+}catch(error){
+
+
+const textarea =
+document
+.createElement(
+"textarea"
+);
+
+
+textarea.value =
+CONTRACT;
+
+
+document.body
+.appendChild(
+textarea
+);
+
+
+textarea.select();
+
+
+document.execCommand(
+"copy"
+);
+
+
+textarea.remove();
+
+
+}
+
+
+byId("copyContract")
+.classList
+.add(
+"copied"
+);
+
+
+byId("copyContract")
+.textContent =
+t("copied");
+
+
+setTimeout(
+()=>{
+
+
+byId("copyContract")
+.classList
+.remove(
+"copied"
+);
+
+
+byId("copyContract")
+.textContent =
+t("copy");
+
+
+},
+1600
+);
+
+
+}
+);
+
+
+
+/* =========================================================
+   NUMBER FORMAT
+========================================================= */
+
+function rawToNumber(raw){
+
+return Number(
+raw || "0"
+)
+/ (
+10 ** DECIMALS
+);
+
+}
+
+
+
+function human(n){
+
+if(
+n >= 1e9
+){
+
+return (
+n / 1e9
+).toFixed(2)
++
+"B";
+
+}
+
+
+if(
+n >= 1e6
+){
+
+return (
+n / 1e6
+).toFixed(2)
++
+"M";
+
+}
+
+
+if(
+n >= 1e3
+){
+
+return (
+n / 1e3
+).toFixed(1)
++
+"K";
+
+}
+
+
+return new Intl
+.NumberFormat(
+"en-US",
+{
+maximumFractionDigits:2
+}
+)
+.format(n);
+
+}
+
+
+
+/* =========================================================
+   SUPPLY SCAN
+========================================================= */
+
+async function loadSupply(){
+
+
+const burnedSupply =
+byId(
+"burnedSupply"
+);
+
+
+const effectiveSupply =
+byId(
+"effectiveSupply"
+);
+
+
+const burnPercent =
+byId(
+"burnPercent"
+);
+
+
+const burnFill =
+byId(
+"burnFill"
+);
+
+
+const burnWalletAmount =
+byId(
+"burnWalletAmount"
+);
+
+
+const supplyStatus =
+byId(
+"supplyStatus"
+);
+
+
+
+try{
+
+
+supplyStatus.innerHTML =
+`<b>&gt;</b> ${t("supplyScanning")}`;
+
+
+
+const url =
+`${HOLDER_API}?owner_address=${encodeURIComponent(BURN_WALLET)}&jetton_address=${encodeURIComponent(CONTRACT)}&limit=10&offset=0`;
+
+
+
+const response =
+await fetch(
+url,
+{
+headers:{
+accept:
+"application/json"
+}
+}
+);
+
+
+
+if(
+!response.ok
+){
+
+throw new Error(
+"TON API unavailable"
+);
+
+}
+
+
+
+const data =
+await response.json();
+
+
+
+const rows =
+data.jetton_wallets
+|| [];
+
+
+
+const burned =
+rows.length
+?
+rawToNumber(
+rows[0].balance
+)
+:
+0;
+
+
+
+const effective =
+Math.max(
+0,
+TOTAL_SUPPLY
+-
+burned
+);
+
+
+
+const percent =
+TOTAL_SUPPLY
+?
+(
+burned
+/
+TOTAL_SUPPLY
+)
+*
+100
+:
+0;
+
+
+
+burnedSupply.textContent =
+human(burned)
++
+" LEEK";
+
+
+
+effectiveSupply.textContent =
+human(effective)
++
+" LEEK";
+
+
+
+burnPercent.textContent =
+percent.toFixed(2)
++
+"%";
+
+
+
+burnFill.style.width =
+Math.min(
+100,
+percent
+)
++
+"%";
+
+
+
+burnWalletAmount.textContent =
+human(burned)
++
+" LEEK · "
++
+percent.toFixed(2)
++
+"%";
+
+
+
+supplyStatus.innerHTML =
+`<b>&gt;</b> ${t("supplyLive")}`;
+
+
+
+}catch(error){
+
+
+burnedSupply.textContent =
+"—";
+
+
+effectiveSupply.textContent =
+"—";
+
+
+burnPercent.textContent =
+"—";
+
+
+burnFill.style.width =
+"0%";
+
+
+supplyStatus.innerHTML =
+`<b>&gt;</b> ${t("supplyError")}`;
+
+
+console.error(
+error
+);
+
+
+}
+
+
+}
+
+
+
+loadSupply();
+
+
+
+/* =========================================================
+   GAME TEASER
+========================================================= */
+
+byId("playGame")
+.addEventListener(
+"click",
+()=>{
+
+
+const button =
+byId(
+"playGame"
+);
+
+
+button.disabled =
+true;
+
+
+button.textContent =
+currentLang === "ru"
+?
+"ПРОТОТИП ГОТОВИТСЯ..."
+:
+"PROTOTYPE COOKING...";
+
+
+setTimeout(
+()=>{
+
+
+button.textContent =
+currentLang === "ru"
+?
+"СКОРО — НЕ УХОДИ"
+:
+"COMING SOON — STAY LOCKED IN";
+
+
+},
+700
+);
+
+
+setTimeout(
+()=>{
+
+
+button.disabled =
+false;
+
+
+button.textContent =
+t("playGame");
+
+
+},
+3500
+);
+
+
+}
+);
+
+
+</script>
+
+</body>
+</html>

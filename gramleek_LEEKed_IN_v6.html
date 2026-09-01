@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#030506" />
+<title>GramLeek — LEEKed IN</title>
+<meta name="description" content="GramLeek — Not a vegetable. Experimental MemeFi layer on GRAM." />
+<style>
+:root{
+  --bg:#030506;--panel:#070a0b;--text:#f5f7f8;--muted:#84908c;
+  --green:#b7ff18;--blue:#22c8ff;--pink:#ff2c9c;--orange:#ff9d2e;
+  --red:#ff315c;--purple:#b43cff;--line:rgba(255,255,255,.10)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);overflow-x:hidden}
+body{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(183,255,24,.11),transparent 26%),
+    radial-gradient(circle at 82% 30%,rgba(255,44,156,.09),transparent 28%),
+    radial-gradient(circle at 55% 78%,rgba(34,200,255,.07),transparent 32%),
+    #030506
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.065;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 4px);
+  mix-blend-mode:overlay
+}
+img,canvas{display:block;max-width:100%} button{font:inherit}
+.page{width:100%;max-width:1180px;margin:0 auto;padding:44px max(18px,env(safe-area-inset-right)) 60px max(18px,env(safe-area-inset-left))}
+.wrap{width:100%;max-width:800px;margin:0 auto;text-align:center}
+.topbar{display:flex;justify-content:flex-end;margin-bottom:22px}
+.lang-switch{display:inline-flex;gap:4px;padding:4px;border:1px solid rgba(183,255,24,.18);background:#050807;border-radius:5px}
+.lang-btn{min-width:42px;height:29px;border:0;border-radius:3px;color:#657069;background:transparent;font-size:10px;font-weight:900;letter-spacing:.12em;cursor:pointer}
+.lang-btn.active{color:#071000;background:var(--green);box-shadow:0 0 18px rgba(183,255,24,.25)}
+.hero{position:relative;padding-top:8px}
+.hero:before{content:"";position:absolute;width:460px;height:460px;max-width:90vw;left:50%;top:34%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(183,255,24,.12),transparent 55%);filter:blur(28px);pointer-events:none}
+.logo-wrap{position:relative;z-index:2;width:150px;height:150px;margin:0 auto 24px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--green),var(--blue));box-shadow:0 0 25px rgba(183,255,24,.16),0 0 40px rgba(34,200,255,.12)}
+.logo{width:100%;height:100%;object-fit:cover;border-radius:50%;background:#071016}
+.eyebrow{position:relative;z-index:2;margin:0 0 12px;color:var(--green);font-size:10px;font-weight:900;letter-spacing:.30em}
+h1{position:relative;z-index:2;margin:0;font-family:Impact,Haettenschweiler,"Arial Narrow Bold",sans-serif;font-style:italic;font-size:clamp(58px,13vw,116px);line-height:.82;letter-spacing:-.045em;transform:skew(-3deg);color:var(--green);text-shadow:3px 3px 0 rgba(85,130,0,.55),0 0 25px rgba(183,255,24,.20)}
+.tagline{position:relative;z-index:2;margin:24px 0 0;color:#cdd3d0;font-size:14px;font-weight:900;letter-spacing:.20em}.tagline span{color:var(--pink)}
+.contract-box{margin:30px auto 0;border:1px solid rgba(183,255,24,.42);border-radius:7px;padding:5px;background:#030504;box-shadow:0 0 24px rgba(183,255,24,.06)}
+.contract-inner{padding:15px;border:1px solid rgba(255,255,255,.06);background:#080b0a}
+.contract-label{margin-bottom:10px;color:var(--green);font-size:9px;font-weight:900;letter-spacing:.22em}
+.contract-row{display:flex;align-items:center;gap:12px}
+.contract-address{flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:left;color:#aeb9b3;font-size:10px}
+.copy-btn{flex-shrink:0;height:36px;padding:0 14px;border:1px solid var(--green);border-radius:3px;background:#0b1008;color:var(--green);font-size:9px;font-weight:900;cursor:pointer}
+.copy-btn.copied{color:#061000;background:var(--green)}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.btn{min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;text-decoration:none;border-radius:5px;background:#080b0c;transition:.18s ease}
+.btn.green{border:1px solid rgba(183,255,24,.55)}.btn.blue{border:1px solid rgba(34,200,255,.55)}
+.btn strong{font-size:13px;letter-spacing:.03em}.btn.green strong{color:var(--green)}.btn.blue strong{color:var(--blue)}.btn span{margin-top:7px;color:#66716c;font-size:9px;letter-spacing:.12em}
+.transparency{margin-top:36px}.section-label{margin-bottom:15px;color:var(--green);font-size:10px;font-weight:900;letter-spacing:.30em}
+.wallet{margin-top:8px;padding:16px 18px;text-align:left;background:#070a09;border-radius:5px}.wallet.dev{border:1px solid rgba(183,255,24,.36)}.wallet.community{border:1px solid rgba(34,200,255,.36)}.wallet.burn{border:1px solid rgba(255,157,46,.36)}
+.wallet-top{display:flex;justify-content:space-between;gap:14px}.wallet-name{font-size:10px;font-weight:900;letter-spacing:.14em}.wallet.dev .wallet-name{color:var(--green)}.wallet.community .wallet-name{color:var(--blue)}.wallet.burn .wallet-name{color:var(--orange)}.wallet-amount{font-size:12px;font-weight:900}
+.wallet-address{display:block;margin-top:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#66716c;font-size:9px;text-decoration:none}.transparency-note{color:#66716c;font-size:10px}
+.supply-scan{margin-top:26px;padding:5px;border:1px solid rgba(255,157,46,.40);border-radius:7px;background:#030504}
+.supply-inner{padding:22px;background:radial-gradient(circle at 100% 0%,rgba(255,157,46,.05),transparent 35%),#070a09;border:1px solid rgba(255,255,255,.05)}
+.supply-kicker{color:var(--orange);font-size:9px;font-weight:900;letter-spacing:.24em}.supply-title{margin-top:9px;font-family:Impact,sans-serif;font-style:italic;font-size:27px}.supply-copy{color:#77827c;font-size:11px;line-height:1.6}
+.supply-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:17px}.supply-stat{padding:15px;border:1px solid rgba(255,255,255,.07);background:#050706}.supply-stat.full{grid-column:1/-1}
+.supply-stat span{display:block;color:#657069;font-size:7px;font-weight:900;letter-spacing:.13em}.supply-stat strong{display:block;margin-top:8px;color:#fff;font-size:17px}.supply-stat.full strong{color:var(--green);font-size:30px}
+.burn-meter{margin-top:12px}.burn-meter-top{display:flex;justify-content:space-between;font-size:8px;color:#69736d}.burn-meter-top b{color:var(--orange)}.burn-track{height:7px;margin-top:8px;background:#101411;overflow:hidden}.burn-fill{width:0;height:100%;background:linear-gradient(90deg,var(--orange),var(--green));box-shadow:0 0 15px rgba(183,255,24,.25);transition:width 1.2s ease}.supply-status{margin-top:12px;color:#68736d;font-size:9px;text-align:left}.supply-status b{color:var(--green)}
+
+/* ===== PLAYABLE GAME ===== */
+.game{margin-top:30px;border:1px solid rgba(183,255,24,.52);border-radius:8px;padding:5px;background:#020303;box-shadow:0 0 35px rgba(183,255,24,.08),0 0 50px rgba(255,44,156,.04)}
+.game-shell{overflow:hidden;border:1px solid rgba(255,255,255,.055);border-radius:5px;background:#060809}
+.game-head{padding:22px 20px 17px;text-align:left;border-bottom:1px solid rgba(255,255,255,.07);background:radial-gradient(circle at 90% 10%,rgba(255,44,156,.13),transparent 35%),radial-gradient(circle at 10% 50%,rgba(183,255,24,.08),transparent 35%),#070909}
+.game-kicker{color:var(--pink);font-size:9px;font-weight:900;letter-spacing:.24em}.game-title{margin-top:6px;color:var(--green);font-family:Impact,sans-serif;font-style:italic;font-size:clamp(42px,10vw,70px);line-height:.82;transform:skew(-3deg);text-shadow:3px 3px 0 #3a5005,0 0 20px rgba(183,255,24,.18)}
+.game-subtitle{margin-top:12px;color:#87918c;font-size:10px;line-height:1.55}.game-subtitle strong{color:#fff}
+.game-frame{position:relative;background:#050708}
+#gameCanvas{width:100%;height:auto;aspect-ratio:16/10;background:#090b0c;touch-action:none}
+.game-overlay{position:absolute;inset:0;pointer-events:none}
+.hud-left{position:absolute;left:12px;top:12px;padding:9px 10px;border-left:3px solid var(--green);background:rgba(2,4,4,.78);text-align:left}
+.hud-left div{font-size:8px;color:#89948e;margin-top:4px}.hud-left div:first-child{margin-top:0}.hud-left b{color:#fff}.hud-left .lime{color:var(--green)}.hud-left .pink{color:var(--pink)}
+.hud-right{position:absolute;right:12px;top:12px;padding:8px 10px;border:1px solid rgba(255,255,255,.12);background:rgba(2,4,4,.78);font-size:8px;text-align:right;color:#78837c}.hud-right b{display:block;color:var(--green);font-size:13px;margin-top:3px}
+.game-message{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(78%,430px);padding:18px;border:1px solid rgba(183,255,24,.35);background:rgba(3,5,5,.93);box-shadow:0 0 38px rgba(183,255,24,.10);text-align:center;pointer-events:auto}
+.game-message.hidden{display:none}.game-message h3{margin:0;color:var(--green);font-family:Impact,sans-serif;font-style:italic;font-size:34px}.game-message p{margin:8px 0 0;color:#89948e;font-size:9px;line-height:1.55}.game-message button{margin-top:13px;min-width:170px;height:44px;border:1px solid var(--pink);background:rgba(255,44,156,.08);color:#fff;font-size:10px;font-weight:900;cursor:pointer}
+.controls{display:flex;justify-content:space-between;gap:12px;padding:12px;background:#060808;border-top:1px solid rgba(255,255,255,.06);touch-action:none;-webkit-user-select:none;user-select:none}
+.control-block{display:flex;align-items:center;gap:9px}.control-copy{text-align:left}.control-copy b{display:block;color:#fff;font-size:8px}.control-copy span{display:block;margin-top:3px;color:#67726c;font-size:7px}
+.joystick{position:relative;width:92px;height:92px;border-radius:50%;border:1px solid rgba(183,255,24,.22);background:radial-gradient(circle,rgba(183,255,24,.04),rgba(255,255,255,.01));touch-action:none}
+.stick{position:absolute;left:50%;top:50%;width:38px;height:38px;border-radius:50%;transform:translate(-50%,-50%);background:#111711;border:1px solid rgba(183,255,24,.42);box-shadow:0 0 16px rgba(183,255,24,.08)}
+.aim-pad{
+  --aim-rot:0deg;
+  position:relative;
+  width:104px;
+  height:104px;
+  flex:0 0 104px;
+  border-radius:50%;
+  border:1px solid rgba(255,44,156,.75);
+  background:
+    radial-gradient(circle at 50% 50%,rgba(255,44,156,.10),rgba(255,44,156,.025) 58%,transparent 59%),
+    #09080a;
+  box-shadow:inset 0 0 22px rgba(255,44,156,.06),0 0 14px rgba(255,44,156,.05);
+  touch-action:none;
+  -webkit-user-select:none;
+  user-select:none;
+  overflow:hidden
+}
+.aim-pad.active{
+  border-color:var(--green);
+  box-shadow:inset 0 0 30px rgba(183,255,24,.08),0 0 25px rgba(255,44,156,.18)
+}
+.aim-ring{
+  position:absolute;inset:15px;border:1px dashed rgba(255,255,255,.10);border-radius:50%;
+}
+.aim-stick{
+  position:absolute;left:50%;top:50%;
+  width:40px;height:40px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:#171017;border:1px solid rgba(255,44,156,.55);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 15px rgba(255,44,156,.08);
+  pointer-events:none
+}
+.aim-stick span{
+  display:block;color:var(--pink);font-size:18px;line-height:1;
+  transform:rotate(var(--aim-rot));
+}
+.aim-pad.active .aim-stick{
+  background:#20101a;border-color:var(--green)
+}
+.aim-pad.active .aim-stick span{color:var(--green)}
+.aim-label{
+  position:absolute;left:50%;bottom:7px;transform:translateX(-50%);
+  color:#7c6e77;font-size:7px;font-weight:900;letter-spacing:.12em;
+  pointer-events:none
+}
+.game-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.06)}
+.game-stat{padding:15px 7px;border-right:1px solid rgba(255,255,255,.06);background:#050707}.game-stat:last-child{border-right:0}.game-stat span{display:block;color:#69736d;font-size:7px;font-weight:900;letter-spacing:.10em}.game-stat strong{display:block;margin-top:7px;color:var(--green);font-size:17px}.game-stat:nth-child(2) strong{color:var(--pink)}.game-stat:nth-child(3) strong{color:var(--orange)}.game-stat:nth-child(4) strong{color:var(--blue)}
+.burn-panel{padding:20px 18px;border-top:1px solid rgba(255,255,255,.06);background:radial-gradient(circle at 100% 100%,rgba(255,44,156,.08),transparent 40%),#050707}
+.burn-rule{display:flex;align-items:center;justify-content:center;gap:9px;color:var(--green);font-family:Impact,sans-serif;font-style:italic;font-size:24px}.burn-rule .skull{color:var(--pink)}
+.burn-explain{max-width:500px;margin:9px auto 0;color:#707b75;font-size:9px;line-height:1.6}
+.pending{margin-top:15px;padding:14px;border:1px solid rgba(183,255,24,.24);background:#080b09}.pending span{display:block;color:#6c776f;font-size:8px;letter-spacing:.16em}.pending strong{display:block;margin-top:7px;color:var(--green);font-size:26px}
+.small-note{margin-top:9px;color:#59635e;font-size:7px;line-height:1.5}
+
+
+/* ===== LEADERBOARD ===== */
+.leaderboard{
+  padding:20px 18px 22px;
+  border-top:1px solid rgba(255,255,255,.06);
+  background:
+    radial-gradient(circle at 0% 100%,rgba(34,200,255,.06),transparent 42%),
+    #060808;
+}
+.leaderboard-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-end;
+  text-align:left;
+}
+.leaderboard-title{
+  color:var(--green);
+  font-family:Impact,sans-serif;
+  font-style:italic;
+  font-size:25px;
+  letter-spacing:.02em;
+}
+.leaderboard-sub{
+  color:#66716c;
+  font-size:8px;
+  line-height:1.45;
+  text-align:right;
+}
+.leaderboard-sub b{color:var(--pink)}
+.career-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:14px;
+}
+.career-stat{
+  padding:14px 12px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#050706;
+  text-align:left;
+}
+.career-stat span{
+  display:block;
+  color:#68736d;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.13em;
+}
+.career-stat strong{
+  display:block;
+  margin-top:7px;
+  color:var(--green);
+  font-size:21px;
+}
+.career-stat:nth-child(2) strong{color:var(--orange)}
+.rank-form{
+  display:grid;
+  grid-template-columns:1fr 150px auto;
+  gap:8px;
+  margin-top:14px;
+}
+.rank-input,
+.rank-country{
+  width:100%;
+  min-height:44px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:3px;
+  background:#090c0b;
+  color:#fff;
+  padding:0 12px;
+  outline:none;
+  font-size:10px;
+}
+.rank-input:focus,
+.rank-country:focus{border-color:var(--green)}
+.rank-submit{
+  min-height:44px;
+  border:1px solid var(--green);
+  border-radius:3px;
+  padding:0 16px;
+  color:#071000;
+  background:var(--green);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.08em;
+  cursor:pointer;
+}
+.rank-submit:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+.rank-status{
+  min-height:16px;
+  margin-top:8px;
+  color:#6d7972;
+  font-size:8px;
+  text-align:left;
+}
+.rank-status.good{color:var(--green)}
+.rank-list{
+  margin-top:13px;
+  border:1px solid rgba(255,255,255,.07);
+  background:#050706;
+  max-height:920px;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.rank-row{
+  display:grid;
+  grid-template-columns:38px 1fr 78px 92px;
+  gap:8px;
+  align-items:center;
+  min-height:38px;
+  padding:7px 10px;
+  border-top:1px solid rgba(255,255,255,.055);
+  font-size:9px;
+}
+.rank-row:first-child{border-top:0}
+.rank-pos{color:#6a756e;font-weight:900}
+.rank-name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:#e8ece9;
+  text-align:left;
+}
+.rank-country-code{
+  color:var(--blue);
+  text-align:center;
+}
+.rank-score{
+  color:var(--green);
+  text-align:right;
+  font-weight:900;
+}
+.rank-empty{
+  padding:16px;
+  color:#59635e;
+  font-size:8px;
+}
+@media(max-width:620px){
+  .rank-form{grid-template-columns:1fr 120px}
+  .rank-submit{grid-column:1/-1}
+  .rank-row{grid-template-columns:30px 1fr 58px 72px}
+}
+
+.construction{margin-top:20px;padding:20px;border:1px dashed rgba(183,255,24,.25);background:#050706}.construction-title{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.14em}.construction p{margin:11px 0 0;color:#6f7a74;font-size:11px;line-height:1.6}.construction strong{color:#fff}
+
+@media(max-width:620px){
+  .page{padding-top:28px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+  .logo-wrap{width:124px;height:124px} h1{font-size:16vw}.tagline{font-size:12px}
+  .buttons,.supply-grid{grid-template-columns:1fr}.supply-stat.full{grid-column:auto}
+  .game-stats{grid-template-columns:1fr 1fr}
+  .game-stat:nth-child(2){border-right:0}.game-stat:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.06)}
+  .controls{padding:10px}.joystick{width:92px;height:92px}.aim-pad{width:104px;height:104px;flex-basis:104px}
+  .game-title{font-size:46px}
+}
+@media (hover:hover) and (pointer:fine) and (min-width:760px){.controls{display:none}}
+@media (hover:none), (pointer:coarse){
+  .controls{display:flex!important;position:relative;z-index:20}
+  .joystick,.shoot-btn{display:block!important}
+}
+</style>
+</head>
+<body>
+<main class="page">
+<section class="wrap">
+
+<div class="topbar">
+  <div class="lang-switch">
+    <button class="lang-btn active" id="langEn">EN</button>
+    <button class="lang-btn" id="langRu">RU</button>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="logo-wrap"><img class="logo" src="Logo.png" alt="GramLeek logo" /></div>
+  <p class="eyebrow">BUILT ON GRAM</p>
+  <h1>GRAMLEEK</h1>
+  <p class="tagline">NOT A <span>VEGETABLE.</span></p>
+
+  <div class="contract-box">
+    <div class="contract-inner">
+      <div class="contract-label">OFFICIAL LEEK CONTRACT</div>
+      <div class="contract-row">
+        <div class="contract-address">EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw</div>
+        <button class="copy-btn" id="copyContract">COPY CA</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <a class="btn green" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">
+      <strong>ENTER THE KITCHEN →</strong><span>VIEW LEEK ON DEDUST</span>
+    </a>
+    <a class="btn blue" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">
+      <strong>ENTER CAFÉ →</strong><span>JOIN THE COMMUNITY</span>
+    </a>
+  </div>
+</section>
+
+<section class="transparency">
+  <div class="section-label">TRANSPARENCY</div>
+
+  <div class="wallet dev">
+    <div class="wallet-top"><div class="wallet-name">DEV WALLET</div><div class="wallet-amount">50M LEEK · 5%</div></div>
+    <a class="wallet-address" href="https://tonviewer.com/UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn" target="_blank">UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn</a>
+  </div>
+
+  <div class="wallet community">
+    <div class="wallet-top"><div class="wallet-name">COMMUNITY FUND</div><div class="wallet-amount">50M LEEK · 5%</div></div>
+    <a class="wallet-address" href="https://tonviewer.com/UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy" target="_blank">UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy</a>
+  </div>
+
+  <div class="wallet burn">
+    <div class="wallet-top"><div class="wallet-name">BURNED</div><div class="wallet-amount" id="burnWalletAmount">15M LEEK · 1.5%</div></div>
+    <a class="wallet-address" href="https://tonviewer.com/UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ" target="_blank">UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ</a>
+  </div>
+
+  <p class="transparency-note">Public wallets. Everything on-chain. Verify it yourself.</p>
+</section>
+
+<section class="supply-scan">
+  <div class="supply-inner">
+    <div class="supply-kicker">ON-CHAIN SUPPLY SCAN</div>
+    <div class="supply-title">LEEK SUPPLY DIAGNOSTICS</div>
+    <p class="supply-copy">Reading the burn wallet directly from TON. No spreadsheet vegetables.</p>
+
+    <div class="supply-grid">
+      <div class="supply-stat"><span>ORIGINAL SPECIMENS</span><strong>1.00B LEEK</strong></div>
+      <div class="supply-stat"><span>THROWN INTO THE VOID</span><strong id="burnedSupply">SCANNING...</strong></div>
+      <div class="supply-stat full"><span>CURRENT EFFECTIVE SUPPLY</span><strong id="effectiveSupply">SCANNING...</strong></div>
+    </div>
+
+    <div class="burn-meter">
+      <div class="burn-meter-top"><span>BURN RATE</span><b id="burnPercent">—</b></div>
+      <div class="burn-track"><div class="burn-fill" id="burnFill"></div></div>
+    </div>
+    <div class="supply-status" id="supplyStatus"><b>&gt;</b> scanning burn wallet...</div>
+  </div>
+</section>
+
+<section class="game">
+  <div class="game-shell">
+
+    <div class="game-head">
+      <div class="game-kicker">GRAMLEEK PRESENTS</div>
+      <div class="game-title">LEEKed IN</div>
+      <div class="game-subtitle">
+        <strong>Actual playable prototype.</strong>
+        Desktop: WASD + mouse. Touch: left stick moves. Hold and drag AIM to choose direction — GramLeek fires continuously while you aim. Every enemy deleted adds 1 LEEK to the in-game pending burn counter.
+      </div>
+    </div>
+
+    <div class="game-frame">
+      <canvas id="gameCanvas" width="800" height="500"></canvas>
+
+      <div class="game-overlay">
+        <div class="hud-left">
+          <div>SCORE <b id="hudScore">0</b></div>
+          <div>KILLS <b class="lime" id="hudKills">0</b></div>
+          <div>COMBO <b class="pink" id="hudCombo">0X</b></div>
+          <div>HP <b id="hudHp">100</b></div>
+        </div>
+
+        <div class="hud-right">
+          PENDING BURN
+          <b id="hudBurn">0 LEEK</b>
+        </div>
+
+        <div class="game-message" id="startScreen">
+          <h3>RUG DEN #01</h3>
+          <p>
+            Enter the den. Delete the scammers. Stay alive.<br>
+            Desktop: WASD / arrows + mouse click.<br>
+            Touch: left joystick + right AIM pad. Hold AIM and it fires continuously in the direction you drag.
+          </p>
+          <button id="startBtn">ENTER THE DEN →</button>
+        </div>
+
+        <div class="game-message hidden" id="gameOverScreen">
+          <h3 id="gameOverTitle">RUGGED.</h3>
+          <p id="gameOverText">The vegetable has fallen.</p>
+          <button id="restartBtn">RUN IT BACK →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="control-block">
+        <div class="joystick" id="joystick"><div class="stick" id="stick"></div></div>
+        <div class="control-copy"><b>MOVE</b><span>drag the stick</span></div>
+      </div>
+
+      <div class="control-block aim-block">
+        <div class="control-copy"><b>AIM + FIRE</b><span>hold + drag · fires nonstop</span></div>
+        <div class="aim-pad" id="aimPad" role="button" aria-label="Aim and fire">
+          <div class="aim-ring"></div>
+          <div class="aim-stick" id="aimStick"><span>▲</span></div>
+          <div class="aim-label">AIM</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-stats">
+      <div class="game-stat"><span>SESSION KILLS</span><strong id="statKills">0</strong></div>
+      <div class="game-stat"><span>BEST COMBO</span><strong id="statCombo">0X</strong></div>
+      <div class="game-stat"><span>ACCURACY</span><strong id="statAccuracy">0%</strong></div>
+      <div class="game-stat"><span>SCORE</span><strong id="statScore">0</strong></div>
+    </div>
+
+    <div class="burn-panel">
+      <div class="burn-rule"><span class="skull">☠</span>1 KILL = 1 LEEK</div>
+      <div class="burn-explain">
+        This prototype counts game kills locally. It does not perform an on-chain burn automatically.
+        A production version can aggregate verified kills and execute public batch burns.
+      </div>
+      <div class="pending">
+        <span>THIS SESSION — PENDING BURN</span>
+        <strong id="pendingBurn">0 LEEK</strong>
+      </div>
+      <div class="small-note">No wallet required to play. No transaction is signed by the game.</div>
+    </div>
+
+    <div class="leaderboard">
+      <div class="leaderboard-head">
+        <div>
+          <div class="leaderboard-title">LEEKed IN RANKING</div>
+        </div>
+        <div class="leaderboard-sub">
+          TOP 100<br>
+          <b>NO LEEK REWARDS</b>
+        </div>
+      </div>
+
+      <div class="career-stats">
+        <div class="career-stat">
+          <span>BEST RUN</span>
+          <strong id="careerBestRun">0</strong>
+        </div>
+        <div class="career-stat">
+          <span>TOTAL GAME BURN</span>
+          <strong id="careerTotalBurned">0 LEEK</strong>
+        </div>
+      </div>
+
+      <div class="rank-form">
+        <input
+          class="rank-input"
+          id="rankName"
+          maxlength="18"
+          autocomplete="nickname"
+          placeholder="YOUR SIGNATURE"
+        />
+
+        <select class="rank-country" id="rankCountry" aria-label="Country">
+          <option value="">COUNTRY</option>
+        </select>
+
+        <button class="rank-submit" id="rankSubmit" disabled>
+          ADD SCORE
+        </button>
+      </div>
+
+      <div class="rank-status" id="rankStatus">
+        Finish a run to unlock ranking submission.
+      </div>
+
+      <div class="rank-list" id="rankList"></div>
+      <div class="small-note">
+        Ranking, best run and total game burn are stored locally in this prototype.
+        “Total game burn” counts gameplay kills — it is not an on-chain burn transaction.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="construction">
+  <div class="construction-title">🚧 GRAMLEEK IS COOKING</div>
+  <p>This is the first playable den. <strong>Gameplay first. More degeneracy later.</strong></p>
+</section>
+
+</section>
+</main>
+
+<script>
+/* ===================== SITE ===================== */
+const CONTRACT="EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw";
+const BURN_WALLET="UQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJKZ";
+const TOTAL_SUPPLY=1000000000;
+const DECIMALS=9;
+const HOLDER_API="https://toncenter.com/api/v3/jetton/wallets";
+
+const copyBtn=document.getElementById("copyContract");
+copyBtn.onclick=async()=>{
+  try{await navigator.clipboard.writeText(CONTRACT)}
+  catch(e){
+    const t=document.createElement("textarea");t.value=CONTRACT;document.body.appendChild(t);
+    t.select();document.execCommand("copy");t.remove();
+  }
+  copyBtn.classList.add("copied");copyBtn.textContent="COPIED ✓";
+  setTimeout(()=>{copyBtn.classList.remove("copied");copyBtn.textContent="COPY CA"},1400);
+};
+
+const rawToNumber=raw=>Number(raw||0)/(10**DECIMALS);
+const human=n=>n>=1e9?(n/1e9).toFixed(2)+"B":n>=1e6?(n/1e6).toFixed(2)+"M":n>=1e3?(n/1e3).toFixed(1)+"K":new Intl.NumberFormat("en-US",{maximumFractionDigits:2}).format(n);
+
+async function loadSupply(){
+  try{
+    const u=`${HOLDER_API}?owner_address=${encodeURIComponent(BURN_WALLET)}&jetton_address=${encodeURIComponent(CONTRACT)}&limit=10&offset=0`;
+    const r=await fetch(u,{headers:{accept:"application/json"}});
+    if(!r.ok)throw Error("TON API");
+    const d=await r.json(),rows=d.jetton_wallets||[];
+    const burned=rows.length?rawToNumber(rows[0].balance):0;
+    const effective=Math.max(0,TOTAL_SUPPLY-burned);
+    const pct=burned/TOTAL_SUPPLY*100;
+
+    document.getElementById("burnedSupply").textContent=human(burned)+" LEEK";
+    document.getElementById("effectiveSupply").textContent=human(effective)+" LEEK";
+    document.getElementById("burnPercent").textContent=pct.toFixed(2)+"%";
+    document.getElementById("burnFill").style.width=Math.min(100,pct)+"%";
+    document.getElementById("burnWalletAmount").textContent=human(burned)+" LEEK · "+pct.toFixed(2)+"%";
+    document.getElementById("supplyStatus").innerHTML="<b>&gt;</b> burn wallet synced. population adjusted.";
+  }catch(e){
+    document.getElementById("burnedSupply").textContent="—";
+    document.getElementById("effectiveSupply").textContent="—";
+    document.getElementById("burnPercent").textContent="—";
+    document.getElementById("supplyStatus").innerHTML="<b>&gt;</b> TON API unavailable. scan paused.";
+  }
+}
+loadSupply();
+
+document.getElementById("langEn").onclick=()=>{
+  document.getElementById("langEn").classList.add("active");
+  document.getElementById("langRu").classList.remove("active");
+};
+document.getElementById("langRu").onclick=()=>{
+  document.getElementById("langRu").classList.add("active");
+  document.getElementById("langEn").classList.remove("active");
+};
+
+/* ===================== GAME ===================== */
+const canvas=document.getElementById("gameCanvas");
+const ctx=canvas.getContext("2d");
+
+const W=canvas.width,H=canvas.height;
+const keys={};
+let mouse={x:W/2,y:H/2,down:false};
+let joy={x:0,y:0};
+let mobileFiring=false;
+let running=false;
+let last=performance.now();
+let spawnTimer=0;
+let shootCooldown=0;
+let hitFlash=0;
+
+const state={
+  score:0,kills:0,combo:0,bestCombo:0,shots:0,hits:0,pendingBurn:0,
+  player:null,enemies:[],bullets:[],enemyBullets:[],particles:[]
+};
+
+const walls=[
+  {x:0,y:0,w:800,h:24},
+  {x:0,y:476,w:800,h:24},
+  {x:0,y:0,w:24,h:500},
+  {x:776,y:0,w:24,h:500},
+  {x:170,y:95,w:230,h:18},
+  {x:400,y:95,w:18,h:150},
+  {x:545,y:60,w:18,h:170},
+  {x:160,y:335,w:250,h:18},
+  {x:410,y:335,w:180,h:18},
+  {x:620,y:250,w:156,h:18},
+  {x:120,y:215,w:115,h:18}
+];
+
+function resetGame(){
+  lastCompletedRun=null;
+  runSubmitted=false;
+  runCareerCounted=false;
+  const rankSubmit=document.getElementById("rankSubmit");
+  if(rankSubmit) rankSubmit.disabled=true;
+  const rankStatus=document.getElementById("rankStatus");
+  if(rankStatus){
+    rankStatus.className="rank-status";
+    rankStatus.textContent="Finish a run to unlock ranking submission.";
+  }
+  state.score=0;state.kills=0;state.combo=0;state.bestCombo=0;state.shots=0;state.hits=0;state.pendingBurn=0;
+  state.player={x:390,y:270,r:15,hp:100,speed:185,angle:0,inv:0};
+  state.enemies=[];state.bullets=[];state.enemyBullets=[];state.particles=[];
+  spawnTimer=0;shootCooldown=0;hitFlash=0;
+  for(let i=0;i<6;i++)spawnEnemy(true);
+  syncHud();
+}
+
+function rectCircleCollide(x,y,r,wall){
+  const cx=Math.max(wall.x,Math.min(x,wall.x+wall.w));
+  const cy=Math.max(wall.y,Math.min(y,wall.y+wall.h));
+  const dx=x-cx,dy=y-cy;
+  return dx*dx+dy*dy<r*r;
+}
+
+function blocked(x,y,r){
+  return walls.some(w=>rectCircleCollide(x,y,r,w));
+}
+
+function moveCircle(obj,dx,dy){
+  const nx=obj.x+dx;
+  if(!blocked(nx,obj.y,obj.r))obj.x=nx;
+  const ny=obj.y+dy;
+  if(!blocked(obj.x,ny,obj.r))obj.y=ny;
+}
+
+function randomSpawnPoint(){
+  const choices=[
+    {x:55+Math.random()*690,y:45},
+    {x:55+Math.random()*690,y:455},
+    {x:45,y:55+Math.random()*390},
+    {x:755,y:55+Math.random()*390}
+  ];
+  for(let i=0;i<20;i++){
+    const p=choices[Math.floor(Math.random()*choices.length)];
+    if(!blocked(p.x,p.y,15) && Math.hypot(p.x-state.player.x,p.y-state.player.y)>170)return p;
+  }
+  return {x:70,y:70};
+}
+
+function spawnEnemy(initial=false){
+  if(state.enemies.length>=13)return;
+  const p=randomSpawnPoint();
+  const types=[
+    {name:"KOL",color:"#a74cff",speed:80,hp:2,score:140,ai:"ranged",fireCd:1.35+Math.random()*1.0},
+    {name:"JEET",color:"#ff6e38",speed:105,hp:1,score:150,ai:"rush",fireCd:99},
+    {name:"CABAL",color:"#14b3a6",speed:72,hp:3,score:240,ai:"tank",fireCd:99},
+    {name:"DEV",color:"#e52c94",speed:88,hp:2,score:280,ai:"dash",fireCd:1.5+Math.random()},
+    {name:"BOT",color:"#d6ff31",speed:96,hp:1,score:175,ai:"strafe",fireCd:1.0+Math.random()*.7}
+  ];
+  const t=types[Math.floor(Math.random()*types.length)];
+  state.enemies.push({x:p.x,y:p.y,r:t.ai==="tank"?17:14,...t,hit:0,dash:0,phase:Math.random()*Math.PI*2});
+}
+
+function nearestEnemy(){
+  let best=null,bd=Infinity;
+  for(const e of state.enemies){
+    const d=(e.x-state.player.x)**2+(e.y-state.player.y)**2;
+    if(d<bd){bd=d;best=e}
+  }
+  return best;
+}
+
+function shootAt(tx,ty){
+  if(!running || shootCooldown>0)return;
+  const p=state.player;
+  let dx=tx-p.x,dy=ty-p.y;
+  const len=Math.hypot(dx,dy)||1;
+  dx/=len;dy/=len;
+  p.angle=Math.atan2(dy,dx);
+  state.bullets.push({x:p.x+dx*19,y:p.y+dy*19,vx:dx*520,vy:dy*520,r:3,life:1.2});
+  state.shots++;
+  shootCooldown=.145;
+  syncHud();
+}
+
+function autoShoot(){
+  const e=nearestEnemy();
+  if(e)shootAt(e.x,e.y);
+}
+
+function killEnemy(index,e){
+  state.enemies.splice(index,1);
+  state.kills++;
+  state.combo++;
+  state.bestCombo=Math.max(state.bestCombo,state.combo);
+  state.pendingBurn++;
+  state.score+=e.score*(1+Math.min(3,state.combo*.04));
+  for(let i=0;i<15;i++){
+    const a=Math.random()*Math.PI*2,s=35+Math.random()*120;
+    state.particles.push({x:e.x,y:e.y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:.45+Math.random()*.45,color:i%3===0?"#ff315c":"#8d1234",r:2+Math.random()*3});
+  }
+  syncHud();
+}
+
+function damagePlayer(){
+  const p=state.player;
+  if(p.inv>0)return;
+  p.hp-=24;p.inv=.58;state.combo=0;hitFlash=.16;
+  if(p.hp<=0){p.hp=0;endGame(false)}
+  syncHud();
+}
+
+function endGame(cleared){
+  running=false;
+  const screen=document.getElementById("gameOverScreen");
+  const title=document.getElementById("gameOverTitle");
+  const text=document.getElementById("gameOverText");
+  title.textContent=cleared?"RUG DEN CLEARED":"RUGGED.";
+  text.innerHTML=cleared
+    ? `Kills: <b>${state.kills}</b> · Pending burn: <b>${state.pendingBurn} LEEK</b> · Score: <b>${Math.round(state.score)}</b>`
+    : `The vegetable has fallen.<br>Kills: <b>${state.kills}</b> · Pending burn: <b>${state.pendingBurn} LEEK</b>`;
+  screen.classList.remove("hidden");
+  unlockRanking();
+}
+
+function syncHud(){
+  document.getElementById("hudScore").textContent=Math.round(state.score).toLocaleString();
+  document.getElementById("hudKills").textContent=state.kills;
+  document.getElementById("hudCombo").textContent=state.combo+"X";
+  document.getElementById("hudHp").textContent=state.player?Math.max(0,Math.round(state.player.hp)):100;
+  document.getElementById("hudBurn").textContent=state.pendingBurn+" LEEK";
+  document.getElementById("statKills").textContent=state.kills;
+  document.getElementById("statCombo").textContent=state.bestCombo+"X";
+  document.getElementById("statAccuracy").textContent=state.shots?Math.round(state.hits/state.shots*100)+"%":"0%";
+  document.getElementById("statScore").textContent=Math.round(state.score).toLocaleString();
+  document.getElementById("pendingBurn").textContent=state.pendingBurn+" LEEK";
+}
+
+function update(dt){
+  if(!running)return;
+  const p=state.player;
+  p.inv=Math.max(0,p.inv-dt);
+  shootCooldown=Math.max(0,shootCooldown-dt);
+  hitFlash=Math.max(0,hitFlash-dt);
+
+  let mx=(keys["d"]||keys["arrowright"]?1:0)-(keys["a"]||keys["arrowleft"]?1:0)+joy.x;
+  let my=(keys["s"]||keys["arrowdown"]?1:0)-(keys["w"]||keys["arrowup"]?1:0)+joy.y;
+  const ml=Math.hypot(mx,my);
+  if(ml>1){mx/=ml;my/=ml}
+  moveCircle(p,mx*p.speed*dt,my*p.speed*dt);
+
+  if(mouse.down)shootAt(mouse.x,mouse.y);
+  if((mobileFiring || aimHeld) && state.player){
+    const p=state.player;
+    shootAt(p.x+aimVector.x*300,p.y+aimVector.y*300);
+  }
+
+
+  spawnTimer-=dt;
+  if(spawnTimer<=0){
+    spawnTimer=Math.max(.45,1.15-state.kills*.012);
+    spawnEnemy(false);
+  }
+
+  for(let i=state.bullets.length-1;i>=0;i--){
+    const b=state.bullets[i];
+    b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;
+    if(b.life<=0 || blocked(b.x,b.y,b.r)){state.bullets.splice(i,1);continue}
+    let hit=false;
+    for(let j=state.enemies.length-1;j>=0;j--){
+      const e=state.enemies[j];
+      if(Math.hypot(b.x-e.x,b.y-e.y)<b.r+e.r){
+        e.hp--;e.hit=.09;state.hits++;hit=true;
+        if(e.hp<=0)killEnemy(j,e);
+        break;
+      }
+    }
+    if(hit)state.bullets.splice(i,1);
+  }
+
+  for(const e of state.enemies){
+    e.hit=Math.max(0,e.hit-dt);
+    e.fireCd-=dt;
+    e.dash=Math.max(0,(e.dash||0)-dt);
+    e.phase=(e.phase||0)+dt;
+
+    let dx=p.x-e.x,dy=p.y-e.y,len=Math.hypot(dx,dy)||1;
+    let nx=dx/len, ny=dy/len;
+
+    if(e.ai==="ranged"){
+      // KOLs try to keep distance and shoot.
+      const desired=len>235?1:(len<175?-1:0);
+      moveCircle(e,nx*e.speed*desired*dt,ny*e.speed*desired*dt);
+      if(e.fireCd<=0 && len<420){
+        const spread=(Math.random()-.5)*.12;
+        const ang=Math.atan2(dy,dx)+spread;
+        state.enemyBullets.push({
+          x:e.x+Math.cos(ang)*18,y:e.y+Math.sin(ang)*18,
+          vx:Math.cos(ang)*255,vy:Math.sin(ang)*255,r:4,life:2.2
+        });
+        e.fireCd=1.35+Math.random()*.85;
+      }
+    }else if(e.ai==="dash"){
+      // DEV occasionally lunges hard.
+      if(e.fireCd<=0 && len<280){
+        e.dash=.28;
+        e.fireCd=1.5+Math.random()*.8;
+      }
+      const mult=e.dash>0?2.35:1;
+      moveCircle(e,nx*e.speed*mult*dt,ny*e.speed*mult*dt);
+    }else if(e.ai==="strafe"){
+      // BOT circles while closing in.
+      const sx=-ny, sy=nx;
+      const swirl=Math.sin(e.phase*2.2);
+      moveCircle(e,(nx*.72+sx*.68*swirl)*e.speed*dt,(ny*.72+sy*.68*swirl)*e.speed*dt);
+      if(e.fireCd<=0 && len<340){
+        const ang=Math.atan2(dy,dx);
+        state.enemyBullets.push({
+          x:e.x+Math.cos(ang)*16,y:e.y+Math.sin(ang)*16,
+          vx:Math.cos(ang)*220,vy:Math.sin(ang)*220,r:3.5,life:2.0
+        });
+        e.fireCd=1.45+Math.random()*.8;
+      }
+    }else{
+      // rush / tank
+      moveCircle(e,nx*e.speed*dt,ny*e.speed*dt);
+    }
+
+    if(Math.hypot(p.x-e.x,p.y-e.y)<p.r+e.r+2)damagePlayer();
+  }
+
+  // Enemy projectiles
+  for(let i=state.enemyBullets.length-1;i>=0;i--){
+    const b=state.enemyBullets[i];
+    b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;
+    if(b.life<=0 || blocked(b.x,b.y,b.r)){
+      state.enemyBullets.splice(i,1);
+      continue;
+    }
+    if(Math.hypot(p.x-b.x,p.y-b.y)<p.r+b.r){
+      state.enemyBullets.splice(i,1);
+      damagePlayer();
+    }
+  }
+
+  for(let i=state.particles.length-1;i>=0;i--){
+    const q=state.particles[i];
+    q.x+=q.vx*dt;q.y+=q.vy*dt;q.vx*=.96;q.vy*=.96;q.life-=dt;
+    if(q.life<=0)state.particles.splice(i,1);
+  }
+
+  if(state.kills>=45)endGame(true);
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle="#090b0c";ctx.fillRect(0,0,W,H);
+
+  // floor grid
+  ctx.strokeStyle="rgba(183,255,24,.035)";ctx.lineWidth=1;
+  for(let x=0;x<W;x+=32){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+  for(let y=0;y<H;y+=32){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+
+  // neon zones
+  let g=ctx.createRadialGradient(610,95,10,610,95,190);
+  g.addColorStop(0,"rgba(255,44,156,.10)");g.addColorStop(1,"rgba(255,44,156,0)");
+  ctx.fillStyle=g;ctx.fillRect(420,0,380,260);
+  g=ctx.createRadialGradient(190,400,10,190,400,200);
+  g.addColorStop(0,"rgba(34,200,255,.08)");g.addColorStop(1,"rgba(34,200,255,0)");
+  ctx.fillStyle=g;ctx.fillRect(0,245,430,255);
+
+  // walls
+  for(const w of walls){
+    ctx.fillStyle="#151a19";ctx.fillRect(w.x,w.y,w.w,w.h);
+    ctx.strokeStyle="#252d2a";ctx.strokeRect(w.x+.5,w.y+.5,w.w-1,w.h-1);
+  }
+
+  // graffiti
+  ctx.save();
+  ctx.font="bold 25px Impact, sans-serif";ctx.fillStyle="rgba(255,44,156,.9)";
+  ctx.shadowColor="#ff2c9c";ctx.shadowBlur=12;ctx.fillText("RUG",70,70);
+  ctx.shadowBlur=0;ctx.fillStyle="rgba(183,255,24,.55)";ctx.font="bold 18px Impact, sans-serif";
+  ctx.rotate(-.08);ctx.fillText("EXIT LIQUIDITY",590,250);ctx.restore();
+
+  // particles / blood
+  for(const q of state.particles){
+    ctx.globalAlpha=Math.max(0,q.life/.8);ctx.fillStyle=q.color;
+    ctx.beginPath();ctx.arc(q.x,q.y,q.r,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+  }
+
+  // enemies
+  for(const e of state.enemies){
+    ctx.save();ctx.translate(e.x,e.y);
+    if(e.hit)ctx.scale(1.18,.82);
+    ctx.fillStyle=e.hit?"#fff":e.color;ctx.strokeStyle="#050606";ctx.lineWidth=3;
+    ctx.beginPath();ctx.arc(0,0,e.r,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle="#050606";ctx.fillRect(-7,-3,4,4);ctx.fillRect(3,-3,4,4);
+    ctx.font="bold 7px ui-monospace";ctx.textAlign="center";ctx.fillStyle="#fff";ctx.fillText(e.name,0,28);
+    ctx.fillStyle="#ff315c";ctx.font="bold 18px sans-serif";ctx.fillText("!",0,-20);
+    ctx.restore();
+  }
+
+  // player bullets
+  ctx.fillStyle="#ffd52b";ctx.shadowColor="#ff8c00";ctx.shadowBlur=8;
+  for(const b of state.bullets){ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fill()}
+  ctx.shadowBlur=0;
+
+  // enemy bullets
+  ctx.fillStyle="#ff315c";ctx.shadowColor="#ff315c";ctx.shadowBlur=9;
+  for(const b of state.enemyBullets){ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fill()}
+  ctx.shadowBlur=0;
+
+  // player
+  const p=state.player;
+  if(p){
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.angle);
+    if(p.inv>0 && Math.floor(p.inv*18)%2===0)ctx.globalAlpha=.35;
+
+    // leaves
+    ctx.rotate(-p.angle);
+    ctx.fillStyle="#b7ff18";
+    for(const [ox,oy,ang] of [[-8,-23,-.35],[0,-26,0],[8,-23,.35]]){
+      ctx.save();ctx.translate(ox,oy);ctx.rotate(ang);
+      ctx.beginPath();ctx.ellipse(0,0,5,15,0,0,Math.PI*2);ctx.fill();ctx.restore();
+    }
+    // head
+    ctx.fillStyle="#e5efad";ctx.fillRect(-11,-15,22,26);
+    ctx.fillStyle="#050606";ctx.fillRect(-14,-8,11,6);ctx.fillRect(3,-8,11,6);ctx.fillRect(-3,-6,6,2);
+    // body
+    ctx.fillStyle="#070909";ctx.strokeStyle="#1b2220";ctx.lineWidth=2;ctx.fillRect(-16,10,32,29);ctx.strokeRect(-16,10,32,29);
+    ctx.fillStyle="#b7ff18";ctx.font="bold 14px sans-serif";ctx.textAlign="center";ctx.fillText("L",0,30);
+
+    // gun rotated to aim
+    ctx.rotate(p.angle);
+    ctx.fillStyle="#1d2422";ctx.fillRect(10,-4,28,8);
+    ctx.restore();
+  }
+
+  if(hitFlash>0){ctx.fillStyle=`rgba(255,49,92,${hitFlash*1.6})`;ctx.fillRect(0,0,W,H)}
+}
+
+function loop(now){
+  const dt=Math.min(.033,(now-last)/1000);last=now;
+  update(dt);draw();requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* keyboard */
+addEventListener("keydown",e=>{keys[e.key.toLowerCase()]=true;if([" ","arrowup","arrowdown","arrowleft","arrowright"].includes(e.key.toLowerCase()))e.preventDefault()});
+addEventListener("keyup",e=>{keys[e.key.toLowerCase()]=false});
+
+/* mouse aim */
+function canvasPos(ev){
+  const r=canvas.getBoundingClientRect();
+  return {x:(ev.clientX-r.left)*W/r.width,y:(ev.clientY-r.top)*H/r.height}
+}
+canvas.addEventListener("pointermove",e=>{if(e.pointerType==="mouse"){const p=canvasPos(e);mouse.x=p.x;mouse.y=p.y}});
+canvas.addEventListener("pointerdown",e=>{
+  if(e.pointerType==="mouse"){const p=canvasPos(e);mouse.x=p.x;mouse.y=p.y;mouse.down=true;shootAt(mouse.x,mouse.y)}
+});
+addEventListener("pointerup",e=>{if(e.pointerType==="mouse")mouse.down=false});
+
+/* mobile joystick */
+const joyEl=document.getElementById("joystick"),stickEl=document.getElementById("stick");
+let joyPointer=null;
+function updateJoy(e){
+  const r=joyEl.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+  let dx=e.clientX-cx,dy=e.clientY-cy;
+  const max=r.width*.32,len=Math.hypot(dx,dy);
+  if(len>max){dx=dx/len*max;dy=dy/len*max}
+  joy.x=dx/max;joy.y=dy/max;
+  stickEl.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
+}
+joyEl.addEventListener("pointerdown",e=>{joyPointer=e.pointerId;joyEl.setPointerCapture(e.pointerId);updateJoy(e)});
+joyEl.addEventListener("pointermove",e=>{if(e.pointerId===joyPointer)updateJoy(e)});
+function resetJoy(e){if(joyPointer===null||e.pointerId===joyPointer){joyPointer=null;joy.x=joy.y=0;stickEl.style.transform="translate(-50%,-50%)"}}
+joyEl.addEventListener("pointerup",resetJoy);joyEl.addEventListener("pointercancel",resetJoy);
+
+const aimPad=document.getElementById("aimPad");
+const aimStick=document.getElementById("aimStick");
+let aimPointer=null;
+let aimHeld=false;
+let aimVector={x:1,y:0};
+
+function setAimFromClient(clientX,clientY){
+  const r=aimPad.getBoundingClientRect();
+  const cx=r.left+r.width/2;
+  const cy=r.top+r.height/2;
+  let dx=clientX-cx;
+  let dy=clientY-cy;
+  const len=Math.hypot(dx,dy);
+  const max=r.width*.31;
+
+  // Direction is fully manual. If finger is almost centered, keep last angle.
+  if(len>5){
+    aimVector.x=dx/len;
+    aimVector.y=dy/len;
+    if(state.player) state.player.angle=Math.atan2(aimVector.y,aimVector.x);
+  }
+
+  // visual stick movement
+  if(len>0){
+    const clamped=Math.min(max,len);
+    const nx=dx/len || 0;
+    const ny=dy/len || 0;
+    aimStick.style.transform=`translate(calc(-50% + ${nx*clamped}px),calc(-50% + ${ny*clamped}px))`;
+  }
+
+  const deg=Math.atan2(aimVector.y,aimVector.x)*180/Math.PI;
+  aimPad.style.setProperty("--aim-rot",`${deg+90}deg`);
+}
+
+function startAim(pointerId,clientX,clientY){
+  aimPointer=pointerId;
+  aimHeld=true;
+  mobileFiring=true;
+  aimPad.classList.add("active");
+  setAimFromClient(clientX,clientY);
+
+  // Fire immediately on touch-down, then update() keeps firing nonstop.
+  if(running && state.player){
+    const p=state.player;
+    shootCooldown=0;
+    shootAt(p.x+aimVector.x*300,p.y+aimVector.y*300);
+  }
+}
+
+function moveAim(clientX,clientY){
+  setAimFromClient(clientX,clientY);
+}
+
+function stopAim(){
+  aimPointer=null;
+  aimHeld=false;
+  mobileFiring=false;
+  aimPad.classList.remove("active");
+  aimStick.style.transform="translate(-50%,-50%)";
+}
+
+/* Pointer Events: iPadOS / modern browsers */
+aimPad.addEventListener("pointerdown",e=>{
+  e.preventDefault();
+  try{aimPad.setPointerCapture(e.pointerId)}catch(_){}
+  startAim(e.pointerId,e.clientX,e.clientY);
+},{passive:false});
+
+aimPad.addEventListener("pointermove",e=>{
+  if(!aimHeld || (aimPointer!==null && e.pointerId!==aimPointer))return;
+  e.preventDefault();
+  moveAim(e.clientX,e.clientY);
+},{passive:false});
+
+aimPad.addEventListener("pointerup",e=>{
+  if(aimPointer===null || e.pointerId===aimPointer)stopAim();
+},{passive:false});
+
+aimPad.addEventListener("pointercancel",()=>stopAim(),{passive:false});
+
+/* Touch fallback for older / weird embedded Telegram WebViews */
+aimPad.addEventListener("touchstart",e=>{
+  if(e.cancelable)e.preventDefault();
+  const t=e.changedTouches[0];
+  if(!t)return;
+  if(!aimHeld)startAim("touch",t.clientX,t.clientY);
+},{passive:false});
+
+aimPad.addEventListener("touchmove",e=>{
+  if(!aimHeld)return;
+  if(e.cancelable)e.preventDefault();
+  const t=e.changedTouches[0];
+  if(t)moveAim(t.clientX,t.clientY);
+},{passive:false});
+
+aimPad.addEventListener("touchend",e=>{
+  if(e.cancelable)e.preventDefault();
+  stopAim();
+},{passive:false});
+
+aimPad.addEventListener("touchcancel",()=>stopAim(),{passive:false});
+
+
+/* ===================== LOCAL RANKING ===================== */
+const RANK_KEY="gramleek_leeked_in_ranking_v2";
+const CAREER_KEY="gramleek_leeked_in_career_v1";
+
+let lastCompletedRun=null;
+let runSubmitted=false;
+let runCareerCounted=false;
+
+const COUNTRY_CODES=[
+  "AF","AL","DZ","AD","AO","AG","AR","AM","AU","AT","AZ",
+  "BS","BH","BD","BB","BY","BE","BZ","BJ","BT","BO","BA","BW","BR","BN","BG","BF","BI",
+  "CV","KH","CM","CA","CF","TD","CL","CN","CO","KM","CG","CD","CR","CI","HR","CU","CY","CZ",
+  "DK","DJ","DM","DO",
+  "EC","EG","SV","GQ","ER","EE","SZ","ET",
+  "FJ","FI","FR",
+  "GA","GM","GE","DE","GH","GR","GD","GT","GN","GW","GY",
+  "HT","HN","HU",
+  "IS","IN","ID","IR","IQ","IE","IL","IT",
+  "JM","JP","JO",
+  "KZ","KE","KI","KW","KG",
+  "LA","LV","LB","LS","LR","LY","LI","LT","LU",
+  "MG","MW","MY","MV","ML","MT","MH","MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM",
+  "NA","NR","NP","NL","NZ","NI","NE","NG","KP","MK","NO",
+  "OM",
+  "PK","PW","PA","PG","PY","PE","PH","PL","PT",
+  "QA",
+  "RO","RU","RW",
+  "KN","LC","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","SB","SO","ZA","KR","SS","ES","LK","SD","SR","SE","CH","SY",
+  "TW","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","TV",
+  "UG","UA","AE","GB","US","UY","UZ",
+  "VU","VA","VE","VN",
+  "YE",
+  "ZM","ZW"
+];
+
+function flagEmoji(code){
+  if(!/^[A-Z]{2}$/.test(code)) return "🌍";
+  return String.fromCodePoint(...[...code].map(c=>127397+c.charCodeAt()));
+}
+
+function populateCountries(){
+  const select=document.getElementById("rankCountry");
+  if(!select)return;
+
+  let displayNames=null;
+  try{
+    displayNames=new Intl.DisplayNames(["en"],{type:"region"});
+  }catch(_){}
+
+  const countries=COUNTRY_CODES
+    .map(code=>({
+      code,
+      name:displayNames?.of(code)||code
+    }))
+    .sort((a,b)=>a.name.localeCompare(b.name,"en",{sensitivity:"base"}));
+
+  for(const c of countries){
+    const opt=document.createElement("option");
+    opt.value=c.code;
+    opt.textContent=`${flagEmoji(c.code)} ${c.name}`;
+    select.appendChild(opt);
+  }
+}
+
+function getRanking(){
+  try{
+    const rows=JSON.parse(localStorage.getItem(RANK_KEY)||"[]");
+    return Array.isArray(rows)?rows:[];
+  }catch(_){
+    return [];
+  }
+}
+
+function saveRanking(rows){
+  localStorage.setItem(RANK_KEY,JSON.stringify(rows.slice(0,100)));
+}
+
+function getCareer(){
+  try{
+    const data=JSON.parse(localStorage.getItem(CAREER_KEY)||"{}");
+    return {
+      bestRun:Number(data.bestRun)||0,
+      totalBurned:Number(data.totalBurned)||0,
+      runs:Number(data.runs)||0
+    };
+  }catch(_){
+    return {bestRun:0,totalBurned:0,runs:0};
+  }
+}
+
+function saveCareer(data){
+  localStorage.setItem(CAREER_KEY,JSON.stringify(data));
+}
+
+function updateCareerFromRun(){
+  if(runCareerCounted || !lastCompletedRun)return;
+
+  const career=getCareer();
+  career.bestRun=Math.max(career.bestRun,lastCompletedRun.score);
+  career.totalBurned+=lastCompletedRun.kills;
+  career.runs+=1;
+
+  saveCareer(career);
+  runCareerCounted=true;
+  renderCareer();
+}
+
+function renderCareer(){
+  const career=getCareer();
+  document.getElementById("careerBestRun").textContent=
+    Math.round(career.bestRun).toLocaleString();
+  document.getElementById("careerTotalBurned").textContent=
+    Math.round(career.totalBurned).toLocaleString()+" LEEK";
+}
+
+function renderRanking(){
+  const list=document.getElementById("rankList");
+
+  const rows=getRanking()
+    .sort((a,b)=>b.score-a.score || b.kills-a.kills || a.time-b.time)
+    .slice(0,100);
+
+  if(!rows.length){
+    list.innerHTML='<div class="rank-empty">NO RUNS YET. BE THE FIRST VEGETABLE.</div>';
+    return;
+  }
+
+  list.innerHTML=rows.map((r,i)=>`
+    <div class="rank-row">
+      <div class="rank-pos">#${i+1}</div>
+      <div class="rank-name">${escapeHtml(r.name)}</div>
+      <div class="rank-country-code">${flagEmoji(r.country)} ${escapeHtml(r.country)}</div>
+      <div class="rank-score">${Math.round(r.score).toLocaleString()}</div>
+    </div>
+  `).join("");
+}
+
+function escapeHtml(v){
+  return String(v||"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function unlockRanking(){
+  lastCompletedRun={
+    score:Math.round(state.score),
+    kills:state.kills,
+    combo:state.bestCombo,
+    accuracy:state.shots?Math.round(state.hits/state.shots*100):0,
+    time:Date.now()
+  };
+
+  runSubmitted=false;
+
+  document.getElementById("rankSubmit").disabled=false;
+  document.getElementById("rankStatus").className="rank-status good";
+  document.getElementById("rankStatus").textContent=
+    `Run ready: ${lastCompletedRun.score.toLocaleString()} pts · ${lastCompletedRun.kills} kills. Add your signature + country.`;
+
+  updateCareerFromRun();
+}
+
+document.getElementById("rankSubmit").addEventListener("click",()=>{
+  if(!lastCompletedRun || runSubmitted)return;
+
+  const name=document.getElementById("rankName").value.trim().slice(0,18);
+  const country=document.getElementById("rankCountry").value;
+
+  if(name.length<2){
+    document.getElementById("rankStatus").className="rank-status";
+    document.getElementById("rankStatus").textContent="Signature needs at least 2 characters.";
+    return;
+  }
+
+  if(!country){
+    document.getElementById("rankStatus").className="rank-status";
+    document.getElementById("rankStatus").textContent="Choose a country first.";
+    return;
+  }
+
+  const rows=getRanking();
+
+  rows.push({
+    ...lastCompletedRun,
+    name,
+    country
+  });
+
+  rows.sort((a,b)=>b.score-a.score || b.kills-a.kills || a.time-b.time);
+  saveRanking(rows);
+
+  runSubmitted=true;
+
+  document.getElementById("rankSubmit").disabled=true;
+  document.getElementById("rankStatus").className="rank-status good";
+  document.getElementById("rankStatus").textContent=
+    "Score added. No LEEKs. Just shame and glory.";
+
+  renderRanking();
+});
+
+populateCountries();
+renderCareer();
+renderRanking();
+});
+
+renderRanking();
+
+/* start / restart */
+document.getElementById("startBtn").onclick=()=>{
+  resetGame();running=true;document.getElementById("startScreen").classList.add("hidden");
+};
+document.getElementById("restartBtn").onclick=()=>{
+  resetGame();running=true;document.getElementById("gameOverScreen").classList.add("hidden");
+};
+
+resetGame();
+</script>
+</body>
+</html>

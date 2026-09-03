@@ -5,7 +5,7 @@ Clean rebuild of the GramLeek game prototype.
 ## Stack
 
 - Phaser 4.2.1
-- TypeScript 7.0.2
+- TypeScript 6.0.3
 - Vite 8.2.2
 - Telegram Mini App bridge (minimal shell for now)
 

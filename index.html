@@ -329,6 +329,7 @@
       html.game-lock .mobile-dock,body.game-lock .mobile-dock{display:none}.toast{bottom:calc(78px + var(--safe-bottom))}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.live-chip::before,.ticker-track,.boot-bar::after,.loader-track::after{animation:none}.game-banner,.toast,.meter-fill,.supply-fill,.scan-progress-fill,.boot-sequence{transition:none}}
+    html[lang="ru"] .game-terminal::before{content:"НАСТОЯЩАЯ ИГРА // БЕЗ AI-ТРЕЙЛЕРА"}
   </style>
 </head>
 <body>
@@ -616,7 +617,7 @@
   function toast(message){
     const el=$("toast");
     clearTimeout(toastTimer);
-    el.textContent=message;
+    el.textContent=uiText(message);
     el.classList.add("show");
     toastTimer=setTimeout(()=>el.classList.remove("show"),1900);
   }
@@ -694,22 +695,22 @@
       wave:"WAVE",locked:"FULLY LEEKED IN",bossWake:"ADMIN FINALLY WOKE UP",bossIncoming:"SLEEPING ADMIN // 64H LATER",victory:"LIQUIDITY SURVIVED",poolHit:"LIQUIDITY HIT",playerHit:"YOU GOT SHILLED"
     },
     ru:{
-      live:"УБИЙСТВ В RUN",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
+      live:"УБИЙСТВ В ЗАБЕГЕ",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
       moveControl:"ДВИЖЕНИЕ",moveHint:"тяни",aimControl:"ПРИЦЕЛ",aimHint:"задай направление",aimAria:"Задать направление огня",autoFire:"АВТООГОНЬ",armed:"АКТИВЕН",rotate:"ПОВЕРНИ ДЛЯ БОЛЬШЕГО ОБЗОРА",
       stamp:"ПУБЛИЧНЫЙ ПРОТОТИП // BURN НЕ АКТИВЕН",hero:'<b>Играбельный прототип. Без фальшивой utility.</b><br>Убийства дают очки. LEEK пока не сжигается игрой.',
-      tag1:"ЕЖЕДНЕВНЫЙ ОДИНАКОВЫЙ RUN",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"BURN-МЕХАНИКА // НЕ АКТИВНА",
-      terminal:"DAILY RUN // АВТООГОНЬ ГОТОВ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
+      tag1:"ЕЖЕДНЕВНЫЙ ФИКСИРОВАННЫЙ ЗАБЕГ",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"BURN-МЕХАНИКА // НЕ АКТИВНА",
+      terminal:"ЕЖЕДНЕВНЫЙ ЗАБЕГ // АВТООГОНЬ ГОТОВ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
       proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Публичные кошельки. Live-баланс void-кошелька. Текущий gameplay не создаёт burn-транзакции. <strong>Проверь сам.</strong>',
-      scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ RUN",finish:"Заверши run, чтобы открыть отправку результата.",
+      scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ RUN",finish:"Заверши забег, чтобы отправить результат.",
       supplyLive:"void-кошелёк синхронизирован. связь с gameplay: не активна.",supplyError:"TON API недоступен. скан приостановлен.",
       copy:"КОПИРОВАТЬ CA",copied:"CA СКОПИРОВАН.",install:"УСТАНОВИТЬ ИГРУ",installed:"ДОБАВЛЕНО НА ЭКРАН",
       paused:"ПАУЗА",resumed:"ОБРАТНО В ЛОГОВО",challenge:(name,score)=>`${name} набрал ${score.toLocaleString()}. Победи овощ.`,
       rugged:"ТЕБЯ ЗАРАГАЛИ.",cleared:"ЛОГОВО ЗАЧИЩЕНО.",liquidityGone:"ЛИКВИДНОСТЬ УКРАЛИ.",
-      runText:r=>`Убийства: <b>${r.kills}</b> · Счёт: <b>${r.score.toLocaleString()}</b> · Время: <b>${formatTime(r.duration)}</b><br>Причина: <b>${escapeHtml(r.cause)}</b>`,
-      share:"ПОДЕЛИТЬСЯ TROPHY",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",
-      runReady:r=>`Run сохранён: ${r.score.toLocaleString()} очков · ${r.kills} убийств. Добавь подпись и страну.`,
-      shortName:"Минимум 2 символа.",chooseCountry:"Сначала выбери страну.",verifying:"Сохраняем run…",verified:"Run принят. Позор стал глобальным.",verifyError:"База отклонила run. Результат остаётся локальным и доступным для sharing.",
-      dbOnline:"GLOBAL READ ONLINE",dbError:"GLOBAL READ OFFLINE",empty:"ПОКА НЕТ ПОДТВЕРЖДЁННЫХ RUNS.",loading:"Загружаем стену…",
+      runText:r=>`Убийства: <b>${r.kills}</b> · Счёт: <b>${r.score.toLocaleString()}</b> · Время: <b>${formatTime(r.duration)}</b><br>Причина: <b>${escapeHtml(uiText(r.cause))}</b>`,
+      share:"ПОДЕЛИТЬСЯ РЕЗУЛЬТАТОМ",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",
+      runReady:r=>`Забег зафиксирован: ${r.score.toLocaleString()} очков · ${r.kills} убийств. Добавь подпись и страну.`,
+      shortName:"Минимум 2 символа.",chooseCountry:"Сначала выбери страну.",verifying:"Сохраняем забег…",verified:"Забег принят. Позор стал глобальным.",verifyError:"База отклонила забег. Результат остаётся локальным, им можно поделиться.",
+      dbOnline:"ГЛОБАЛЬНАЯ БАЗА ОНЛАЙН",dbError:"ГЛОБАЛЬНАЯ БАЗА ОФЛАЙН",empty:"ПОКА НЕТ ПОДТВЕРЖДЁННЫХ ЗАБЕГОВ.",loading:"Загружаем стену…",
       scanLoading:"Допрашиваем блокчейн…",scanInvalid:"Это не похоже на адрес TON jetton.",scanFailed:"TON ответил невнятно. Подожди и попробуй снова.",
       verdictLow:"ХОРОШО НАРЕЗАНО",verdictMid:"ТЕСНАЯ КУХНЯ",verdictHigh:"КИТЫ В КЛАДОВКЕ",
       verdictLowText:"Видимые топ-10 не контролируют основную часть выпущенного supply.",verdictMidText:"Владение заметно сконцентрировано. Сначала проверь адреса, потом сочиняй теорию.",verdictHighText:"Небольшая группа контролирует крупную долю. Это факт, но ещё не автоматический rug verdict.",
@@ -719,15 +720,85 @@
     }
   };
   const tr=key=>TEXT[currentLang][key];
+
+  const STATIC_RU=new Map([
+    ["SKIP","ПРОПУСТИТЬ"],["PROTOTYPE","ПРОТОТИП"],["VOID WALLET DATA","ДАННЫЕ VOID-КОШЕЛЬКА"],["READ-ONLY","ТОЛЬКО ЧТЕНИЕ"],["GLOBAL RANKING","ГЛОБАЛЬНЫЙ РЕЙТИНГ"],["CONNECTING","ПОДКЛЮЧЕНИЕ"],["READY","ГОТОВО"],
+    ["Skip to game","Перейти к игре"],["GramLeek home","Главная GramLeek"],["GAME // PROTOTYPE // CHAIN DATA","ИГРА // ПРОТОТИП // ДАННЫЕ БЛОКЧЕЙНА"],["PUBLIC PROTOTYPE","ПУБЛИЧНЫЙ ПРОТОТИП"],["// BUILDING IN THE OPEN","// СТРОИМ ОТКРЫТО"],["TRADE","ТОРГОВАТЬ"],["CAFÉ","КАФЕ"],
+    ["Add game to home screen","Добавить игру на главный экран"],["Toggle sound","Включить или выключить звук"],["Language","Язык"],["Game features","Особенности игры"],["Token links","Ссылки токена"],["LEEKed IN game","Игра LEEKed IN"],
+    ["TRADE ON DeDust →","ТОРГОВАТЬ НА DeDust →"],["LEEK CAFÉ →","LEEK КАФЕ →"],["INITIALIZING RUN","ЗАПУСК ЗАБЕГА"],["LOADING DAILY SEED // ARMING AUTO-FIRE","ЗАГРУЖАЕМ DAILY SEED // ВКЛЮЧАЕМ АВТООГОНЬ"],
+    ["SCORE","СЧЁТ"],["KILLS","УБИЙСТВА"],["COMBO","КОМБО"],["GAME BURN","СЖИГАНИЕ ИГРОЙ"],["NOT LIVE","НЕ АКТИВНО"],["LIQUIDITY","ЛИКВИДНОСТЬ"],["LOCKED IN","ЗАЛОЧЕНО"],["DAILY CASE //","ЕЖЕДНЕВНОЕ ДЕЛО //"],
+    ["TRANSMISSION INTERRUPTED","ПЕРЕДАЧА ПРЕРВАНА"],["PAUSED.","ПАУЗА."],["The den waits. Unfortunately, so does the admin.","Логово подождёт. К сожалению, админ тоже."],["RESUME →","ПРОДОЛЖИТЬ →"],["RUN AUTOPSY","ВСКРЫТИЕ ЗАБЕГА"],["The vegetable has fallen.","Овощ пал."],["POST ON X","ОПУБЛИКОВАТЬ В X"],
+    ["RUN KILLS","УБИЙСТВА В ЗАБЕГЕ"],["BEST COMBO","ЛУЧШЕЕ КОМБО"],["ACCURACY","ТОЧНОСТЬ"],["RUN TIME","ВРЕМЯ ЗАБЕГА"],
+    ["PROTOTYPE TELEMETRY","ТЕЛЕМЕТРИЯ ПРОТОТИПА"],["THE GAME LEAVES A SCORE.","ИГРА ОСТАВЛЯЕТ СЧЁТ."],["Kills are gameplay data only. This prototype does not burn LEEK or trigger token transactions. The burn mechanic is planned, not live.","Убийства — только игровые данные. Этот прототип не сжигает LEEK и не создаёт транзакций токена. Механика сжигания запланирована, но пока не активна."],
+    ["THIS RUN // KILLS","ЭТОТ ЗАБЕГ // УБИЙСТВА"],["GAME BURN STATUS","СТАТУС СЖИГАНИЯ ИГРОЙ"],["ALL RECORDED KILLS","ВСЕ ЗАПИСАННЫЕ УБИЙСТВА"],["LAST SEALED RUN","ПОСЛЕДНИЙ ЗАФИКСИРОВАННЫЙ ЗАБЕГ"],["NONE","НЕТ"],["WAITING FOR A RUN.","ЖДЁМ ЗАБЕГ."],["Nothing invented. Nothing pending.","Ничего не выдумано. Ничего не ожидается."],
+    ["ON-CHAIN DATA // SEPARATE FROM GAME","ON-CHAIN ДАННЫЕ // ОТДЕЛЬНО ОТ ИГРЫ"],["DEV WALLET","КОШЕЛЁК DEV"],["COMMUNITY FUND","ФОНД СООБЩЕСТВА"],["VOID WALLET","VOID-КОШЕЛЁК"],["SCANNING…","СКАНИРУЕМ…"],["SUPPLY DIAGNOSTICS","ДИАГНОСТИКА ЭМИССИИ"],["CURRENT EFFECTIVE SUPPLY","ТЕКУЩАЯ ЭФФЕКТИВНАЯ ЭМИССИЯ"],["reading the void wallet…","читаем void-кошелёк…"],
+    ["The void wallet is real on-chain data and is not connected to current gameplay. No kill in this prototype burns LEEK.","Void-кошелёк — реальные on-chain данные и он не связан с текущей игрой. Ни одно убийство в этом прототипе не сжигает LEEK."],
+    ["GRAMLEAKS // OPEN CASE FILE","GRAMLEAKS // ОТКРЫТОЕ ДЕЛО"],["PASTE THE CONTRACT.","ВСТАВЬ КОНТРАКТ."],["READ THE CHAIN.","ЧИТАЙ БЛОКЧЕЙН."],["Concentration, largest holder and admin state.","Концентрация, крупнейший холдер и статус админа."],["Evidence first. Drama after.","Сначала доказательства. Драма потом."],["FILE","ДЕЛО"],["UNOPENED","НЕ ОТКРЫТО"],
+    ["top-wallet concentration","концентрация топ-кошельков"],["largest visible position","крупнейшая видимая позиция"],["admin and mint state","статус админа и минта"],["QUICK DISTRIBUTION SCAN","БЫСТРЫЙ СКАН РАСПРЕДЕЛЕНИЯ"],["TON jetton contract","Контракт TON jetton"],["WAITING","ОЖИДАНИЕ"],["USE $LEEK CONTRACT","ИСПОЛЬЗОВАТЬ КОНТРАКТ $LEEK"],["Public TON Center data · 1 request/second without API key","Публичные данные TON Center · 1 запрос/сек без API-ключа"],
+    ["TOP 10 SHARE","ДОЛЯ ТОП-10"],["LARGEST WALLET","КРУПНЕЙШИЙ КОШЕЛЁК"],["VISIBLE WALLETS","ВИДИМЫЕ КОШЕЛЬКИ"],["CASE PENDING","ДЕЛО ОЖИДАЕТ"],["The chain has not testified yet.","Блокчейн ещё не дал показаний."],
+    ["GLOBAL HIGH-SCORE WALL","ГЛОБАЛЬНАЯ ТАБЛИЦА РЕКОРДОВ"],["SHAME & GLORY","ПОЗОР И СЛАВА"],["DATABASE","БАЗА ДАННЫХ"],["CHECKING…","ПРОВЕРКА…"],["GLOBAL BEST RUN","ЛУЧШИЙ ЗАБЕГ В МИРЕ"],["GAME KILLS RECORDED","ЗАПИСАНО УБИЙСТВ"],["COMPLETED RUNS","ЗАВЕРШЁННЫЕ ЗАБЕГИ"],["Signature","Подпись"],["Country","Страна"],
+    ["Global scores are written to Supabase with the public publishable key. Row-level security controls anonymous access. If the database is unavailable, your result remains local and shareable.","Глобальные результаты записываются в Supabase с публичным publishable key. Row-level security контролирует анонимный доступ. Если база недоступна, результат остаётся локальным и им можно поделиться."],
+    ["WE'RE NOT A VEGETABLE.","МЫ НЕ ОВОЩ."],["WE'RE THE THING THAT EATS VEGETABLES.","МЫ ТО, ЧТО ЕСТ ОВОЩИ."],["Playable prototype. Public wallets. Chain data. No fake utility.","Играбельный прототип. Публичные кошельки. Данные блокчейна. Никакой фальшивой utility."],["PUBLIC BUILD TAPE","ПУБЛИЧНЫЙ ЖУРНАЛ СБОРОК"],
+    ["Proof of play, trophy cards, case files and combat juice","Подтверждение игры, карточки результатов, дела и больше боевого драйва"],["Landscape screen recovery + clear lower combat zone","Восстановление landscape-экрана + чистая нижняя зона боя"],["Manual aim + continuous auto-fire + mobile combat pass","Ручной прицел + непрерывный автоогонь + мобильная доработка боя"],["Three-act LEEKed IN run + final boss","Трёхактный забег LEEKed IN + финальный босс"],["15M LEEK sent to the public void wallet — independent of prototype gameplay","15M LEEK отправлено в публичный void-кошелёк — отдельно от игры прототипа"],
+    ["GRAMLEEK // BUILT IN PUBLIC ON GRAM","GRAMLEEK // СТРОИМ ОТКРЫТО НА GRAM"],["PLAY","ИГРАТЬ"],["PROOF","ДОКАЗАТЕЛЬСТВА"],["RANK","РЕЙТИНГ"],["COPY","КОПИРОВАТЬ"],["Quick actions","Быстрые действия"],
+    ["Top-down action game. Move with WASD or left joystick, set the automatic firing direction with mouse or right pad.","Экшен с видом сверху. Двигайся WASD или левым стиком, направление автоогня задавай мышью или правым падом."],["Shareable run trophy","Карточка результата для публикации"],["Unlocked run badges","Разблокированные достижения"],["Live GramLeek impact ticker","Live-лента GramLeek"]
+  ]);
+
+  const RUNTIME_RU=new Map([
+    ["FULLSCREEN ENGAGED","ПОЛНЫЙ ЭКРАН ВКЛЮЧЁН"],["RETURNED TO PAGE","ВОЗВРАТ НА СТРАНИЦУ"],["CHALLENGE DESTROYED","ВЫЗОВ УНИЧТОЖЕН"],["AUTOPSY RELEASED","РЕЗУЛЬТАТ ОПУБЛИКОВАН"],["CHALLENGE LINK COPIED","ССЫЛКА НА ВЫЗОВ СКОПИРОВАНА"],
+    ["READING JETTON MASTER","ЧИТАЕМ JETTON MASTER"],["MASTER RECEIVED","MASTER ПОЛУЧЕН"],["READING HOLDER SET","ЧИТАЕМ СПИСОК ХОЛДЕРОВ"],["CALCULATING CONCENTRATION","СЧИТАЕМ КОНЦЕНТРАЦИЮ"],["CASE SEALED","ДЕЛО ЗАФИКСИРОВАНО"],["VALIDATING CONTRACT","ПРОВЕРЯЕМ КОНТРАКТ"],["SCAN FAILED","СКАН НЕ УДАЛСЯ"],
+    ["WHALE ALERT","ТРЕВОГА: КИТ"],["ADMIN PRESENT","АДМИН УКАЗАН"],["ADMIN NOT RETURNED","АДМИН НЕ ВОЗВРАЩЁН API"],["MINTABLE","МИНТ ДОСТУПЕН"],["MINT DISABLED","МИНТ ОТКЛЮЧЁН"],["MINT UNKNOWN","СТАТУС МИНТА НЕИЗВЕСТЕН"],
+    ["LOCAL","ЛОКАЛЬНО"],["ANON VEGETABLE","ОВОЩ-АНОНИМ"],["GLOBAL READ ONLINE","ГЛОБАЛЬНАЯ БАЗА ОНЛАЙН"],["GLOBAL READ OFFLINE","ГЛОБАЛЬНАЯ БАЗА ОФЛАЙН"],
+    ["FIRST KILL","ПЕРВОЕ УБИЙСТВО"],["70%+ ACCURACY","ТОЧНОСТЬ 70%+"],["POOL UNTOUCHED","ПУЛ НЕ ТРОНУТ"],["SURVIVED ADMIN 64H","ПЕРЕЖИЛ ADMIN 64H"],["RUN RECORDED","ЗАБЕГ ЗАПИСАН"],
+    ["NO EXIT","ВЫХОДА НЕТ"],["PAID","ПРОПЛАЧЕНО"],["OPINIONS FACTORY","ФАБРИКА МНЕНИЙ"],["SLEEPING ADMIN // SHOOT TO WAKE","СПЯЩИЙ АДМИН // СТРЕЛЯЙ, ЧТОБЫ РАЗБУДИТЬ"],["CABAL SHIELD","ЩИТ CABAL"],["STOLEN","УКРАДЕНО"],
+    ["GRAMLEEK // RUN AUTOPSY","GRAMLEEK // ВСКРЫТИЕ ЗАБЕГА"],["DEN CLEARED","ЛОГОВО ЗАЧИЩЕНО"],["RUGGED","ЗАРАГАЛИ"],["SURVIVAL","ВЫЖИВАНИЕ"],["CAUSE OF DEATH / FINAL WITNESS","ПРИЧИНА ПОРАЖЕНИЯ / ПОСЛЕДНИЙ СВИДЕТЕЛЬ"],["BEAT THIS VEGETABLE →","ПОБЕДИ ЭТОТ ОВОЩ →"],["PROTOTYPE // GAMEPLAY DOES NOT BURN LEEK","ПРОТОТИП // ИГРА НЕ СЖИГАЕТ LEEK"],
+    ["HOSTILE SHILL","ВРАЖДЕБНЫЙ ШИЛЛ"],["PAID KOL PROJECTILE","СНАРЯД ПРОПЛАЧЕННОГО KOL"],["PAID KOL HIT THE POOL","ПРОПЛАЧЕННЫЙ KOL ПОПАЛ В ПУЛ"],["RUGGED FLOOR","RUG-ПОЛ"],["RUG REACHED LIQUIDITY","RUG ДОБРАЛСЯ ДО ЛИКВИДНОСТИ"],["JEET STOLE THE LIQUIDITY","JEET УКРАЛ ЛИКВИДНОСТЬ"],["JEET ESCAPED","JEET СБЕЖАЛ"],["LIQUIDITY DRAINED","ЛИКВИДНОСТЬ ВЫКАЧАНА"]
+  ]);
+
+  const RU_DOM=new Map([...STATIC_RU,...RUNTIME_RU]);
+  const EN_DOM=new Map([...RU_DOM].map(([en,ru])=>[ru,en]));
+
+  function uiText(value){
+    const text=String(value??"");
+    if(currentLang!=="ru")return text;
+    const exact=RU_DOM.get(text);if(exact)return exact;
+    let match=text.match(/^Largest visible wallet controls ([0-9.]+)%\. Inspect it before inventing a verdict\.$/);
+    if(match)return `Крупнейший видимый кошелёк контролирует ${match[1]}%. Проверь его, прежде чем выносить вердикт.`;
+    return text;
+  }
+
+  function applyStaticLanguage(lang){
+    const map=lang==="ru"?RU_DOM:EN_DOM;
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode(node){
+        const parent=node.parentElement;if(!parent||["SCRIPT","STYLE","NOSCRIPT"].includes(parent.tagName))return NodeFilter.FILTER_REJECT;
+        return node.nodeValue&&node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+      }
+    });
+    while(walker.nextNode()){
+      const node=walker.currentNode,raw=node.nodeValue,match=raw.match(/^(\s*)([\s\S]*?)(\s*)$/),core=match?match[2]:raw;
+      const translated=lang==="ru"?uiText(core):(map.get(core)||core);
+      if(translated!==core)node.nodeValue=(match?match[1]:"")+translated+(match?match[3]:"");
+    }
+    document.querySelectorAll("[aria-label],[title],[placeholder]").forEach(el=>{
+      for(const attr of ["aria-label","title","placeholder"]){
+        if(!el.hasAttribute(attr))continue;const value=el.getAttribute(attr),translated=lang==="ru"?uiText(value):(map.get(value)||value);if(translated!==value)el.setAttribute(attr,translated);
+      }
+    });
+    document.title=lang==="ru"?"GramLeek — LEEKed IN // прототип":"GramLeek — LEEKed IN";
+    const meta=document.querySelector('meta[name="description"]');
+    if(meta)meta.content=lang==="ru"?"Играй в публичный прототип LEEKed IN на GRAM. Сейчас gameplay работает off-chain, а механика сжигания токена ещё не активна. Публичные данные TON-кошельков показаны отдельно.":"Play the public prototype of LEEKed IN on GRAM. Gameplay is off-chain for now; the token-burn mechanic is not live. Public TON wallet data is shown separately.";
+  }
+
   let liveBurned=15_000_000,burnDataReady=false,tickerSignature="";
 
   function renderTicker(){
     const kills=Number(state?.kills)||0,total=Number(globalStats?.totalBurned)||0,last=lastImpactRun;
     const items=currentLang==="ru"?[
-      `ЭТОТ RUN: ${kills} УБИЙСТВ`,
-      burnDataReady?`VOID WALLET: ${human(liveBurned)} LEEK // GAMEPLAY НЕ ПОДКЛЮЧЕН`:"VOID WALLET: ПОДКЛЮЧЕНИЕ",
-      globalDataReady?`ВСЕ RUNS: ${human(total)} УБИЙСТВ`:"GLOBAL RUNS: ПОДКЛЮЧЕНИЕ",
-      last?`ПОСЛЕДНИЙ RUN: ${Math.round(Number(last.score)||0).toLocaleString()} SCORE · ${Math.round(Number(last.kills)||0)} KILLS`:"ПОСЛЕДНИЙ RUN: НЕТ"
+      `ЭТОТ ЗАБЕГ: ${kills} УБИЙСТВ`,
+      burnDataReady?`VOID-КОШЕЛЁК: ${human(liveBurned)} LEEK // ИГРА НЕ ПОДКЛЮЧЕНА`:"VOID-КОШЕЛЁК: ПОДКЛЮЧЕНИЕ",
+      globalDataReady?`ВСЕ ЗАБЕГИ: ${human(total)} УБИЙСТВ`:"ВСЕ ЗАБЕГИ: ПОДКЛЮЧЕНИЕ",
+      last?`ПОСЛЕДНИЙ ЗАБЕГ: ${Math.round(Number(last.score)||0).toLocaleString()} ОЧКОВ · ${Math.round(Number(last.kills)||0)} УБИЙСТВ`:"ПОСЛЕДНИЙ ЗАБЕГ: НЕТ"
     ]:[
       `THIS RUN: ${kills} KILLS`,
       burnDataReady?`VOID WALLET: ${human(liveBurned)} LEEK // GAMEPLAY LINK OFF`:"VOID WALLET: CONNECTING",
@@ -743,18 +814,18 @@
     const kills=Number(state?.kills)||0,last=lastImpactRun;
     $("impactRunKills").textContent=kills.toLocaleString();
     $("impactPendingBurn").textContent=currentLang==="ru"?"НЕ АКТИВЕН":"NOT LIVE";
-    $("impactGlobalKills").textContent=globalDataReady?Math.round(Number(globalStats.totalBurned)||0).toLocaleString():"CONNECTING";
-    $("impactLastScore").textContent=last?Math.round(last.score).toLocaleString():"NONE";
+    $("impactGlobalKills").textContent=globalDataReady?Math.round(Number(globalStats.totalBurned)||0).toLocaleString():uiText("CONNECTING");
+    $("impactLastScore").textContent=last?Math.round(last.score).toLocaleString():uiText("NONE");
     $("navLive").textContent=`${kills.toLocaleString()} ${tr("live")}`;
     $("navLive").classList.toggle("active",!!state?.running&&!state?.ended);
     if(last){
       const stamp=new Date(Number(last.startedAt)||Date.now()).toISOString();
       $("impactLogTime").textContent=stamp.slice(0,10)+" "+stamp.slice(11,19)+" UTC";
       const hash=last.eventHash?last.eventHash.slice(0,12).toUpperCase():"LOCAL";
-      $("impactLogText").innerHTML=`<b>RUN ${escapeHtml(hash)}</b> · ${Math.round(last.score).toLocaleString()} SCORE · ${last.kills} KILLS · ${last.pool}% LIQUIDITY`;
+      $("impactLogText").innerHTML=currentLang==="ru"?`<b>ЗАБЕГ ${escapeHtml(hash)}</b> · ${Math.round(last.score).toLocaleString()} ОЧКОВ · ${last.kills} УБИЙСТВ · ${last.pool}% ЛИКВИДНОСТИ`:`<b>RUN ${escapeHtml(hash)}</b> · ${Math.round(last.score).toLocaleString()} SCORE · ${last.kills} KILLS · ${last.pool}% LIQUIDITY`;
     }else{
       $("impactLogTime").textContent="—";
-      $("impactLogText").innerHTML="<b>WAITING FOR A RUN.</b> Nothing invented. Nothing pending.";
+      $("impactLogText").innerHTML=currentLang==="ru"?"<b>ЖДЁМ ЗАБЕГ.</b> Ничего не выдумано. Ничего не ожидается.":"<b>WAITING FOR A RUN.</b> Nothing invented. Nothing pending.";
     }
     renderTicker();
   }
@@ -785,6 +856,16 @@
     $("restartBtn").textContent=tr("retry");$("shareBtn").textContent=tr("share");$("challengeBtn").textContent=tr("challengeCopy");
     if(challengeData)renderChallengeCallout();
     renderImpact();refreshHud();renderRanking();
+    if(lastScanData)renderScan(lastScanData);
+    if(lastCompletedRun){
+      if(!$("gameOverScreen").classList.contains("hidden")){
+        $("gameOverKicker").textContent=lastCompletedRun.boss?tr("victory"):uiText("RUN AUTOPSY");
+        $("gameOverTitle").textContent=lastCompletedRun.boss?tr("cleared"):lastCompletedRun.pool<=0?tr("liquidityGone"):tr("rugged");
+        $("gameOverText").innerHTML=tr("runText")(lastCompletedRun);
+      }
+      renderShareCard(lastCompletedRun,$("trophyPreview"));renderRunBadges(lastCompletedRun);
+    }
+    applyStaticLanguage(currentLang);
   }
 
   $("langEn").addEventListener("click",()=>setLanguage("en"));
@@ -1168,12 +1249,12 @@
   }
 
   function showBanner(text,duration=850){
-    const el=$("gameBanner");el.textContent=text;el.classList.add("show");
+    const el=$("gameBanner");el.textContent=uiText(text);el.classList.add("show");
     clearTimeout(showBanner.timer);showBanner.timer=setTimeout(()=>el.classList.remove("show"),duration);
   }
 
   function addFloater(x,y,text,color="#ffffff",size=15){
-    state.floaters.push({x,y,text,color,size,life:.85,maxLife:.85});
+    state.floaters.push({x,y,text:uiText(text),color,size,life:.85,maxLife:.85});
   }
 
   function burst(x,y,color,count=10,force=120){
@@ -1454,10 +1535,10 @@
 
     ctx.save();
     if(act===0){
-      ctx.fillStyle="rgba(255,43,145,.12)";ctx.fillRect(52,56,180,54);ctx.strokeStyle="#ff2b91";ctx.lineWidth=2;ctx.strokeRect(52,56,180,54);ctx.fillStyle="#ff2b91";ctx.font="42px Anton, Impact";ctx.fillText("NO EXIT",68,99);
+      ctx.fillStyle="rgba(255,43,145,.12)";ctx.fillRect(52,56,180,54);ctx.strokeStyle="#ff2b91";ctx.lineWidth=2;ctx.strokeRect(52,56,180,54);ctx.fillStyle="#ff2b91";ctx.font="42px Anton, Impact";ctx.fillText(uiText("NO EXIT"),68,99);
       ctx.fillStyle="rgba(37,213,255,.28)";for(let i=0;i<7;i++)ctx.fillRect(760+i*18,70,8,105+i%2*23);
     }else if(act===1){
-      ctx.translate(774,90);ctx.rotate(-.08);ctx.fillStyle="#ff2b91";ctx.font="48px Anton, Impact";ctx.fillText("PAID",0,0);ctx.fillStyle="#f3f6ed";ctx.font="23px Anton, Impact";ctx.fillText("OPINIONS FACTORY",-33,28);ctx.setTransform(1,0,0,1,0,0);
+      ctx.translate(774,90);ctx.rotate(-.08);ctx.fillStyle="#ff2b91";ctx.font="48px Anton, Impact";ctx.fillText(uiText("PAID"),0,0);ctx.fillStyle="#f3f6ed";ctx.font="23px Anton, Impact";ctx.fillText(uiText("OPINIONS FACTORY"),-33,28);ctx.setTransform(1,0,0,1,0,0);
       ctx.strokeStyle="rgba(255,158,29,.26)";ctx.lineWidth=9;for(let y=225;y<380;y+=44){ctx.beginPath();ctx.moveTo(60,y);ctx.lineTo(900,y);ctx.stroke()}
     }else{
       ctx.fillStyle="rgba(255,255,255,.05)";ctx.fillRect(360,58,240,105);ctx.strokeStyle="rgba(255,158,29,.45)";ctx.lineWidth=3;ctx.strokeRect(360,58,240,105);
@@ -1487,7 +1568,7 @@
     ctx.strokeStyle=pool.flash>0?"#ff315d":"rgba(37,213,255,.58)";ctx.lineWidth=7;ctx.beginPath();ctx.arc(0,0,pool.r+7,-Math.PI/2,-Math.PI/2+Math.PI*2*ratio);ctx.stroke();
     ctx.strokeStyle=`rgba(200,255,40,${.22+pulse*.18})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,pool.r+16,performance.now()/700,performance.now()/700+Math.PI*1.35);ctx.stroke();
     const glow=ctx.createRadialGradient(0,0,4,0,0,pool.r);glow.addColorStop(0,"rgba(200,255,40,.35)");glow.addColorStop(.55,"rgba(37,213,255,.20)");glow.addColorStop(1,"rgba(4,11,10,.95)");ctx.fillStyle=glow;ctx.beginPath();ctx.arc(0,0,pool.r,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle="#eef4e8";ctx.font="18px Anton, Impact";ctx.textAlign="center";ctx.fillText("LIQUIDITY",0,-2);ctx.fillStyle="#c8ff28";ctx.font="25px Anton, Impact";ctx.fillText(Math.round(pool.hp)+"%",0,25);ctx.restore();
+    ctx.fillStyle="#eef4e8";ctx.font="18px Anton, Impact";ctx.textAlign="center";ctx.fillText(uiText("LIQUIDITY"),0,-2);ctx.fillStyle="#c8ff28";ctx.font="25px Anton, Impact";ctx.fillText(Math.round(pool.hp)+"%",0,25);ctx.restore();
   }
 
   function drawRugZones(){
@@ -1570,7 +1651,7 @@
 
   function drawBossBar(){
     const boss=state.enemies.find(e=>e.type==="admin");if(!boss)return;
-    const width=420,x=(W-width)/2,y=82;ctx.fillStyle="rgba(2,3,2,.82)";ctx.fillRect(x-7,y-19,width+14,37);ctx.fillStyle="rgba(255,255,255,.1)";ctx.fillRect(x,y,width,8);ctx.fillStyle="#ff315d";ctx.fillRect(x,y,width*clamp(boss.hp/boss.maxHp,0,1),8);ctx.fillStyle="#fff";ctx.font="15px Anton, Impact";ctx.textAlign="center";ctx.fillText(boss.sleep>0?"SLEEPING ADMIN // SHOOT TO WAKE":"ADMIN_64H",W/2,y-4);ctx.textAlign="left";
+    const width=420,x=(W-width)/2,y=82;ctx.fillStyle="rgba(2,3,2,.82)";ctx.fillRect(x-7,y-19,width+14,37);ctx.fillStyle="rgba(255,255,255,.1)";ctx.fillRect(x,y,width,8);ctx.fillStyle="#ff315d";ctx.fillRect(x,y,width*clamp(boss.hp/boss.maxHp,0,1),8);ctx.fillStyle="#fff";ctx.font="15px Anton, Impact";ctx.textAlign="center";ctx.fillText(boss.sleep>0?uiText("SLEEPING ADMIN // SHOOT TO WAKE"):"ADMIN_64H",W/2,y-4);ctx.textAlign="left";
   }
 
   function drawGame(){
@@ -1624,7 +1705,7 @@
     if(run.pool===100)badges.push("POOL UNTOUCHED");
     if(run.boss)badges.push("SURVIVED ADMIN 64H");
     if(!badges.length)badges.push("RUN RECORDED");
-    $("runBadges").innerHTML=badges.map(label=>`<span class="run-badge">${escapeHtml(label)}</span>`).join("");
+    $("runBadges").innerHTML=badges.map(label=>`<span class="run-badge">${escapeHtml(uiText(label))}</span>`).join("");
   }
 
   function endGame(victory,cause){
@@ -1640,7 +1721,7 @@
       shots:state.shots,hits:state.hits,accuracy:state.shots?Math.round(state.hits/state.shots*100):0,pool:Math.round(state.pool.hp),boss:victory,cause:state.cause,eventHash:""
     };
     lastImpactRun=lastCompletedRun;localStorage.setItem("leeked-last-run",JSON.stringify(lastCompletedRun));$("shareBtn").disabled=true;$("xShareBtn").disabled=true;
-    const screen=$("gameOverScreen");$("gameOverKicker").textContent=victory?tr("victory"):"RUN AUTOPSY";$("gameOverTitle").textContent=victory?tr("cleared"):state.pool.hp<=0?tr("liquidityGone"):tr("rugged");$("gameOverText").innerHTML=tr("runText")(lastCompletedRun);screen.classList.remove("hidden");
+    const screen=$("gameOverScreen");$("gameOverKicker").textContent=victory?tr("victory"):uiText("RUN AUTOPSY");$("gameOverTitle").textContent=victory?tr("cleared"):state.pool.hp<=0?tr("liquidityGone"):tr("rugged");$("gameOverText").innerHTML=tr("runText")(lastCompletedRun);screen.classList.remove("hidden");
     renderShareCard(lastCompletedRun,$("trophyPreview"));renderRunBadges(lastCompletedRun);renderImpact();
     if(challengeData&&lastCompletedRun.score>challengeData.score){setTimeout(()=>showBanner("CHALLENGE DESTROYED",1250),120)}
     sealRun().catch(()=>{$("rankStatus").className="rank-status error";$("rankStatus").textContent=tr("verifyError")});refreshHud();
@@ -1737,16 +1818,16 @@
     c.strokeStyle="rgba(200,255,40,.10)";c.lineWidth=1;for(let x=0;x<1200;x+=42){c.beginPath();c.moveTo(x,0);c.lineTo(x,630);c.stroke()}for(let y=0;y<630;y+=42){c.beginPath();c.moveTo(0,y);c.lineTo(1200,y);c.stroke()}
     c.fillStyle="#c8ff28";c.fillRect(0,0,1200,12);c.fillStyle="#ff2b91";c.fillRect(0,618,1200,12);
     drawCardMark(c,1015,153,190);
-    c.textAlign="left";c.fillStyle="#ff2b91";c.font="24px IBM Plex Mono, monospace";c.fillText("GRAMLEEK // RUN AUTOPSY",66,72);
-    c.fillStyle=run.boss?"#c8ff28":"#f3f6ed";c.font="italic 112px Anton, Impact";c.fillText(run.boss?"DEN CLEARED":"RUGGED",58,197);
-    c.fillStyle="#f3f6ed";c.font="58px Anton, Impact";c.fillText(run.score.toLocaleString(),66,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText("SCORE",66,337);
-    c.fillStyle="#c8ff28";c.font="58px Anton, Impact";c.fillText(String(run.kills),340,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText("KILLS",340,337);
-    c.fillStyle="#ff9e1d";c.font="58px Anton, Impact";c.fillText(formatTime(run.duration),555,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText("SURVIVAL",555,337);
-    c.fillStyle="#25d5ff";c.font="58px Anton, Impact";c.fillText(run.pool+"%",805,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText("LIQUIDITY",805,337);
-    c.fillStyle="#8f9a90";c.font="20px IBM Plex Mono, monospace";c.fillText("CAUSE OF DEATH / FINAL WITNESS",66,405);c.fillStyle="#f3f6ed";c.font="38px Anton, Impact";cardText(c,run.cause,66,450,760,43);
+    c.textAlign="left";c.fillStyle="#ff2b91";c.font="24px IBM Plex Mono, monospace";c.fillText(uiText("GRAMLEEK // RUN AUTOPSY"),66,72);
+    c.fillStyle=run.boss?"#c8ff28":"#f3f6ed";c.font="italic 112px Anton, Impact";c.fillText(run.boss?uiText("DEN CLEARED"):uiText("RUGGED"),58,197);
+    c.fillStyle="#f3f6ed";c.font="58px Anton, Impact";c.fillText(run.score.toLocaleString(),66,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText(uiText("SCORE"),66,337);
+    c.fillStyle="#c8ff28";c.font="58px Anton, Impact";c.fillText(String(run.kills),340,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText(uiText("KILLS"),340,337);
+    c.fillStyle="#ff9e1d";c.font="58px Anton, Impact";c.fillText(formatTime(run.duration),555,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText(uiText("SURVIVAL"),555,337);
+    c.fillStyle="#25d5ff";c.font="58px Anton, Impact";c.fillText(run.pool+"%",805,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText(uiText("LIQUIDITY"),805,337);
+    c.fillStyle="#8f9a90";c.font="20px IBM Plex Mono, monospace";c.fillText(uiText("CAUSE OF DEATH / FINAL WITNESS"),66,405);c.fillStyle="#f3f6ed";c.font="38px Anton, Impact";cardText(c,uiText(run.cause),66,450,760,43);
     const runStamp=new Date(Number(run.startedAt)||Date.now()).toISOString().slice(0,19).replace("T"," "),runHash=run.eventHash?run.eventHash.slice(0,12).toUpperCase():"SEALING";
-    c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText("BEAT THIS VEGETABLE →",66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(`RUN ${runHash} · ${runStamp} UTC`,66,582);
-    c.textAlign="right";c.fillStyle="#f3f6ed";c.font="34px Anton, Impact";c.fillText("LEEKed IN",1136,548);c.fillStyle="#c8ff28";c.font="18px IBM Plex Mono, monospace";c.fillText("PROTOTYPE // GAMEPLAY DOES NOT BURN LEEK",1136,582);
+    c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText(uiText("BEAT THIS VEGETABLE →"),66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(`RUN ${runHash} · ${runStamp} UTC`,66,582);
+    c.textAlign="right";c.fillStyle="#f3f6ed";c.font="34px Anton, Impact";c.fillText("LEEKed IN",1136,548);c.fillStyle="#c8ff28";c.font="18px IBM Plex Mono, monospace";c.fillText(uiText("PROTOTYPE // GAMEPLAY DOES NOT BURN LEEK"),1136,582);
     c.globalAlpha=.08;c.fillStyle="#fff";for(let y=16;y<618;y+=4)c.fillRect(0,y,1200,1);c.globalAlpha=1;
     return card;
   }
@@ -1756,10 +1837,10 @@
   }
 
   async function shareRun(){
-    if(!lastCompletedRun)return;const run=lastCompletedRun,link=challengeUrl(run),text=`LEEKed IN: ${run.score.toLocaleString()} score · ${run.kills} kills. Beat this vegetable.`;
+    if(!lastCompletedRun)return;const run=lastCompletedRun,link=challengeUrl(run),text=currentLang==="ru"?`LEEKed IN: ${run.score.toLocaleString()} очков · ${run.kills} убийств. Победи этот овощ.`:`LEEKed IN: ${run.score.toLocaleString()} score · ${run.kills} kills. Beat this vegetable.`;
     try{
       const blob=await cardBlob(run),file=new File([blob],`gramleek-${run.score}.png`,{type:"image/png"});
-      if(navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share({title:"LEEKed IN — Run Autopsy",text,url:link,files:[file]});toast("AUTOPSY RELEASED");return}
+      if(navigator.share&&navigator.canShare?.({files:[file]})){await navigator.share({title:currentLang==="ru"?"LEEKed IN — Итог забега":"LEEKed IN — Run Autopsy",text,url:link,files:[file]});toast("AUTOPSY RELEASED");return}
       const shareUrl=`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(text)}`;
       if(tg?.openTelegramLink)tg.openTelegramLink(shareUrl);else window.open(shareUrl,"_blank","noopener,noreferrer");
       await copyText(link,"CHALLENGE LINK COPIED");
@@ -1768,8 +1849,8 @@
 
   function shareRunOnX(){
     if(!lastCompletedRun)return;const run=lastCompletedRun,link=challengeUrl(run);
-    const lead=run.boss?"I survived Admin 64H.":`I got rugged after ${run.kills} kills.`;
-    const text=`${lead} ${run.score.toLocaleString()} score in LEEKed IN. Beat this vegetable.`;
+    const lead=currentLang==="ru"?(run.boss?"Я пережил Admin 64H.":`Меня зарагали после ${run.kills} убийств.`):(run.boss?"I survived Admin 64H.":`I got rugged after ${run.kills} kills.`);
+    const text=currentLang==="ru"?`${lead} ${run.score.toLocaleString()} очков в LEEKed IN. Победи этот овощ.`:`${lead} ${run.score.toLocaleString()} score in LEEKed IN. Beat this vegetable.`;
     const intent=`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
     window.open(intent,"_blank","noopener,noreferrer");
   }
@@ -1783,7 +1864,7 @@
   function numberRaw(value){const n=Number(value||0);return Number.isFinite(n)?n:0}
 
   function setScanProgress(value,label,active=true){
-    const amount=clamp(Number(value)||0,0,100);$("scanProgress").classList.toggle("active",active);$("scanProgressFill").style.width=amount+"%";$("scanProgressValue").textContent=Math.round(amount)+"%";$("scanProgressLabel").textContent=label;
+    const amount=clamp(Number(value)||0,0,100);$("scanProgress").classList.toggle("active",active);$("scanProgressFill").style.width=amount+"%";$("scanProgressValue").textContent=Math.round(amount)+"%";$("scanProgressLabel").textContent=uiText(label);
   }
 
   function openCaseFile(){
@@ -1813,21 +1894,24 @@
     return {address:clean,rows,decimals,totalRaw,top10,largest,name:meta.name||master?.name||"UNKNOWN JETTON",symbol:meta.symbol||master?.symbol||"?",mintable:master?.mintable,admin:master?.admin_address||master?.admin||""};
   }
 
+  let lastScanData=null;
+
   function renderScan(data){
+    lastScanData=data;
     $("scanTop10").textContent=data.top10.toFixed(2)+"%";$("scanLargest").textContent=data.largest.toFixed(2)+"%";$("scanWallets").textContent=data.rows.length+(data.rows.length>=100?"+":"");
     let level="Low",title=tr("verdictLow"),copy=tr("verdictLowText");
     if(data.top10>=55){level="High";title=tr("verdictHigh");copy=tr("verdictHighText")}
     else if(data.top10>=28){level="Mid";title=tr("verdictMid");copy=tr("verdictMidText")}
-    const whale=data.largest>10;if(whale){title="WHALE ALERT";copy=`Largest visible wallet controls ${data.largest.toFixed(2)}%. Inspect it before inventing a verdict.`}
+    const whale=data.largest>10;if(whale){title=uiText("WHALE ALERT");copy=currentLang==="ru"?`Крупнейший видимый кошелёк контролирует ${data.largest.toFixed(2)}%. Проверь его, прежде чем выносить вердикт.`:`Largest visible wallet controls ${data.largest.toFixed(2)}%. Inspect it before inventing a verdict.`}
     $("scanVerdictBox").classList.toggle("whale",whale);$("scanVerdict").textContent=title;$("scanVerdictText").textContent=copy;
-    const supply=data.totalRaw/(10**data.decimals),admin=data.admin?"ADMIN PRESENT":"ADMIN NOT RETURNED",mint=data.mintable===true?"MINTABLE":data.mintable===false?"MINT DISABLED":"MINT UNKNOWN";
-    $("scanMeta").textContent=`${data.name} (${data.symbol}) · issued ${human(supply)} · ${admin} · ${mint} · concentration: ${level}`;
+    const supply=data.totalRaw/(10**data.decimals),admin=uiText(data.admin?"ADMIN PRESENT":"ADMIN NOT RETURNED"),mint=uiText(data.mintable===true?"MINTABLE":data.mintable===false?"MINT DISABLED":"MINT UNKNOWN"),levelText=currentLang==="ru"?({Low:"низкая",Mid:"средняя",High:"высокая"}[level]||level):level;
+    $("scanMeta").textContent=currentLang==="ru"?`${data.name} (${data.symbol}) · выпущено ${human(supply)} · ${admin} · ${mint} · концентрация: ${levelText}`:`${data.name} (${data.symbol}) · issued ${human(supply)} · ${admin} · ${mint} · concentration: ${levelText}`;
     $("scanResult").classList.add("show");
     setScanProgress(100,"CASE SEALED");
   }
 
   $("scanForm").addEventListener("submit",async event=>{
-    event.preventDefault();const button=$("scanBtn");openCaseFile();$("scanError").textContent="";$("scanResult").classList.remove("show");$("scanVerdictBox").classList.remove("whale");button.disabled=true;button.textContent="SCANNING…";setScanProgress(4,"VALIDATING CONTRACT");toast(tr("scanLoading"));
+    event.preventDefault();const button=$("scanBtn");openCaseFile();$("scanError").textContent="";$("scanResult").classList.remove("show");$("scanVerdictBox").classList.remove("whale");button.disabled=true;button.textContent=uiText("SCANNING…");setScanProgress(4,"VALIDATING CONTRACT");toast(tr("scanLoading"));
     try{renderScan(await scanJetton($("scanAddress").value))}
     catch(error){setScanProgress(100,"SCAN FAILED");$("scanError").textContent=error.message==="INVALID_ADDRESS"?tr("scanInvalid"):tr("scanFailed")}
     finally{button.disabled=false;button.textContent=tr("scan")}
@@ -1876,7 +1960,7 @@
   }
 
   function setDbState(ok){
-    const el=$("rankDbState");el.classList.toggle("error",!ok);el.innerHTML=`DATABASE<b>${escapeHtml(ok?tr("dbOnline"):tr("dbError"))}</b>`;
+    const el=$("rankDbState");el.classList.toggle("error",!ok);el.innerHTML=`${uiText("DATABASE")}<b>${escapeHtml(uiText(ok?tr("dbOnline"):tr("dbError")))}</b>`;
   }
 
   function renderCareer(){
@@ -1890,8 +1974,8 @@
     if(!rows.length){list.innerHTML=`<div class="rank-empty">${escapeHtml(tr("empty"))}</div>`;return}
     list.innerHTML=rows.slice(0,100).map((row,index)=>`
       <div class="rank-row${row.local?" me":""}">
-        <div class="rank-pos">${row.local?"LOCAL":"#"+(index+1)}</div>
-        <div class="rank-name">${escapeHtml(row.name||"ANON VEGETABLE")}</div>
+        <div class="rank-pos">${row.local?uiText("LOCAL"):"#"+(index+1)}</div>
+        <div class="rank-name">${escapeHtml(row.name||uiText("ANON VEGETABLE"))}</div>
         <div class="rank-country-code">${row.country?flagEmoji(row.country)+" "+escapeHtml(row.country):"—"}</div>
         <div class="rank-score">${Math.round(Number(row.score)||0).toLocaleString()}</div>
       </div>`).join("");

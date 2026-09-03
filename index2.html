@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
-  <meta name="theme-color" content="#060806" />
-  <meta name="description" content="No roadmap. No promises. Just a gun, a pool and receipts on-chain. Play LEEKed IN on GRAM." />
+  <meta name="theme-color" content="#050705" />
+  <meta name="description" content="GramLeek turns on-chain nonsense into games, evidence and memes. Enter LEEKed IN on GRAM." />
   <title>GramLeek — LEEKed IN</title>
   <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
   <style>
@@ -18,7 +18,6 @@
       --muted:#8f9a90;
       --dim:#5f695f;
       --acid:#c8ff28;
-      --signal:#ffe600;
       --hot:#ff2b91;
       --cold:#25d5ff;
       --warn:#ff9e1d;
@@ -43,10 +42,10 @@
       font-size:16px;
       line-height:1.5;
       background:
-        radial-gradient(circle at 8% 12%,rgba(255,230,0,.11),transparent 24rem),
-        radial-gradient(circle at 88% 25%,rgba(255,43,145,.10),transparent 30rem),
-        radial-gradient(circle at 53% 83%,rgba(37,213,255,.075),transparent 34rem),
-        linear-gradient(145deg,#050705 0%,#081008 44%,#050607 100%);
+        radial-gradient(circle at 13% 17%,rgba(200,255,40,.095),transparent 25rem),
+        radial-gradient(circle at 86% 28%,rgba(255,43,145,.085),transparent 28rem),
+        radial-gradient(circle at 57% 86%,rgba(37,213,255,.055),transparent 31rem),
+        var(--ink);
     }
     body::before{
       content:"";
@@ -97,7 +96,7 @@
     .nav-signal b{color:var(--acid);font-weight:500}
     .nav-actions{display:flex;align-items:center;gap:8px}
     .live-chip{display:flex;align-items:center;gap:7px;padding:9px 10px;color:var(--hot);font-size:.73rem;letter-spacing:.08em;border:1px solid rgba(255,43,145,.34);background:rgba(255,43,145,.035)}
-    .live-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.35}.live-chip.active::before{opacity:1;box-shadow:0 0 12px currentColor;animation:blink 1.2s steps(2,end) infinite}
+    .live-chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor;animation:blink 1.2s steps(2,end) infinite}
     .icon-btn,.lang-btn{
       min-width:42px;height:40px;padding:0 10px;border:1px solid var(--line);background:#080b09;color:var(--muted);cursor:pointer
     }
@@ -218,53 +217,10 @@
     .manifest{margin-top:18px;display:grid;grid-template-columns:1.12fr .88fr;gap:18px}.manifest-quote{padding:30px;border:1px solid var(--line-acid);background:linear-gradient(135deg,rgba(200,255,40,.055),transparent 55%),#070a08}.manifest-quote blockquote{margin:0;color:#fff;font-family:Anton,Impact,sans-serif;font-size:clamp(2.1rem,5vw,4rem);font-style:italic;line-height:1.02}.manifest-quote blockquote span{color:var(--acid)}.manifest-quote p{margin:17px 0 0;color:var(--muted);font-size:.8rem}.build-tape{padding:25px;border:1px solid var(--line);background:#070a08}.tape-row{display:grid;grid-template-columns:78px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:.75rem}.tape-row:first-of-type{margin-top:13px}.tape-row time{color:var(--hot)}.tape-row span{color:#b7c0b7}
     footer{display:flex;justify-content:space-between;gap:18px;padding:22px 0 max(30px,var(--safe-bottom));border-top:1px solid var(--line);color:var(--dim);font-size:.7rem}.footer-links{display:flex;gap:14px}.footer-links a{text-decoration:none}.footer-links a:hover{color:var(--acid)}
 
-    /* BUILD 0.9 // SHOWMAN PASS */
-    body.booting{overflow:hidden}
-    .boot-sequence{position:fixed;inset:0;z-index:11000;display:grid;place-items:center;padding:24px;background:#030503;color:var(--paper);transition:opacity .22s ease,visibility .22s ease}
-    .boot-sequence::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 46%,rgba(200,255,40,.13),transparent 31rem),repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.025) 4px 5px);pointer-events:none}
-    .boot-sequence.done{opacity:0;visibility:hidden}
-    .boot-core{position:relative;width:min(620px,100%);border:1px solid rgba(200,255,40,.46);background:rgba(5,8,5,.92);box-shadow:0 0 90px rgba(200,255,40,.08)}
-    .boot-head{display:flex;align-items:center;justify-content:space-between;padding:15px 17px;border-bottom:1px solid var(--line);font-family:Anton,Impact,sans-serif;font-size:1.25rem;letter-spacing:.06em}
-    .boot-head b{color:var(--acid);font-weight:400}.boot-skip{min-height:40px;padding:0 12px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
-    .boot-lines{display:grid;gap:9px;padding:22px 18px;color:#aab4aa;font-size:.76rem}.boot-lines span{display:flex;justify-content:space-between;gap:16px}.boot-lines b{color:var(--acid);font-weight:500}
-    .boot-bar{height:7px;margin:0 18px 20px;background:#111711;overflow:hidden}.boot-bar::after{content:"";display:block;width:100%;height:100%;background:linear-gradient(90deg,var(--cold),var(--signal),var(--acid));transform:translateX(-100%);animation:bootLoad 1.55s cubic-bezier(.7,0,.2,1) forwards}
-
-    .nav-direct{min-height:40px;display:flex;align-items:center;padding:0 11px;border:1px solid var(--line);color:#d5ddd4;text-decoration:none;font-size:.7rem;letter-spacing:.05em}.nav-direct.trade{border-color:rgba(255,230,0,.5);color:var(--signal)}.nav-direct:hover{border-color:var(--acid);color:var(--acid)}
-    #installBtn:not([hidden]){border-color:var(--signal);background:var(--signal);color:#070904;box-shadow:0 0 18px rgba(255,230,0,.12)}
-    .quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.quick-action{min-height:50px;display:flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid var(--line);color:#fff;text-decoration:none;font-size:.73rem;letter-spacing:.055em;text-align:center}.quick-action.primary{border-color:var(--signal);background:linear-gradient(105deg,var(--signal),var(--acid));color:#080a04;font-weight:500}.quick-action:hover{transform:translateY(-2px);border-color:var(--acid)}
-    .hero-line{border-left:3px solid var(--signal);padding-left:14px}.game-terminal{box-shadow:16px 16px 0 rgba(0,0,0,.5),0 0 72px rgba(200,255,40,.095),0 0 120px rgba(37,213,255,.035)}
-    .game-terminal::before{content:"REAL GAME // NO TRAILER";background:linear-gradient(100deg,var(--hot),#ff315d)}
-    .terminal-head{position:relative;background:linear-gradient(90deg,#050705,#0b100b 52%,#050705)}
-    .terminal-head::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--cold),var(--signal),transparent);opacity:.55}
-    #gameCanvas{filter:saturate(1.14) contrast(1.035)}
-    .hud-left,.hud-right,.hud-center,.hud-meter{border:1px solid rgba(255,255,255,.075);background:linear-gradient(135deg,rgba(3,5,4,.91),rgba(10,17,12,.74));box-shadow:inset 0 0 18px rgba(37,213,255,.035),0 4px 18px rgba(0,0,0,.3)}
-    .hud-left{clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%)}.hud-right{clip-path:polygon(12px 0,100% 0,100% 100%,0 100%,0 12px)}
-    .game-loader{position:absolute;inset:0;z-index:55;display:grid;place-items:center;background:rgba(2,4,3,.94);opacity:0;visibility:hidden;transition:.12s ease;pointer-events:none}.game-loader.show{opacity:1;visibility:visible}.loader-core{width:min(76%,420px);text-align:left}.loader-core b{display:block;color:var(--signal);font-family:Anton,Impact,sans-serif;font-size:clamp(2rem,6vw,3.6rem);font-weight:400;letter-spacing:.035em}.loader-core span{display:block;margin-top:5px;color:var(--cold);font-size:.7rem;letter-spacing:.11em}.loader-track{height:7px;margin-top:14px;background:#151b15;overflow:hidden}.loader-track::after{content:"";display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--hot),var(--signal),var(--acid));animation:loaderSweep .46s ease-out both}
-    #fullscreenBtn[aria-pressed="true"]{border-color:var(--acid);background:rgba(200,255,40,.11);color:var(--acid);box-shadow:0 0 18px rgba(200,255,40,.12)}
-
-    .live-impact{margin-top:18px;border:1px solid rgba(255,230,0,.35);background:linear-gradient(120deg,rgba(255,230,0,.045),transparent 34%),rgba(6,9,7,.9);box-shadow:0 0 55px rgba(255,230,0,.035)}
-    .impact-head{display:flex;align-items:end;justify-content:space-between;gap:18px;padding:20px 22px;border-bottom:1px solid var(--line)}.impact-head h2{margin:4px 0 0;font-family:Anton,Impact,sans-serif;font-size:clamp(2rem,4.2vw,3.6rem);font-style:italic;font-weight:400;line-height:.95}.impact-head p{max-width:480px;margin:0;color:var(--muted);font-size:.75rem;text-align:right}
-    .impact-grid{display:grid;grid-template-columns:repeat(4,1fr)}.impact-stat{min-width:0;padding:18px 20px;border-right:1px solid var(--line)}.impact-stat:last-child{border-right:0}.impact-stat span{display:block;color:var(--dim);font-size:.65rem;letter-spacing:.09em}.impact-stat strong{display:block;margin-top:6px;overflow:hidden;text-overflow:ellipsis;color:var(--paper);font-size:clamp(1.15rem,2.6vw,2rem);font-weight:500;white-space:nowrap}.impact-stat:nth-child(1) strong,.impact-stat:nth-child(2) strong{color:var(--signal)}.impact-stat:nth-child(3) strong{color:var(--cold)}.impact-stat:nth-child(4) strong{color:var(--acid)}
-    .impact-log{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;padding:14px 20px;border-top:1px solid var(--line);font-size:.69rem}.impact-log time{color:var(--hot)}.impact-log span{overflow:hidden;text-overflow:ellipsis;color:#9da79d;white-space:nowrap}.impact-log b{color:var(--acid);font-weight:500}
-
-    #gameOverScreen{width:min(92%,680px);max-height:94%;overflow-y:auto;padding:14px 16px}.trophy-preview{width:100%;height:auto;aspect-ratio:1200/630;margin-top:10px;border:1px solid rgba(200,255,40,.42);background:#050705}.run-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:9px}.run-badge{padding:5px 7px;border:1px solid rgba(255,230,0,.42);background:rgba(255,230,0,.05);color:var(--signal);font-size:.62rem;letter-spacing:.06em}
-    .screen-btn.x-share{border-color:#fff;background:#fff;color:#050705}.screen-btn.x-share:hover{border-color:var(--signal);background:var(--signal);color:#050705}
-    .screen-btn:disabled{opacity:.42;cursor:wait}
-
-    .case-meta{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:14px;color:var(--dim);font-size:.68rem}.case-meta b{color:var(--hot);font-weight:500}.scan-progress{display:none;margin-top:12px}.scan-progress.active{display:block}.scan-progress-copy{display:flex;justify-content:space-between;color:var(--dim);font-size:.66rem}.scan-progress-copy b{color:var(--cold);font-weight:500}.scan-progress-track{height:6px;margin-top:6px;background:#131814;overflow:hidden}.scan-progress-fill{width:0;height:100%;background:linear-gradient(90deg,var(--cold),var(--signal),var(--acid));box-shadow:0 0 16px rgba(37,213,255,.3);transition:width .28s ease}.verdict.whale{border-left-color:var(--danger);background:rgba(255,49,93,.09);box-shadow:inset 0 0 28px rgba(255,49,93,.05)}.verdict.whale b{color:var(--danger)}
-
-    .mobile-dock{display:none}
-    @media(hover:hover) and (pointer:fine){
-      .panel,.gramleaks,.live-impact{transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}.panel:hover,.live-impact:hover{transform:translate(-2px,-2px);border-color:rgba(255,230,0,.48);box-shadow:7px 7px 0 rgba(0,0,0,.32),0 0 28px rgba(255,230,0,.035)}.gramleaks:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 rgba(0,0,0,.32),0 0 34px rgba(255,43,145,.08)}
-      .proof-row:hover,.tape-row:hover,.rank-row:hover{background:linear-gradient(90deg,rgba(255,230,0,.05),transparent);transform:translateX(2px)}
-    }
-
     .toast{position:fixed;left:50%;bottom:max(20px,var(--safe-bottom));z-index:10001;max-width:min(90vw,520px);transform:translate(-50%,20px);padding:11px 14px;border:1px solid var(--acid);background:#071006;color:var(--acid);font-size:.76rem;opacity:0;pointer-events:none;transition:.2s ease}.toast.show{opacity:1;transform:translate(-50%,0)}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     #shareCardCanvas{display:none}
 
-    @keyframes bootLoad{to{transform:translateX(0)}}
-    @keyframes loaderSweep{from{transform:translateX(-100%)}to{transform:translateX(0)}}
     @keyframes blink{50%{opacity:.25}}
     @keyframes marquee{to{transform:translateX(-50%)}}
     @media(hover:hover) and (pointer:fine){.mobile-controls{display:none!important}}
@@ -302,8 +258,6 @@
       .game-terminal.game-fullscreen .joystick,.game-terminal.game-fullscreen .aim-pad{width:clamp(82px,25vw,116px);height:clamp(82px,25vw,116px);flex-basis:clamp(82px,25vw,116px)}
       .game-terminal.game-fullscreen .stick,.game-terminal.game-fullscreen .aim-stick{width:clamp(36px,10vw,44px);height:clamp(36px,10vw,44px)}
       .game-terminal.game-fullscreen .auto-fire-state{min-width:76px;padding:10px 7px}.game-terminal.game-fullscreen .auto-fire-state small{display:block}
-      .game-terminal.game-fullscreen.run-ended .mobile-controls{display:none}
-      .game-terminal.game-fullscreen.run-ended #gameOverScreen{position:fixed;left:50%;top:50%;z-index:120;width:min(94vw,680px);max-height:calc(100dvh - var(--safe-top) - var(--safe-bottom) - 18px);transform:translate(-50%,-50%)}
     }
     @media(orientation:landscape) and (max-height:520px) and (hover:none),(orientation:landscape) and (max-height:520px) and (pointer:coarse){
       .game-terminal.game-fullscreen .terminal-shell{display:grid;grid-template-columns:clamp(82px,12vw,104px) minmax(0,1fr) clamp(82px,12vw,104px);grid-template-rows:38px minmax(0,1fr)}
@@ -314,50 +268,21 @@
       .game-terminal.game-fullscreen .control-label{display:none}.game-terminal.game-fullscreen .joystick,.game-terminal.game-fullscreen .aim-pad{width:clamp(70px,20vh,86px);height:clamp(70px,20vh,86px);flex-basis:clamp(70px,20vh,86px)}
       .game-terminal.game-fullscreen .stick,.game-terminal.game-fullscreen .aim-stick{width:32px;height:32px}
       .game-terminal.game-fullscreen .auto-fire-state{grid-column:2;grid-row:1;align-self:start;justify-self:center;min-width:92px;margin-top:5px;padding:4px 8px;background:rgba(5,7,5,.84);pointer-events:none}.game-terminal.game-fullscreen .auto-fire-state small{display:none}
-      .game-terminal.game-fullscreen.run-ended .mobile-controls{display:none}.game-terminal.game-fullscreen.run-ended #gameOverScreen{position:fixed;left:50%;top:50%;z-index:120;width:min(74vw,590px);max-height:calc(100dvh - var(--safe-top) - var(--safe-bottom) - 10px);transform:translate(-50%,-50%);padding:8px}.game-terminal.game-fullscreen.run-ended .trophy-preview{max-height:190px}
     }
-    @media(max-width:1040px){.nav-direct{display:none}}
-    @media(max-width:840px){
-      .impact-head{align-items:flex-start}.impact-head p{max-width:360px}.impact-grid{grid-template-columns:1fr 1fr}.impact-stat:nth-child(2){border-right:0}.impact-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
-    }
-    @media(max-width:620px){
-      body{padding-bottom:calc(66px + var(--safe-bottom))}.content{padding-bottom:34px}.quick-actions{grid-template-columns:1fr 1fr}.quick-action{min-height:48px;padding-inline:8px;font-size:.68rem}
-      .impact-head{display:block;padding:17px 15px}.impact-head p{margin-top:9px;text-align:left}.impact-grid{grid-template-columns:1fr 1fr}.impact-stat{padding:14px 13px}.impact-stat strong{font-size:1.12rem}.impact-log{grid-template-columns:1fr;padding:12px 13px;gap:5px}.impact-log time{display:none}.impact-log span{white-space:normal}
-      #gameOverScreen{width:96%;max-height:96%;padding:10px}.trophy-preview{margin-top:7px}.run-badges{margin-top:7px}.screen-actions{position:relative;z-index:2}
-      .mobile-dock{position:fixed;left:0;right:0;bottom:0;z-index:9500;display:grid;grid-template-columns:repeat(4,1fr);min-height:calc(62px + var(--safe-bottom));padding:0 max(5px,var(--safe-right)) var(--safe-bottom) max(5px,var(--safe-left));border-top:1px solid rgba(255,230,0,.34);background:rgba(4,6,4,.96);backdrop-filter:blur(14px);box-shadow:0 -12px 34px rgba(0,0,0,.48)}
-      .mobile-dock a,.mobile-dock button{min-width:0;min-height:62px;display:grid;place-items:center;align-content:center;gap:3px;padding:5px 3px;border:0;border-right:1px solid var(--line);background:transparent;color:#c6cec5;text-decoration:none;font-size:.6rem;letter-spacing:.055em;cursor:pointer}.mobile-dock>*:last-child{border-right:0}.mobile-dock b{color:var(--acid);font-family:Anton,Impact,sans-serif;font-size:1rem;font-weight:400}.mobile-dock .trade{background:linear-gradient(135deg,var(--signal),var(--acid));color:#071006}.mobile-dock .trade b{color:#071006}.mobile-dock .copy b{color:var(--cold)}
-      html.game-lock .mobile-dock,body.game-lock .mobile-dock{display:none}.toast{bottom:calc(78px + var(--safe-bottom))}
-    }
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.live-chip::before,.ticker-track,.boot-bar::after,.loader-track::after{animation:none}.game-banner,.toast,.meter-fill,.supply-fill,.scan-progress-fill,.boot-sequence{transition:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.live-chip::before,.ticker-track{animation:none}.game-banner,.toast,.meter-fill,.supply-fill{transition:none}}
   </style>
 </head>
 <body>
-  <noscript><style>.boot-sequence{display:none!important}</style></noscript>
-  <div class="boot-sequence" id="bootScreen" role="status" aria-live="polite">
-    <div class="boot-core">
-      <div class="boot-head"><span>GRAMLEEK <b>BOOT_09</b></span><button class="boot-skip" id="bootSkip" type="button">SKIP</button></div>
-      <div class="boot-lines">
-        <span>LEEKed IN <b>READY</b></span>
-        <span>TON BURN WALLET <b>CONNECTING</b></span>
-        <span>GLOBAL RANKING <b>CONNECTING</b></span>
-        <span>GRAMLEAKS <b>READY</b></span>
-      </div>
-      <div class="boot-bar" aria-hidden="true"></div>
-    </div>
-  </div>
-
   <a class="skip-link" href="#play">Skip to game</a>
 
   <header class="shell site-nav">
     <a class="brand" href="#play" aria-label="GramLeek home">
       <span class="brand-orb" id="brandOrb"><img src="Logo.png" alt="" id="brandLogo" /><span class="brand-fallback">L</span></span>
-      <span class="brand-copy"><strong>GRAMLEEK</strong><span>GAME // PROOF // RECEIPTS</span></span>
+      <span class="brand-copy"><strong>GRAMLEEK</strong><span>PLAYABLE CULTURE ON GRAM</span></span>
     </a>
-    <div class="nav-signal">PUBLIC BUILD <b>0.9</b> // NOTHING TO HIDE</div>
+    <div class="nav-signal">PIRATE BUILD <b>0.8.2</b> // TRUST NOTHING</div>
     <div class="nav-actions">
-      <a class="nav-direct trade" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">TRADE</a>
-      <a class="nav-direct" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">CAFÉ</a>
-      <span class="live-chip" id="navLive">0 KILLS THIS RUN</span>
+      <span class="live-chip" id="navLive">RUG DEN LIVE</span>
       <button class="icon-btn" id="installBtn" type="button" aria-label="Add game to home screen" hidden>INSTALL</button>
       <button class="icon-btn" id="soundBtn" type="button" aria-label="Toggle sound">SOUND OFF</button>
       <div class="lang-switch" aria-label="Language">
@@ -370,30 +295,26 @@
   <main>
     <section class="shell hero" id="play">
       <div class="hero-copy">
-        <div class="build-stamp" id="heroStamp">NO ROADMAP // NO PROMISES</div>
+        <div class="build-stamp" id="heroStamp">NOT A VEGETABLE // STILL ALIVE</div>
         <h1><span>LEEKed</span><strong>IN</strong></h1>
-        <p class="hero-line" id="heroLine"><b>No roadmap. No promises.</b><br>Just a gun and a pool.</p>
+        <p class="hero-line" id="heroLine"><b>A meme with a playable alibi.</b> Protect the liquidity. Delete the scammers. Get fully LEEKed IN.</p>
         <div class="hero-tags" aria-label="Game features">
           <span id="tagOne">DAILY SEEDED RUN</span><span id="tagTwo">NO WALLET REQUIRED</span><span id="tagThree">1 VERIFIED KILL = 1 PENDING LEEK</span>
         </div>
         <div class="contract-mini">
           <b>LEEK CA</b>
           <code>EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw</code>
-          <button class="text-action" id="copyContract" type="button">COPY CA</button>
-        </div>
-        <div class="quick-actions" aria-label="Token links">
-          <a class="quick-action primary" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">TRADE ON DeDust →</a>
-          <a class="quick-action" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">LEEK CAFÉ →</a>
+          <button class="text-action" id="copyContract" type="button">COPY</button>
         </div>
       </div>
 
       <section class="game-terminal" id="gameTerminal" aria-label="LEEKed IN game">
         <div class="terminal-shell">
           <div class="terminal-head">
-            <div class="terminal-title"><b>CAM_01</b><span id="terminalStatus">DAILY RUN // AUTO-FIRE READY</span></div>
+            <div class="terminal-title"><b>CAM_01</b><span id="terminalStatus">DAILY DEN // SAME CHAOS FOR EVERYONE</span></div>
             <div class="terminal-actions">
               <button id="soundBtnGame" type="button">AUDIO</button>
-              <button id="fullscreenBtn" type="button" aria-pressed="false">FULLSCREEN ↗</button>
+              <button id="fullscreenBtn" type="button">FULLSCREEN ↗</button>
             </div>
           </div>
 
@@ -401,7 +322,6 @@
             <div class="playfield" id="playfield">
               <canvas id="gameCanvas" width="960" height="600" aria-label="Top-down action game. Move with WASD or left joystick, set the automatic firing direction with mouse or right pad."></canvas>
               <div class="game-overlay">
-              <div class="game-loader" id="gameLoader" aria-live="polite"><div class="loader-core"><b>INITIALIZING RUN</b><span>LOADING DAILY SEED // ARMING AUTO-FIRE</span><div class="loader-track"></div></div></div>
               <div class="hud" aria-hidden="true">
                 <div class="hud-left">
                   <div class="hud-row">SCORE <b id="hudScore">0</b></div>
@@ -438,12 +358,9 @@
                 <div class="screen-kicker" id="gameOverKicker">RUN AUTOPSY</div>
                 <h2 id="gameOverTitle">RUGGED.</h2>
                 <p id="gameOverText">The vegetable has fallen.</p>
-                <canvas class="trophy-preview" id="trophyPreview" width="1200" height="630" aria-label="Shareable run trophy"></canvas>
-                <div class="run-badges" id="runBadges" aria-label="Unlocked run badges"></div>
                 <div class="screen-actions">
                   <button class="screen-btn acid" id="restartBtn" type="button">RUN IT BACK →</button>
-                  <button class="screen-btn primary" id="shareBtn" type="button">SHARE TROPHY</button>
-                  <button class="screen-btn x-share" id="xShareBtn" type="button">POST ON X</button>
+                  <button class="screen-btn primary" id="shareBtn" type="button">SHARE AUTOPSY</button>
                   <button class="screen-btn" id="challengeBtn" type="button">COPY CHALLENGE</button>
                 </div>
               </div>
@@ -467,28 +384,14 @@
       </section>
     </section>
 
-    <div class="ticker" aria-label="Live GramLeek impact ticker"><div class="ticker-track" id="tickerTrack">THIS RUN: 0 KILLS → 0 PENDING LEEK&nbsp;&nbsp; ✦ &nbsp;&nbsp;BURN WALLET: CONNECTING&nbsp;&nbsp; ✦ &nbsp;&nbsp;</div></div>
-
-    <section class="shell live-impact" id="impact" aria-labelledby="impactTitle">
-      <div class="impact-head">
-        <div><div class="section-kicker acid">PROOF OF PLAY</div><h2 id="impactTitle">THE GAME LEAVES A RECEIPT.</h2></div>
-        <p>Kills are pending LEEK. A burn becomes real only when the disclosed wallet sends the public transaction.</p>
-      </div>
-      <div class="impact-grid">
-        <div class="impact-stat"><span>THIS RUN // KILLS</span><strong id="impactRunKills">0</strong></div>
-        <div class="impact-stat"><span>THIS RUN // PENDING</span><strong id="impactPendingBurn">0 LEEK</strong></div>
-        <div class="impact-stat"><span>ALL RECORDED KILLS</span><strong id="impactGlobalKills">CONNECTING</strong></div>
-        <div class="impact-stat"><span>LAST SEALED RUN</span><strong id="impactLastScore">NONE</strong></div>
-      </div>
-      <div class="impact-log"><time id="impactLogTime">—</time><span id="impactLogText"><b>WAITING FOR A RUN.</b> Nothing invented. Nothing pending.</span></div>
-    </section>
+    <div class="ticker" aria-label="GramLeek project ticker"><div class="ticker-track" id="tickerTrack">1 KILL = 1 PENDING LEEK&nbsp;&nbsp; ✦ &nbsp;&nbsp;15,000,000 SENT INTO THE VOID&nbsp;&nbsp; ✦ &nbsp;&nbsp;NO WALLET REQUIRED&nbsp;&nbsp; ✦ &nbsp;&nbsp;NO ROADMAP FANFICTION&nbsp;&nbsp; ✦ &nbsp;&nbsp;GAMEPLAY FIRST&nbsp;&nbsp; ✦ &nbsp;&nbsp;1 KILL = 1 PENDING LEEK&nbsp;&nbsp; ✦ &nbsp;&nbsp;15,000,000 SENT INTO THE VOID&nbsp;&nbsp; ✦ &nbsp;&nbsp;NO WALLET REQUIRED&nbsp;&nbsp; ✦ &nbsp;&nbsp;NO ROADMAP FANFICTION&nbsp;&nbsp; ✦ &nbsp;&nbsp;GAMEPLAY FIRST&nbsp;&nbsp; ✦ &nbsp;&nbsp;</div></div>
 
     <div class="shell content">
       <section class="section-grid" id="proof">
         <div class="panel acid">
           <div class="section-kicker acid">THE RECEIPT // ON-CHAIN</div>
           <h2 class="section-title" id="proofTitle">TRUST NOTHING.<br>CHECK EVERYTHING.</h2>
-          <p class="section-copy" id="proofCopy">Public wallets. Live burn balance. Links to the chain. <strong>Read it yourself.</strong></p>
+          <p class="section-copy" id="proofCopy">Project-controlled wallets are public. The burn address is read directly from TON. <strong>No mystery side-wallet theatre.</strong></p>
           <div class="proof-list">
             <div class="proof-row"><div class="proof-main"><div class="proof-name">DEV WALLET</div><a class="proof-address" href="https://tonviewer.com/UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn" target="_blank" rel="noopener noreferrer">UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn</a></div><div class="proof-value">50M · 5%</div></div>
             <div class="proof-row"><div class="proof-main"><div class="proof-name">COMMUNITY FUND</div><a class="proof-address" href="https://tonviewer.com/UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy" target="_blank" rel="noopener noreferrer">UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy</a></div><div class="proof-value">50M · 5%</div></div>
@@ -502,8 +405,8 @@
           <div class="supply-meter"><div class="supply-fill" id="burnFill"></div></div>
           <div class="status-line" id="supplyStatus"><b>&gt;</b> reading the void wallet…</div>
           <div class="link-row">
-            <a class="big-link primary" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">TRADE ON DeDust →</a>
-            <a class="big-link" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">LEEK CAFÉ →</a>
+            <a class="big-link primary" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">VIEW LEEK ON DEDUST →</a>
+            <a class="big-link" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">ENTER LEEK CAFÉ →</a>
           </div>
           <p class="fineprint">Gameplay kills are tracked separately. They become real burns only after a public batch transaction from a disclosed project wallet.</p>
         </div>
@@ -512,12 +415,11 @@
       <section class="gramleaks" id="gramleaks">
         <div class="gramleaks-inner">
           <div class="case-intro">
-            <div class="case-number">GL</div>
+            <div class="case-number">01</div>
             <div class="section-kicker">GRAMLEAKS // OPEN CASE FILE</div>
             <h2 class="section-title">PASTE THE CONTRACT.<br>READ THE CHAIN.</h2>
-            <p class="section-copy">Concentration, largest holder and admin state. <strong>Evidence first. Drama after.</strong></p>
-            <div class="case-meta"><span>FILE <b id="caseNumber">UNOPENED</b></span><span>UTC <b id="caseDate">—</b></span></div>
-            <ul class="case-points"><li>top-wallet concentration</li><li>largest visible position</li><li>admin and mint state</li></ul>
+            <p class="section-copy">A factual holder-distribution scan with an appropriately disrespectful interpretation. <strong>Not a scam verdict.</strong></p>
+            <ul class="case-points"><li>top-wallet concentration</li><li>largest visible position</li><li>mintability and admin state</li><li>zero accusations without evidence</li></ul>
           </div>
           <div class="scanner">
             <div class="section-kicker cold">QUICK DISTRIBUTION SCAN</div>
@@ -526,10 +428,6 @@
               <input class="scan-input" id="scanAddress" autocomplete="off" spellcheck="false" value="EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" placeholder="TON JETTON CONTRACT" />
               <button class="scan-btn" id="scanBtn" type="submit">OPEN CASE →</button>
             </form>
-            <div class="scan-progress" id="scanProgress" aria-live="polite">
-              <div class="scan-progress-copy"><span id="scanProgressLabel">WAITING</span><b id="scanProgressValue">0%</b></div>
-              <div class="scan-progress-track"><div class="scan-progress-fill" id="scanProgressFill"></div></div>
-            </div>
             <div class="scan-presets"><button class="scan-preset" id="scanLeek" type="button">USE $LEEK CONTRACT</button><span class="fineprint">Public TON Center data · 1 request/second without API key</span></div>
             <div class="scan-result" id="scanResult" aria-live="polite">
               <div class="scan-summary">
@@ -537,7 +435,7 @@
                 <div class="scan-stat"><span>LARGEST WALLET</span><b id="scanLargest">—</b></div>
                 <div class="scan-stat"><span>VISIBLE WALLETS</span><b id="scanWallets">—</b></div>
               </div>
-              <div class="verdict" id="scanVerdictBox"><b id="scanVerdict">CASE PENDING</b><span id="scanVerdictText">The chain has not testified yet.</span><small id="scanMeta">—</small></div>
+              <div class="verdict"><b id="scanVerdict">CASE PENDING</b><span id="scanVerdictText">The chain has not testified yet.</span><small id="scanMeta">—</small></div>
             </div>
             <div class="scan-error" id="scanError" role="alert"></div>
           </div>
@@ -565,20 +463,13 @@
       </section>
 
       <section class="manifest">
-        <div class="manifest-quote"><blockquote>WE'RE NOT A VEGETABLE. <span>WE'RE THE THING THAT EATS VEGETABLES.</span></blockquote><p>Game. Public wallets. Receipts. Everything else is noise.</p></div>
-        <div class="build-tape" id="builds"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 09</time><span>Proof of play, trophy cards, case files and combat juice</span></div><div class="tape-row"><time>BUILD 08.2</time><span>Landscape screen recovery + clear lower combat zone</span></div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
+        <div class="manifest-quote"><blockquote>GRAMLEEK TURNS <span>ON-CHAIN NONSENSE</span> INTO GAMES, EVIDENCE AND MEMES.</blockquote><p>Not the official token of someone else's app. Not financial infrastructure cosplay. A transparent community experiment with something people can actually play.</p></div>
+        <div class="build-tape"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 08.2</time><span>Landscape screen recovery + clear lower combat zone</span></div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>BUILD 07</time><span>Daily seed, challenge cards and Telegram hooks</span></div><div class="tape-row"><time>BUILD 06</time><span>Global ranking separated from insecure browser writes</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
       </section>
     </div>
   </main>
 
-  <footer class="shell"><span>GRAMLEEK // BUILT IN PUBLIC ON GRAM</span><span class="footer-links"><a href="#play">PLAY</a><a href="#proof">PROOF</a><a href="#gramleaks">GRAMLEAKS</a><a href="#ranking">RANK</a><a href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">CAFÉ</a></span></footer>
-
-  <nav class="mobile-dock" aria-label="Quick actions">
-    <a href="#play"><b>▶</b><span>PLAY</span></a>
-    <button class="copy" id="mobileCopyContract" type="button"><b>CA</b><span>COPY</span></button>
-    <a class="trade" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer"><b>↗</b><span>DeDust</span></a>
-    <a href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer"><b>☕</b><span>CAFÉ</span></a>
-  </nav>
+  <footer class="shell"><span>GRAMLEEK // EXPERIMENTAL MEMEFI ON GRAM</span><span class="footer-links"><a href="#play">PLAY</a><a href="#proof">PROOF</a><a href="#gramleaks">GRAMLEAKS</a><a href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">CAFÉ</a></span></footer>
 
   <canvas id="shareCardCanvas" width="1200" height="630" aria-hidden="true"></canvas>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -651,39 +542,23 @@
     });
   }
 
-  function setupBoot(){
-    const screen=$("bootScreen");if(!screen)return;
-    let alreadySeen=false,closed=false;
-    try{alreadySeen=sessionStorage.getItem("gramleek-boot-09")==="1"}catch(_){ }
-    const close=()=>{
-      if(closed)return;closed=true;
-      screen.classList.add("done");document.body.classList.remove("booting");
-      try{sessionStorage.setItem("gramleek-boot-09","1")}catch(_){ }
-      setTimeout(()=>screen.remove(),260);
-    };
-    if(reducedMotion||alreadySeen){screen.remove();return}
-    document.body.classList.add("booting");
-    $("bootSkip").addEventListener("click",close,{once:true});
-    setTimeout(close,1800);
-  }
-
   /* ===================== LANGUAGE ===================== */
   let currentLang=localStorage.getItem("gramleek-lang")==="ru"?"ru":"en";
   const TEXT={
     en:{
-      live:"KILLS THIS RUN",soundOn:"SOUND ON",soundOff:"SOUND OFF",audio:"AUDIO",fullscreen:"FULLSCREEN ↗",exitFullscreen:"EXIT FULLSCREEN ×",
+      live:"RUG DEN LIVE",soundOn:"SOUND ON",soundOff:"SOUND OFF",audio:"AUDIO",fullscreen:"FULLSCREEN ↗",exitFullscreen:"EXIT FULLSCREEN ×",
       moveControl:"MOVE",moveHint:"drag",aimControl:"AIM",aimHint:"set direction",aimAria:"Set firing direction",autoFire:"AUTO-FIRE",armed:"ARMED",rotate:"ROTATE FOR MORE ROOM",
-      stamp:"NO ROADMAP // NO PROMISES",hero:'<b>No roadmap. No promises.</b><br>Just a gun and a pool.',
+      stamp:"NOT A VEGETABLE // STILL ALIVE",hero:'<b>A meme with a playable alibi.</b> Protect the liquidity. Delete the scammers. Get fully LEEKed IN.',
       tag1:"DAILY SEEDED RUN",tag2:"NO WALLET REQUIRED",tag3:"1 VERIFIED KILL = 1 PENDING LEEK",
-      terminal:"DAILY RUN // AUTO-FIRE READY",startTitle:"PROTECT THE POOL",startCopy:'Three acts. One sleeping admin. No second chances.<br><b>Move:</b> WASD or left stick. <b>Aim:</b> mouse or right pad. Fire is automatic.',start:"ENTER THE DEN →",
-      proofTitle:"TRUST NOTHING.<br>CHECK EVERYTHING.",proofCopy:'Public wallets. Live burn balance. Links to the chain. <strong>Read it yourself.</strong>',
+      terminal:"DAILY DEN // SAME CHAOS FOR EVERYONE",startTitle:"PROTECT THE POOL",startCopy:'Three acts. One sleeping admin. No second chances.<br><b>Move:</b> WASD or left stick. <b>Aim:</b> mouse or right pad. Fire is automatic.',start:"ENTER THE DEN →",
+      proofTitle:"TRUST NOTHING.<br>CHECK EVERYTHING.",proofCopy:'Project-controlled wallets are public. The burn address is read directly from TON. <strong>No mystery side-wallet theatre.</strong>',
       scan:"OPEN CASE →",scanInput:"TON JETTON CONTRACT",rankName:"YOUR SIGNATURE",rankCountry:"COUNTRY",rankSubmit:"ADD VERIFIED RUN",finish:"Finish a run to unlock submission.",
       supplyLive:"void wallet synced. population adjusted.",supplyError:"TON API unavailable. scan paused.",
-      copy:"COPY CA",copied:"CA COPIED.",install:"INSTALL GAME",installed:"ADDED TO HOME SCREEN",
+      copy:"COPY",copied:"COPIED. THE CHAIN REMEMBERS.",install:"INSTALL",installed:"ADDED TO HOME SCREEN",
       paused:"PAUSED",resumed:"BACK INTO THE DEN",challenge:(name,score)=>`${name} scored ${score.toLocaleString()}. Beat the vegetable.`,
       rugged:"RUGGED.",cleared:"DEN CLEARED.",liquidityGone:"LIQUIDITY DRAINED.",
       runText:r=>`Kills: <b>${r.kills}</b> · Score: <b>${r.score.toLocaleString()}</b> · Time: <b>${formatTime(r.duration)}</b><br>Cause: <b>${escapeHtml(r.cause)}</b>`,
-      share:"SHARE TROPHY",challengeCopy:"COPY CHALLENGE",retry:"RUN IT BACK →",
+      share:"SHARE AUTOPSY",challengeCopy:"COPY CHALLENGE",retry:"RUN IT BACK →",
       runReady:r=>`Run sealed: ${r.score.toLocaleString()} pts · ${r.kills} kills. Add signature and country.`,
       shortName:"Signature needs at least 2 characters.",chooseCountry:"Choose a country first.",verifying:"Verifying the run…",verified:"Run accepted. Shame is now global.",verifyError:"Verification endpoint rejected or is not deployed. Result remains local and shareable.",
       dbOnline:"GLOBAL READ ONLINE",dbError:"GLOBAL READ OFFLINE",empty:"NO VERIFIED RUNS YET.",loading:"Loading the wall…",
@@ -695,19 +570,19 @@
       wave:"WAVE",locked:"FULLY LEEKED IN",bossWake:"ADMIN FINALLY WOKE UP",bossIncoming:"SLEEPING ADMIN // 64H LATER",victory:"LIQUIDITY SURVIVED",poolHit:"LIQUIDITY HIT",playerHit:"YOU GOT SHILLED"
     },
     ru:{
-      live:"УБИЙСТВ В RUN",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
+      live:"RUG DEN В ЭФИРЕ",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
       moveControl:"ДВИЖЕНИЕ",moveHint:"тяни",aimControl:"ПРИЦЕЛ",aimHint:"задай направление",aimAria:"Задать направление огня",autoFire:"АВТООГОНЬ",armed:"АКТИВЕН",rotate:"ПОВЕРНИ ДЛЯ БОЛЬШЕГО ОБЗОРА",
-      stamp:"БЕЗ ROADMAP // БЕЗ ОБЕЩАНИЙ",hero:'<b>Без roadmap. Без обещаний.</b><br>Только оружие и пул.',
+      stamp:"НЕ ОВОЩ // ВСЁ ЕЩЁ ЖИВ",hero:'<b>Мем с играбельным алиби.</b> Защищай ликвидность. Уничтожай скамеров. Стань полностью LEEKed IN.',
       tag1:"ЕЖЕДНЕВНЫЙ ОДИНАКОВЫЙ RUN",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"1 ПОДТВЕРЖДЁННОЕ УБИЙСТВО = 1 PENDING LEEK",
-      terminal:"DAILY RUN // АВТООГОНЬ ГОТОВ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
-      proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Публичные кошельки. Live burn balance. Ссылки на блокчейн. <strong>Проверь сам.</strong>',
+      terminal:"DAILY DEN // ОДИН ХАОС ДЛЯ ВСЕХ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
+      proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Кошельки проекта публичны. Burn-адрес читается напрямую из TON. <strong>Никакого театра с тайными кошельками.</strong>',
       scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ RUN",finish:"Заверши run, чтобы открыть отправку результата.",
       supplyLive:"void-кошелёк синхронизирован. supply обновлён.",supplyError:"TON API недоступен. скан приостановлен.",
-      copy:"КОПИРОВАТЬ CA",copied:"CA СКОПИРОВАН.",install:"УСТАНОВИТЬ ИГРУ",installed:"ДОБАВЛЕНО НА ЭКРАН",
+      copy:"КОПИРОВАТЬ",copied:"СКОПИРОВАНО. ЦЕПЬ ПОМНИТ.",install:"УСТАНОВИТЬ",installed:"ДОБАВЛЕНО НА ЭКРАН",
       paused:"ПАУЗА",resumed:"ОБРАТНО В ЛОГОВО",challenge:(name,score)=>`${name} набрал ${score.toLocaleString()}. Победи овощ.`,
       rugged:"ТЕБЯ ЗАРАГАЛИ.",cleared:"ЛОГОВО ЗАЧИЩЕНО.",liquidityGone:"ЛИКВИДНОСТЬ УКРАЛИ.",
       runText:r=>`Убийства: <b>${r.kills}</b> · Счёт: <b>${r.score.toLocaleString()}</b> · Время: <b>${formatTime(r.duration)}</b><br>Причина: <b>${escapeHtml(r.cause)}</b>`,
-      share:"ПОДЕЛИТЬСЯ TROPHY",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",
+      share:"ПОДЕЛИТЬСЯ ВСКРЫТИЕМ",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",
       runReady:r=>`Run сохранён: ${r.score.toLocaleString()} очков · ${r.kills} убийств. Добавь подпись и страну.`,
       shortName:"Минимум 2 символа.",chooseCountry:"Сначала выбери страну.",verifying:"Проверяем run…",verified:"Run принят. Позор стал глобальным.",verifyError:"Endpoint проверки отклонил запрос или ещё не развёрнут. Результат остаётся локальным и доступным для sharing.",
       dbOnline:"GLOBAL READ ONLINE",dbError:"GLOBAL READ OFFLINE",empty:"ПОКА НЕТ ПОДТВЕРЖДЁННЫХ RUNS.",loading:"Загружаем стену…",
@@ -720,44 +595,11 @@
     }
   };
   const tr=key=>TEXT[currentLang][key];
-  let liveBurned=15_000_000,burnDataReady=false,tickerSignature="";
+  let liveBurned=15_000_000;
 
   function renderTicker(){
-    const kills=Number(state?.kills)||0,pending=Number(state?.pendingBurn)||0,total=Number(globalStats?.totalBurned)||0,last=lastImpactRun;
-    const items=currentLang==="ru"?[
-      `ЭТОТ RUN: ${kills} УБИЙСТВ → ${pending} PENDING LEEK`,
-      burnDataReady?`${human(liveBurned)} СГОРЕЛО ON-CHAIN`:"BURN WALLET: ПОДКЛЮЧЕНИЕ",
-      globalDataReady?`ВСЕ RUNS: ${human(total)} УБИЙСТВ`:"GLOBAL RUNS: ПОДКЛЮЧЕНИЕ",
-      last?`ПОСЛЕДНИЙ RUN: ${Math.round(Number(last.score)||0).toLocaleString()} SCORE · ${Math.round(Number(last.kills)||0)} KILLS`:"ПОСЛЕДНИЙ RUN: НЕТ"
-    ]:[
-      `THIS RUN: ${kills} KILLS → ${pending} PENDING LEEK`,
-      burnDataReady?`${human(liveBurned)} BURNED ON-CHAIN`:"BURN WALLET: CONNECTING",
-      globalDataReady?`ALL RUNS: ${human(total)} RECORDED KILLS`:"GLOBAL RUNS: CONNECTING",
-      last?`LAST RUN: ${Math.round(Number(last.score)||0).toLocaleString()} SCORE · ${Math.round(Number(last.kills)||0)} KILLS`:"LAST RUN: NONE"
-    ];
-    const signature=items.join("|");if(signature===tickerSignature)return;tickerSignature=signature;
-    const loop=[...items,...items];
+    const items=tr("ticker")(liveBurned),loop=[...items,...items];
     $("tickerTrack").textContent=loop.join("\u00a0\u00a0 ✦ \u00a0\u00a0")+"\u00a0\u00a0 ✦ \u00a0\u00a0";
-  }
-
-  function renderImpact(){
-    const kills=Number(state?.kills)||0,pending=Number(state?.pendingBurn)||0,last=lastImpactRun;
-    $("impactRunKills").textContent=kills.toLocaleString();
-    $("impactPendingBurn").textContent=pending.toLocaleString()+" LEEK";
-    $("impactGlobalKills").textContent=globalDataReady?Math.round(Number(globalStats.totalBurned)||0).toLocaleString():"CONNECTING";
-    $("impactLastScore").textContent=last?Math.round(last.score).toLocaleString():"NONE";
-    $("navLive").textContent=`${kills.toLocaleString()} ${tr("live")}`;
-    $("navLive").classList.toggle("active",!!state?.running&&!state?.ended);
-    if(last){
-      const stamp=new Date(Number(last.startedAt)||Date.now()).toISOString();
-      $("impactLogTime").textContent=stamp.slice(0,10)+" "+stamp.slice(11,19)+" UTC";
-      const hash=last.eventHash?last.eventHash.slice(0,12).toUpperCase():"LOCAL";
-      $("impactLogText").innerHTML=`<b>RUN ${escapeHtml(hash)}</b> · ${Math.round(last.score).toLocaleString()} SCORE · ${last.kills} KILLS · ${last.pool}% LIQUIDITY`;
-    }else{
-      $("impactLogTime").textContent="—";
-      $("impactLogText").innerHTML="<b>WAITING FOR A RUN.</b> Nothing invented. Nothing pending.";
-    }
-    renderTicker();
   }
 
   function setLanguage(lang){
@@ -766,6 +608,7 @@
     localStorage.setItem("gramleek-lang",currentLang);
     $("langEn").classList.toggle("active",currentLang==="en");
     $("langRu").classList.toggle("active",currentLang==="ru");
+    $("navLive").textContent=tr("live");
     $("soundBtn").textContent=audioEnabled?tr("soundOn"):tr("soundOff");
     $("soundBtnGame").textContent=tr("audio");
     $("fullscreenBtn").textContent=gameFullscreen?tr("exitFullscreen"):tr("fullscreen");
@@ -785,7 +628,7 @@
     $("copyContract").textContent=tr("copy");$("installBtn").textContent=tr("install");
     $("restartBtn").textContent=tr("retry");$("shareBtn").textContent=tr("share");$("challengeBtn").textContent=tr("challengeCopy");
     if(challengeData)renderChallengeCallout();
-    renderImpact();refreshHud();renderRanking();
+    renderTicker();refreshHud();renderRanking();
   }
 
   $("langEn").addEventListener("click",()=>setLanguage("en"));
@@ -835,7 +678,6 @@
   $("brandLogo").addEventListener("error",()=>$("brandOrb").classList.add("missing"));
   if($("brandLogo").complete&&!$("brandLogo").naturalWidth)$("brandOrb").classList.add("missing");
   $("copyContract").addEventListener("click",()=>copyText(CONFIG.contract,tr("copied")));
-  $("mobileCopyContract").addEventListener("click",()=>copyText(CONFIG.contract,tr("copied")));
 
   /* ===================== AUDIO ===================== */
   let audioEnabled=localStorage.getItem("leeked-audio")==="1";
@@ -872,14 +714,14 @@
 
   function sfx(name){
     if(!audioEnabled)return;
-    if(name==="shoot"){tone(145,.052,"square",.018,120)}
-    else if(name==="hit"){noise(.035,.012);tone(82,.055,"sawtooth",.025,-42)}
-    else if(name==="kill"){noise(.075,.026);tone(78,.12,"sine",.045,-28);tone(320,.085,"square",.032,250);setTimeout(()=>tone(690,.06,"square",.016,-160),32)}
-    else if(name==="hurt"){noise(.15,.065);tone(58,.22,"sawtooth",.045,-24)}
-    else if(name==="pool"){tone(164,.18,"triangle",.045,-112);noise(.09,.022)}
-    else if(name==="locked"){tone(150,.15,"sawtooth",.045,220);setTimeout(()=>tone(390,.22,"square",.032,420),80)}
-    else if(name==="boss"){noise(.18,.025);tone(42,.62,"sawtooth",.065,22)}
-    else if(name==="win"){[196,294,440,740].forEach((f,i)=>setTimeout(()=>tone(f,.17,"square",.032,75),i*85))}
+    if(name==="shoot"){tone(155,.045,"square",.012,90)}
+    else if(name==="hit"){tone(95,.035,"sawtooth",.018,-35)}
+    else if(name==="kill"){tone(310,.07,"square",.025,220);setTimeout(()=>tone(620,.05,"square",.012,-120),28)}
+    else if(name==="hurt"){noise(.12,.05);tone(70,.18,"sawtooth",.035,-30)}
+    else if(name==="pool"){tone(185,.15,"triangle",.035,-100)}
+    else if(name==="locked"){tone(180,.12,"sawtooth",.035,180);setTimeout(()=>tone(360,.18,"square",.025,360),90)}
+    else if(name==="boss"){tone(48,.55,"sawtooth",.05,18)}
+    else if(name==="win"){[220,330,440,660].forEach((f,i)=>setTimeout(()=>tone(f,.15,"square",.025,60),i*90))}
   }
 
   function toggleAudio(){
@@ -899,14 +741,13 @@
       const data=await response.json(),rows=data.jetton_wallets||data.wallets||[];
       const burned=Number(rows[0]?.balance||0)/(10**CONFIG.decimals);
       const effective=Math.max(0,CONFIG.totalSupply-burned),pct=burned/CONFIG.totalSupply*100;
-      liveBurned=burned;burnDataReady=true;renderImpact();
+      liveBurned=burned;renderTicker();
       $("effectiveSupply").textContent=human(effective)+" LEEK";
       $("burnPercent").textContent=pct.toFixed(2)+"% BURNED";
       $("burnWalletAmount").textContent=human(burned)+" · "+pct.toFixed(2)+"%";
       $("burnFill").style.width=clamp(pct,0,100)+"%";
       status.className="status-line";status.innerHTML=`<b>&gt;</b> ${escapeHtml(tr("supplyLive"))}`;
     }catch(error){
-      burnDataReady=false;renderImpact();
       $("effectiveSupply").textContent="—";$("burnPercent").textContent="—";$("burnWalletAmount").textContent="—";
       status.className="status-line error";status.textContent=tr("supplyError");
     }
@@ -928,7 +769,6 @@
 
   async function enterFullscreen(){
     gameFullscreen=true;gameTerminal.classList.add("game-fullscreen");document.documentElement.classList.add("game-lock");document.body.classList.add("game-lock");
-    $("fullscreenBtn").setAttribute("aria-pressed","true");
     try{
       if(isTelegramMiniApp&&tg?.requestFullscreen)tg.requestFullscreen();
       else{
@@ -936,18 +776,17 @@
         const result=fn?.call(gameTerminal);if(result?.then)await result;
       }
     }catch(_){ }
-    setLanguage(currentLang);toast("FULLSCREEN ENGAGED");requestAnimationFrame(fitGameCanvas);setTimeout(fitGameCanvas,140);
+    setLanguage(currentLang);requestAnimationFrame(fitGameCanvas);setTimeout(fitGameCanvas,140);
   }
 
   async function exitFullscreen(){
     gameFullscreen=false;gameTerminal.classList.remove("game-fullscreen");document.documentElement.classList.remove("game-lock");document.body.classList.remove("game-lock");
-    $("fullscreenBtn").setAttribute("aria-pressed","false");
     try{
       if(isTelegramMiniApp&&tg?.exitFullscreen)tg.exitFullscreen();
       else if(document.fullscreenElement&&document.exitFullscreen)await document.exitFullscreen();
       else if(document.webkitFullscreenElement&&document.webkitExitFullscreen)document.webkitExitFullscreen();
     }catch(_){ }
-    fitGameCanvas();setLanguage(currentLang);toast("RETURNED TO PAGE");
+    fitGameCanvas();setLanguage(currentLang);
   }
 
   $("fullscreenBtn").addEventListener("click",()=>gameFullscreen?exitFullscreen():enterFullscreen());
@@ -955,7 +794,7 @@
   addEventListener("orientationchange",()=>{if(gameFullscreen){setTimeout(fitGameCanvas,120);setTimeout(fitGameCanvas,420)}setTimeout(renderAimRest,160)});
   if(isTelegramMiniApp){
     tg.onEvent?.("fullscreenChanged",()=>{
-      if(gameFullscreen&&!tg.isFullscreen){gameFullscreen=false;gameTerminal.classList.remove("game-fullscreen");document.documentElement.classList.remove("game-lock");document.body.classList.remove("game-lock");$("fullscreenBtn").setAttribute("aria-pressed","false");setLanguage(currentLang)}
+      if(gameFullscreen&&!tg.isFullscreen){gameFullscreen=false;gameTerminal.classList.remove("game-fullscreen");document.documentElement.classList.remove("game-lock");document.body.classList.remove("game-lock");setLanguage(currentLang)}
       requestAnimationFrame(fitGameCanvas);
     });
     tg.onEvent?.("fullscreenFailed",()=>requestAnimationFrame(fitGameCanvas));
@@ -1073,8 +912,7 @@
     enemies:[],bullets:[],enemyBullets:[],particles:[],decals:[],floaters:[],rugZones:[],eventLog:[],lastBeat:0
   };
 
-  let lastFrame=performance.now(),lastCompletedRun=null,lastImpactRun=null,runProofPending=false,runSubmitted=false,gameStartPending=false;
-  try{const saved=JSON.parse(localStorage.getItem("leeked-last-run")||"null");lastImpactRun=saved&&Number.isFinite(Number(saved.score))&&Number.isFinite(Number(saved.kills))?saved:null}catch(_){lastImpactRun=null}
+  let lastFrame=performance.now(),lastCompletedRun=null,runProofPending=false,runSubmitted=false;
   const keys=Object.create(null);
   const mouse={x:W/2,y:H/2};
   const joy={x:0,y:0};
@@ -1148,24 +986,16 @@
     aimVector={x:0,y:-1};aimSource="vector";requestAnimationFrame(renderAimRest);
     lastCompletedRun=null;runProofPending=false;runSubmitted=false;
     $("rankSubmit").disabled=true;$("rankStatus").className="rank-status";$("rankStatus").textContent=tr("finish");
-    gameTerminal.classList.remove("run-ended");$("gameOverScreen").classList.add("hidden");$("pauseScreen").classList.add("hidden");
+    $("gameOverScreen").classList.add("hidden");$("pauseScreen").classList.add("hidden");
     refreshHud();
   }
 
-  async function beginGame(){
-    if(gameStartPending)return;gameStartPending=true;
-    const loader=$("gameLoader"),startButton=$("startBtn"),restartButton=$("restartBtn");
-    startButton.disabled=true;restartButton.disabled=true;loader.classList.add("show");
-    try{
-      if(coarsePointer&&!gameFullscreen)await enterFullscreen();
-      await delay(reducedMotion?40:480);
-      resetGame();ensureAudio();state.running=true;state.phase="between";state.startedAt=Date.now();
-      $("startScreen").classList.add("hidden");
-      try{if(isTelegramMiniApp){tg.disableVerticalSwipes?.();if(gameFullscreen&&globalThis.screen?.orientation?.type?.startsWith("landscape"))tg.lockOrientation?.()}}catch(_){ }
-      startWave(0);haptic("medium");logEvent("start",state.seed);renderImpact();
-    }finally{
-      loader.classList.remove("show");startButton.disabled=false;restartButton.disabled=false;gameStartPending=false;
-    }
+  function beginGame(){
+    if(coarsePointer&&!gameFullscreen)enterFullscreen();
+    resetGame();ensureAudio();state.running=true;state.phase="between";state.startedAt=Date.now();
+    $("startScreen").classList.add("hidden");
+    try{if(isTelegramMiniApp){tg.disableVerticalSwipes?.();if(gameFullscreen&&globalThis.screen?.orientation?.type?.startsWith("landscape"))tg.lockOrientation?.()}}catch(_){ }
+    startWave(0);haptic("medium");logEvent("start",state.seed);
   }
 
   function showBanner(text,duration=850){
@@ -1178,13 +1008,11 @@
   }
 
   function burst(x,y,color,count=10,force=120){
-    const scaled=reducedMotion?Math.ceil(count*.35):Math.ceil(count*1.65);
+    const scaled=reducedMotion?Math.ceil(count*.45):count;
     for(let i=0;i<scaled;i++){
       const angle=Math.random()*Math.PI*2,speed=25+Math.random()*force;
-      const life=.38+Math.random()*.72;
-      state.particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:1.8+Math.random()*4.8,life,maxLife:life,color,shape:i%3,rot:Math.random()*Math.PI,spin:(Math.random()-.5)*9,gravity:18+Math.random()*52,drag:.035+Math.random()*.08});
+      state.particles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:1.5+Math.random()*3.2,life:.3+Math.random()*.55,maxLife:.85,color});
     }
-    if(state.particles.length>520)state.particles.splice(0,state.particles.length-520);
   }
 
   function nearestEnemy(){
@@ -1231,7 +1059,7 @@
       return false;
     }
     const actual=cabalShielding(enemy)&&enemy.type!=="cabal"?damage*.45:damage;
-    enemy.hp-=actual;enemy.hit=.11;state.hits++;state.hitStop=Math.max(state.hitStop,state.lockedTime>0?.048:.028);state.shake=Math.max(state.shake,3.4);burst(bullet.x,bullet.y,enemy.color,8,92);sfx("hit");
+    enemy.hp-=actual;enemy.hit=.09;state.hits++;state.hitStop=Math.max(state.hitStop,state.lockedTime>0?.032:.018);state.shake=Math.max(state.shake,2.6);burst(bullet.x,bullet.y,enemy.color,5,70);sfx("hit");
     if(actual<damage)addFloater(enemy.x,enemy.y-24,"CABAL SHIELD","#23cbbb",10);
     if(enemy.hp<=0){killEnemy(enemy);return true}
     return false;
@@ -1246,7 +1074,7 @@
     state.decals.push({x:enemy.x,y:enemy.y,r:enemy.r*(.7+Math.random()*.65),rot:Math.random()*Math.PI,color:enemy.color,alpha:.18});
     if(state.decals.length>90)state.decals.shift();
     burst(enemy.x,enemy.y,enemy.color,enemy.type==="admin"?36:15,enemy.type==="admin"?230:150);addFloater(enemy.x,enemy.y-15,`+${points}`,"#c8ff28",enemy.type==="admin"?23:15);
-    state.hitStop=enemy.type==="admin"?.23:.078;state.shake=enemy.type==="admin"?18:7.2;state.flash=enemy.type==="admin"?.3:.1;sfx("kill");haptic(enemy.type==="admin"?"success":"light");logEvent("kill",enemy.type);
+    state.hitStop=enemy.type==="admin"?.16:.055;state.shake=enemy.type==="admin"?13:5.5;state.flash=enemy.type==="admin"?.24:.07;sfx("kill");haptic(enemy.type==="admin"?"success":"light");logEvent("kill",enemy.type);
     if(state.locked>=100&&state.lockedTime<=0)activateLockedIn();
     if(enemy.type==="admin"){state.score+=Math.round(state.pool.hp*25);setTimeout(()=>endGame(true,tr("victory")),420)}
     refreshHud();
@@ -1418,7 +1246,7 @@
     }
 
     for(let i=state.particles.length-1;i>=0;i--){
-      const p=state.particles[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=(p.gravity||0)*dt;p.rot=(p.rot||0)+(p.spin||0)*dt;const drag=p.drag||.045;p.vx*=Math.pow(drag,dt);p.vy*=Math.pow(drag,dt);p.life-=dt;if(p.life<=0)state.particles.splice(i,1);
+      const p=state.particles[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=Math.pow(.045,dt);p.vy*=Math.pow(.045,dt);p.life-=dt;if(p.life<=0)state.particles.splice(i,1);
     }
     for(let i=state.floaters.length-1;i>=0;i--){const f=state.floaters[i];f.y-=26*dt;f.life-=dt;if(f.life<=0)state.floaters.splice(i,1)}
 
@@ -1558,13 +1386,7 @@
   }
 
   function drawParticlesAndText(){
-    for(const p of state.particles){
-      const alpha=clamp(p.life/p.maxLife,0,1);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot||0);ctx.globalAlpha=alpha;ctx.fillStyle=p.color;ctx.shadowColor=p.color;ctx.shadowBlur=p.r>4?8:3;
-      if(p.shape===1)ctx.fillRect(-p.r*.45,-p.r*1.5,p.r*.9,p.r*3);
-      else if(p.shape===2){ctx.beginPath();ctx.moveTo(0,-p.r*1.5);ctx.lineTo(p.r,p.r);ctx.lineTo(-p.r,p.r);ctx.closePath();ctx.fill()}
-      else{ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill()}
-      ctx.restore();
-    }
+    for(const p of state.particles){ctx.globalAlpha=clamp(p.life/p.maxLife,0,1);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}
     ctx.globalAlpha=1;
     for(const f of state.floaters){ctx.globalAlpha=clamp(f.life/f.maxLife,0,1);ctx.fillStyle=f.color;ctx.font=`${f.size}px Anton, Impact`;ctx.textAlign="center";ctx.fillText(f.text,f.x,f.y)}ctx.globalAlpha=1;ctx.textAlign="left";
   }
@@ -1575,7 +1397,7 @@
   }
 
   function drawGame(){
-    const shake=reducedMotion?0:state.shake,sx=shake>0?(Math.random()-.5)*shake:0,sy=shake>0?(Math.random()-.5)*shake:0;
+    const sx=state.shake>0?(Math.random()-.5)*state.shake:0,sy=state.shake>0?(Math.random()-.5)*state.shake:0;
     ctx.save();ctx.translate(sx,sy);drawFloor();drawDecals();drawRugZones();drawWalls();drawPool();
     for(const enemy of state.enemies)drawEnemy(enemy);drawProjectiles();drawPlayer();drawParticlesAndText();drawBossBar();ctx.restore();
 
@@ -1591,7 +1413,6 @@
     $("hudBurn").textContent=state.pendingBurn+" LEEK";$("hudActLabel").textContent=tr("actLabel")[state.actIndex]||tr("actLabel")[0];$("hudAct").textContent=tr("act")[state.actIndex]||tr("act")[0];
     $("hudLiquidity").textContent=Math.round(state.pool.hp)+"%";$("liquidityFill").style.width=clamp(state.pool.hp,0,100)+"%";$("hudLocked").textContent=Math.round(state.locked)+"%";$("lockedFill").style.width=clamp(state.locked,0,100)+"%";
     $("statKills").textContent=state.kills;$("statCombo").textContent=state.bestCombo+"X";$("statAccuracy").textContent=state.shots?Math.round(state.hits/state.shots*100)+"%":"0%";$("statTime").textContent=formatTime(state.elapsed);
-    renderImpact();
   }
 
   function frame(now){
@@ -1611,26 +1432,13 @@
     const run=lastCompletedRun;if(!run)return;runProofPending=true;$("rankSubmit").disabled=true;
     run.eventHash=await digestRun(run);
     if(lastCompletedRun!==run)return;
-    localStorage.setItem("leeked-last-run",JSON.stringify(run));lastImpactRun=run;renderShareCard(run,$("trophyPreview"));renderImpact();
-    runProofPending=false;$("rankSubmit").disabled=false;$("shareBtn").disabled=false;$("xShareBtn").disabled=false;
+    runProofPending=false;$("rankSubmit").disabled=false;
     $("rankStatus").className="rank-status good";$("rankStatus").textContent=tr("runReady")(run);
     renderRanking();
   }
 
-  function renderRunBadges(run){
-    const badges=[];
-    if(run.kills>=1)badges.push("FIRST KILL");
-    if(run.combo>=10)badges.push("COMBO X10");
-    if(run.accuracy>=70&&run.shots>=10)badges.push("70%+ ACCURACY");
-    if(run.pool===100)badges.push("POOL UNTOUCHED");
-    if(run.boss)badges.push("SURVIVED ADMIN 64H");
-    if(!badges.length)badges.push("RUN RECORDED");
-    $("runBadges").innerHTML=badges.map(label=>`<span class="run-badge">${escapeHtml(label)}</span>`).join("");
-  }
-
   function endGame(victory,cause){
     if(state.ended)return;state.ended=true;state.running=false;state.phase="ended";state.victory=!!victory;state.cause=cause||state.cause;
-    gameTerminal.classList.add("run-ended");
     stopAim();resetJoyVisual();
     if(victory){state.score+=1500;sfx("win")}else sfx("hurt");
     try{if(isTelegramMiniApp){tg.enableVerticalSwipes?.();tg.unlockOrientation?.()}}catch(_){ }
@@ -1640,9 +1448,8 @@
       runId:state.runId,seed:state.seed,day:dailyCode,startedAt:state.startedAt,duration:Number(duration.toFixed(2)),score:Math.max(0,Math.round(state.score)),kills:state.kills,combo:state.bestCombo,
       shots:state.shots,hits:state.hits,accuracy:state.shots?Math.round(state.hits/state.shots*100):0,pool:Math.round(state.pool.hp),boss:victory,cause:state.cause,eventHash:""
     };
-    lastImpactRun=lastCompletedRun;localStorage.setItem("leeked-last-run",JSON.stringify(lastCompletedRun));$("shareBtn").disabled=true;$("xShareBtn").disabled=true;
+    localStorage.setItem("leeked-last-run",JSON.stringify(lastCompletedRun));
     const screen=$("gameOverScreen");$("gameOverKicker").textContent=victory?tr("victory"):"RUN AUTOPSY";$("gameOverTitle").textContent=victory?tr("cleared"):state.pool.hp<=0?tr("liquidityGone"):tr("rugged");$("gameOverText").innerHTML=tr("runText")(lastCompletedRun);screen.classList.remove("hidden");
-    renderShareCard(lastCompletedRun,$("trophyPreview"));renderRunBadges(lastCompletedRun);renderImpact();
     if(challengeData&&lastCompletedRun.score>challengeData.score){setTimeout(()=>showBanner("CHALLENGE DESTROYED",1250),120)}
     sealRun().catch(()=>{$("rankStatus").className="rank-status error";$("rankStatus").textContent=tr("verifyError")});refreshHud();
   }
@@ -1710,7 +1517,7 @@
   $("startBtn").addEventListener("click",beginGame);$("restartBtn").addEventListener("click",beginGame);$("resumeBtn").addEventListener("click",resumeGame);
 
   function handleBrowserFullscreenChange(){
-    if(gameFullscreen&&!document.fullscreenElement&&!document.webkitFullscreenElement&&!isTelegramMiniApp){gameFullscreen=false;gameTerminal.classList.remove("game-fullscreen");document.documentElement.classList.remove("game-lock");document.body.classList.remove("game-lock");$("fullscreenBtn").setAttribute("aria-pressed","false");fitGameCanvas();setLanguage(currentLang)}
+    if(gameFullscreen&&!document.fullscreenElement&&!document.webkitFullscreenElement&&!isTelegramMiniApp){gameFullscreen=false;gameTerminal.classList.remove("game-fullscreen");document.documentElement.classList.remove("game-lock");document.body.classList.remove("game-lock");fitGameCanvas();setLanguage(currentLang)}
   }
   document.addEventListener("fullscreenchange",handleBrowserFullscreenChange);
   document.addEventListener("webkitfullscreenchange",handleBrowserFullscreenChange);
@@ -1731,8 +1538,8 @@
     if(line)c.fillText(line,x,lineY);return lineY;
   }
 
-  function renderShareCard(run,card=$("shareCardCanvas")){
-    const c=card.getContext("2d");
+  function renderShareCard(run){
+    const card=$("shareCardCanvas"),c=card.getContext("2d");
     c.clearRect(0,0,card.width,card.height);c.fillStyle="#050705";c.fillRect(0,0,card.width,card.height);
     let glow=c.createRadialGradient(960,120,20,960,120,520);glow.addColorStop(0,run.boss?"rgba(200,255,40,.24)":"rgba(255,43,145,.25)");glow.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=glow;c.fillRect(440,0,760,630);
     c.strokeStyle="rgba(200,255,40,.10)";c.lineWidth=1;for(let x=0;x<1200;x+=42){c.beginPath();c.moveTo(x,0);c.lineTo(x,630);c.stroke()}for(let y=0;y<630;y+=42){c.beginPath();c.moveTo(0,y);c.lineTo(1200,y);c.stroke()}
@@ -1745,8 +1552,7 @@
     c.fillStyle="#ff9e1d";c.font="58px Anton, Impact";c.fillText(formatTime(run.duration),555,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText("SURVIVAL",555,337);
     c.fillStyle="#25d5ff";c.font="58px Anton, Impact";c.fillText(run.pool+"%",805,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText("LIQUIDITY",805,337);
     c.fillStyle="#8f9a90";c.font="20px IBM Plex Mono, monospace";c.fillText("CAUSE OF DEATH / FINAL WITNESS",66,405);c.fillStyle="#f3f6ed";c.font="38px Anton, Impact";cardText(c,run.cause,66,450,760,43);
-    const runStamp=new Date(Number(run.startedAt)||Date.now()).toISOString().slice(0,19).replace("T"," "),runHash=run.eventHash?run.eventHash.slice(0,12).toUpperCase():"SEALING";
-    c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText("BEAT THIS VEGETABLE →",66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(`RUN ${runHash} · ${runStamp} UTC`,66,582);
+    c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText("BEAT THIS VEGETABLE →",66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(`DAILY CASE ${run.day} · SEED ${run.seed}`,66,582);
     c.textAlign="right";c.fillStyle="#f3f6ed";c.font="34px Anton, Impact";c.fillText("LEEKed IN",1136,548);c.fillStyle="#c8ff28";c.font="18px IBM Plex Mono, monospace";c.fillText("1 VERIFIED KILL = 1 PENDING LEEK",1136,582);
     c.globalAlpha=.08;c.fillStyle="#fff";for(let y=16;y<618;y+=4)c.fillRect(0,y,1200,1);c.globalAlpha=1;
     return card;
@@ -1767,15 +1573,7 @@
     }catch(error){if(error?.name!=="AbortError")copyText(link,"CHALLENGE LINK COPIED")}
   }
 
-  function shareRunOnX(){
-    if(!lastCompletedRun)return;const run=lastCompletedRun,link=challengeUrl(run);
-    const lead=run.boss?"I survived Admin 64H.":`I got rugged after ${run.kills} kills.`;
-    const text=`${lead} ${run.score.toLocaleString()} score in LEEKed IN. Beat this vegetable.`;
-    const intent=`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
-    window.open(intent,"_blank","noopener,noreferrer");
-  }
-
-  $("shareBtn").addEventListener("click",shareRun);$("xShareBtn").addEventListener("click",shareRunOnX);$("challengeBtn").addEventListener("click",()=>lastCompletedRun&&copyText(challengeUrl(lastCompletedRun),"CHALLENGE LINK COPIED"));
+  $("shareBtn").addEventListener("click",shareRun);$("challengeBtn").addEventListener("click",()=>lastCompletedRun&&copyText(challengeUrl(lastCompletedRun),"CHALLENGE LINK COPIED"));
 
   /* ===================== GRAMLEAKS SCANNER ===================== */
   function masterRows(data){return data.jetton_masters||data.masters||data.result||[]}
@@ -1783,29 +1581,16 @@
   function tokenData(master){return master?.jetton_content?.data||master?.jetton_content||master?.metadata||{}}
   function numberRaw(value){const n=Number(value||0);return Number.isFinite(n)?n:0}
 
-  function setScanProgress(value,label,active=true){
-    const amount=clamp(Number(value)||0,0,100);$("scanProgress").classList.toggle("active",active);$("scanProgressFill").style.width=amount+"%";$("scanProgressValue").textContent=Math.round(amount)+"%";$("scanProgressLabel").textContent=label;
-  }
-
-  function openCaseFile(){
-    const now=new Date(),id="GL-"+now.getTime().toString(36).slice(-6).toUpperCase();
-    $("caseNumber").textContent=id;$("caseDate").textContent=now.toISOString().slice(0,10);
-  }
-
   async function scanJetton(address){
     const clean=address.trim();
     if(!/^[A-Za-z0-9_-]{45,70}$/.test(clean))throw new Error("INVALID_ADDRESS");
-    setScanProgress(12,"READING JETTON MASTER");
     const masterUrl=`${CONFIG.toncenter}/jetton/masters?address=${encodeURIComponent(clean)}&limit=1&offset=0`;
     const masterResponse=await fetch(masterUrl,{headers:{Accept:"application/json"}});if(!masterResponse.ok)throw new Error("MASTER_"+masterResponse.status);
     const masterPayload=await masterResponse.json(),master=masterRows(masterPayload)[0]||null,meta=tokenData(master);
-    setScanProgress(46,"MASTER RECEIVED");
     await delay(1050);
-    setScanProgress(62,"READING HOLDER SET");
     const walletUrl=`${CONFIG.toncenter}/jetton/wallets?jetton_address=${encodeURIComponent(clean)}&exclude_zero_balance=true&limit=100&offset=0&sort=desc`;
     const walletResponse=await fetch(walletUrl,{headers:{Accept:"application/json"}});if(!walletResponse.ok)throw new Error("WALLETS_"+walletResponse.status);
     const walletPayload=await walletResponse.json(),rows=walletRows(walletPayload).filter(row=>numberRaw(row.balance)>0).sort((a,b)=>numberRaw(b.balance)-numberRaw(a.balance));
-    setScanProgress(90,"CALCULATING CONCENTRATION");
     const decimals=Number(meta.decimals??master?.decimals??(clean===CONFIG.contract?CONFIG.decimals:9));
     let totalRaw=numberRaw(master?.total_supply??master?.totalSupply);
     if(!totalRaw&&clean===CONFIG.contract)totalRaw=CONFIG.totalSupply*(10**CONFIG.decimals);
@@ -1819,24 +1604,22 @@
     let level="Low",title=tr("verdictLow"),copy=tr("verdictLowText");
     if(data.top10>=55){level="High";title=tr("verdictHigh");copy=tr("verdictHighText")}
     else if(data.top10>=28){level="Mid";title=tr("verdictMid");copy=tr("verdictMidText")}
-    const whale=data.largest>10;if(whale){title="WHALE ALERT";copy=`Largest visible wallet controls ${data.largest.toFixed(2)}%. Inspect it before inventing a verdict.`}
-    $("scanVerdictBox").classList.toggle("whale",whale);$("scanVerdict").textContent=title;$("scanVerdictText").textContent=copy;
-    const supply=data.totalRaw/(10**data.decimals),admin=data.admin?"ADMIN PRESENT":"ADMIN NOT RETURNED",mint=data.mintable===true?"MINTABLE":data.mintable===false?"MINT DISABLED":"MINT UNKNOWN";
-    $("scanMeta").textContent=`${data.name} (${data.symbol}) · issued ${human(supply)} · ${admin} · ${mint} · concentration: ${level}`;
+    $("scanVerdict").textContent=title;$("scanVerdictText").textContent=copy;
+    const supply=data.totalRaw/(10**data.decimals),admin=data.admin?"ADMIN PRESENT":"ADMIN NOT RETURNED";
+    $("scanMeta").textContent=`${data.name} (${data.symbol}) · issued ${human(supply)} · ${admin} · concentration tier: ${level}`;
     $("scanResult").classList.add("show");
-    setScanProgress(100,"CASE SEALED");
   }
 
   $("scanForm").addEventListener("submit",async event=>{
-    event.preventDefault();const button=$("scanBtn");openCaseFile();$("scanError").textContent="";$("scanResult").classList.remove("show");$("scanVerdictBox").classList.remove("whale");button.disabled=true;button.textContent="SCANNING…";setScanProgress(4,"VALIDATING CONTRACT");toast(tr("scanLoading"));
+    event.preventDefault();const button=$("scanBtn");$("scanError").textContent="";$("scanResult").classList.remove("show");button.disabled=true;button.textContent="…";toast(tr("scanLoading"));
     try{renderScan(await scanJetton($("scanAddress").value))}
-    catch(error){setScanProgress(100,"SCAN FAILED");$("scanError").textContent=error.message==="INVALID_ADDRESS"?tr("scanInvalid"):tr("scanFailed")}
+    catch(error){$("scanError").textContent=error.message==="INVALID_ADDRESS"?tr("scanInvalid"):tr("scanFailed")}
     finally{button.disabled=false;button.textContent=tr("scan")}
   });
   $("scanLeek").addEventListener("click",()=>{$("scanAddress").value=CONFIG.contract;$("scanForm").requestSubmit()});
 
   /* ===================== VERIFIED RANKING ===================== */
-  let globalRanking=[],globalStats={bestRun:0,totalBurned:0,totalRuns:0},globalDataReady=false;
+  let globalRanking=[],globalStats={bestRun:0,totalBurned:0,totalRuns:0};
   const COUNTRY_CODES=[
     "AF","AL","DZ","AD","AO","AG","AR","AM","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BT","BO","BA","BW","BR","BN","BG","BF","BI","CV","KH","CM","CA","CF","TD","CL","CN","CO","KM","CG","CD","CR","CI","HR","CU","CY","CZ","DK","DJ","DM","DO","EC","EG","SV","GQ","ER","EE","SZ","ET","FJ","FI","FR","GA","GM","GE","DE","GH","GR","GD","GT","GN","GW","GY","HT","HN","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","JO","KZ","KE","KI","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MG","MW","MY","MV","ML","MT","MH","MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM","NA","NR","NP","NL","NZ","NI","NE","NG","KP","MK","NO","OM","PK","PW","PA","PG","PY","PE","PH","PL","PT","QA","RO","RU","RW","KN","LC","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","SB","SO","ZA","KR","SS","ES","LK","SD","SR","SE","CH","SY","TW","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","TV","UG","UA","AE","GB","US","UY","UZ","VU","VA","VE","VN","YE","ZM","ZW"
   ];
@@ -1867,7 +1650,6 @@
 
   function renderCareer(){
     $("careerBestRun").textContent=Math.round(globalStats.bestRun).toLocaleString();$("careerTotalBurned").textContent=Math.round(globalStats.totalBurned).toLocaleString();$("careerTotalRuns").textContent=Math.round(globalStats.totalRuns).toLocaleString();
-    renderImpact();
   }
 
   function renderRanking(){
@@ -1891,8 +1673,8 @@
         dbRead("leeked_in_stats?select=best_run,total_burned,total_runs&limit=1")
       ]);
       globalRanking=Array.isArray(rows)?rows:[];const data=Array.isArray(stats)&&stats.length?stats[0]:{};
-      globalStats={bestRun:Number(data.best_run)||0,totalBurned:Number(data.total_burned)||0,totalRuns:Number(data.total_runs)||0};globalDataReady=true;setDbState(true);renderCareer();renderRanking();
-    }catch(error){globalDataReady=false;setDbState(false);renderCareer();renderRanking()}
+      globalStats={bestRun:Number(data.best_run)||0,totalBurned:Number(data.total_burned)||0,totalRuns:Number(data.total_runs)||0};setDbState(true);renderCareer();renderRanking();
+    }catch(error){setDbState(false);renderCareer();renderRanking()}
   }
 
   async function submitVerifiedRun(){
@@ -1915,7 +1697,6 @@
 
   /* ===================== INIT ===================== */
   function init(){
-    setupBoot();
     $("rankName").value=localStorage.getItem("leeked-signature")||"";
     setupTelegram();populateCountries();resetGame();setLanguage(currentLang);loadSupply();refreshGlobalData();requestAnimationFrame(frame);
   }

@@ -697,12 +697,12 @@
     ru:{
       live:"УБИЙСТВ В ЗАБЕГЕ",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
       moveControl:"ДВИЖЕНИЕ",moveHint:"тяни",aimControl:"ПРИЦЕЛ",aimHint:"задай направление",aimAria:"Задать направление огня",autoFire:"АВТООГОНЬ",armed:"АКТИВЕН",rotate:"ПОВЕРНИ ДЛЯ БОЛЬШЕГО ОБЗОРА",
-      stamp:"ПУБЛИЧНЫЙ ПРОТОТИП // BURN НЕ АКТИВЕН",hero:'<b>Играбельный прототип. Без фальшивой utility.</b><br>Убийства дают очки. LEEK пока не сжигается игрой.',
-      tag1:"ЕЖЕДНЕВНЫЙ ФИКСИРОВАННЫЙ ЗАБЕГ",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"BURN-МЕХАНИКА // НЕ АКТИВНА",
+      stamp:"ПУБЛИЧНЫЙ ПРОТОТИП // СЖИГАНИЕ НЕ АКТИВНО",hero:'<b>Играбельный прототип. Без выдуманной пользы.</b><br>Убийства дают очки. LEEK пока не сжигается игрой.',
+      tag1:"ЕЖЕДНЕВНЫЙ ФИКСИРОВАННЫЙ ЗАБЕГ",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"МЕХАНИКА СЖИГАНИЯ // НЕ АКТИВНА",
       terminal:"ЕЖЕДНЕВНЫЙ ЗАБЕГ // АВТООГОНЬ ГОТОВ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
-      proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Публичные кошельки. Live-баланс void-кошелька. Текущий gameplay не создаёт burn-транзакции. <strong>Проверь сам.</strong>',
-      scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ RUN",finish:"Заверши забег, чтобы отправить результат.",
-      supplyLive:"void-кошелёк синхронизирован. связь с gameplay: не активна.",supplyError:"TON API недоступен. скан приостановлен.",
+      proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Публичные кошельки. Баланс void-кошелька в реальном времени. Текущая игра не создаёт транзакций сжигания. <strong>Проверь сам.</strong>',
+      scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ ЗАБЕГ",finish:"Заверши забег, чтобы отправить результат.",
+      supplyLive:"void-кошелёк синхронизирован. связь с игрой: не активна.",supplyError:"TON API недоступен. скан приостановлен.",
       copy:"КОПИРОВАТЬ CA",copied:"CA СКОПИРОВАН.",install:"УСТАНОВИТЬ ИГРУ",installed:"ДОБАВЛЕНО НА ЭКРАН",
       paused:"ПАУЗА",resumed:"ОБРАТНО В ЛОГОВО",challenge:(name,score)=>`${name} набрал ${score.toLocaleString()}. Победи овощ.`,
       rugged:"ТЕБЯ ЗАРАГАЛИ.",cleared:"ЛОГОВО ЗАЧИЩЕНО.",liquidityGone:"ЛИКВИДНОСТЬ УКРАЛИ.",
@@ -713,8 +713,8 @@
       dbOnline:"ГЛОБАЛЬНАЯ БАЗА ОНЛАЙН",dbError:"ГЛОБАЛЬНАЯ БАЗА ОФЛАЙН",empty:"ПОКА НЕТ ПОДТВЕРЖДЁННЫХ ЗАБЕГОВ.",loading:"Загружаем стену…",
       scanLoading:"Допрашиваем блокчейн…",scanInvalid:"Это не похоже на адрес TON jetton.",scanFailed:"TON ответил невнятно. Подожди и попробуй снова.",
       verdictLow:"ХОРОШО НАРЕЗАНО",verdictMid:"ТЕСНАЯ КУХНЯ",verdictHigh:"КИТЫ В КЛАДОВКЕ",
-      verdictLowText:"Видимые топ-10 не контролируют основную часть выпущенного supply.",verdictMidText:"Владение заметно сконцентрировано. Сначала проверь адреса, потом сочиняй теорию.",verdictHighText:"Небольшая группа контролирует крупную долю. Это факт, но ещё не автоматический rug verdict.",
-      ticker:burned=>["GAME BURN = НЕ АКТИВЕН",`VOID WALLET: ${human(burned)} LEEK // НЕ ИЗ GAMEPLAY`,"КОШЕЛЁК НЕ НУЖЕН","ПУБЛИЧНЫЙ ПРОТОТИП","СНАЧАЛА ГЕЙМПЛЕЙ"],
+      verdictLowText:"Видимые топ-10 не контролируют основную часть выпущенной эмиссии.",verdictMidText:"Владение заметно сконцентрировано. Сначала проверь адреса, потом сочиняй теорию.",verdictHighText:"Небольшая группа контролирует крупную долю. Это факт, но ещё не автоматический признак рага.",
+      ticker:burned=>["СЖИГАНИЕ ИГРОЙ = НЕ АКТИВНО",`VOID-КОШЕЛЁК: ${human(burned)} LEEK // НЕ ИЗ ИГРЫ`,"КОШЕЛЁК НЕ НУЖЕН","ПУБЛИЧНЫЙ ПРОТОТИП","СНАЧАЛА ИГРА"],
       act:["АЛЛЕЯ ЛИКВИДНОСТИ","ФАБРИКА KOL","СПАЛЬНЯ АДМИНА"],actLabel:["АКТ I","АКТ II","ФИНАЛ"],
       wave:"ВОЛНА",locked:"FULLY LEEKED IN",bossWake:"АДМИН НАКОНЕЦ ПРОСНУЛСЯ",bossIncoming:"СПЯЩИЙ АДМИН // 64 ЧАСА СПУСТЯ",victory:"ЛИКВИДНОСТЬ ВЫЖИЛА",poolHit:"ЛИКВИДНОСТЬ АТАКОВАНА",playerHit:"ТЕБЯ ЗАШИЛЛИЛИ"
     }
@@ -737,15 +737,15 @@
     ["top-wallet concentration","концентрация топ-кошельков"],["largest visible position","крупнейшая видимая позиция"],["admin and mint state","статус админа и минта"],["QUICK DISTRIBUTION SCAN","БЫСТРЫЙ СКАН РАСПРЕДЕЛЕНИЯ"],["TON jetton contract","Контракт TON jetton"],["WAITING","ОЖИДАНИЕ"],["USE $LEEK CONTRACT","ИСПОЛЬЗОВАТЬ КОНТРАКТ $LEEK"],["Public TON Center data · 1 request/second without API key","Публичные данные TON Center · 1 запрос/сек без API-ключа"],
     ["TOP 10 SHARE","ДОЛЯ ТОП-10"],["LARGEST WALLET","КРУПНЕЙШИЙ КОШЕЛЁК"],["VISIBLE WALLETS","ВИДИМЫЕ КОШЕЛЬКИ"],["CASE PENDING","ДЕЛО ОЖИДАЕТ"],["The chain has not testified yet.","Блокчейн ещё не дал показаний."],
     ["GLOBAL HIGH-SCORE WALL","ГЛОБАЛЬНАЯ ТАБЛИЦА РЕКОРДОВ"],["SHAME & GLORY","ПОЗОР И СЛАВА"],["DATABASE","БАЗА ДАННЫХ"],["CHECKING…","ПРОВЕРКА…"],["GLOBAL BEST RUN","ЛУЧШИЙ ЗАБЕГ В МИРЕ"],["GAME KILLS RECORDED","ЗАПИСАНО УБИЙСТВ"],["COMPLETED RUNS","ЗАВЕРШЁННЫЕ ЗАБЕГИ"],["Signature","Подпись"],["Country","Страна"],
-    ["Global scores are written to Supabase with the public publishable key. Row-level security controls anonymous access. If the database is unavailable, your result remains local and shareable.","Глобальные результаты записываются в Supabase с публичным publishable key. Row-level security контролирует анонимный доступ. Если база недоступна, результат остаётся локальным и им можно поделиться."],
-    ["WE'RE NOT A VEGETABLE.","МЫ НЕ ОВОЩ."],["WE'RE THE THING THAT EATS VEGETABLES.","МЫ ТО, ЧТО ЕСТ ОВОЩИ."],["Playable prototype. Public wallets. Chain data. No fake utility.","Играбельный прототип. Публичные кошельки. Данные блокчейна. Никакой фальшивой utility."],["PUBLIC BUILD TAPE","ПУБЛИЧНЫЙ ЖУРНАЛ СБОРОК"],
-    ["Proof of play, trophy cards, case files and combat juice","Подтверждение игры, карточки результатов, дела и больше боевого драйва"],["Landscape screen recovery + clear lower combat zone","Восстановление landscape-экрана + чистая нижняя зона боя"],["Manual aim + continuous auto-fire + mobile combat pass","Ручной прицел + непрерывный автоогонь + мобильная доработка боя"],["Three-act LEEKed IN run + final boss","Трёхактный забег LEEKed IN + финальный босс"],["15M LEEK sent to the public void wallet — independent of prototype gameplay","15M LEEK отправлено в публичный void-кошелёк — отдельно от игры прототипа"],
+    ["Global scores are written to Supabase with the public publishable key. Row-level security controls anonymous access. If the database is unavailable, your result remains local and shareable.","Глобальные результаты записываются в Supabase с публичным ключом. Политики доступа на уровне строк контролируют анонимную запись. Если база недоступна, результат остаётся локальным и им можно поделиться."],
+    ["WE'RE NOT A VEGETABLE.","МЫ НЕ ОВОЩ."],["WE'RE THE THING THAT EATS VEGETABLES.","МЫ ТО, ЧТО ЕСТ ОВОЩИ."],["Playable prototype. Public wallets. Chain data. No fake utility.","Играбельный прототип. Публичные кошельки. Данные блокчейна. Никакой выдуманной пользы."],["PUBLIC BUILD TAPE","ПУБЛИЧНЫЙ ЖУРНАЛ СБОРОК"],
+    ["Proof of play, trophy cards, case files and combat juice","Подтверждение игры, карточки результатов, дела и больше боевого драйва"],["Landscape screen recovery + clear lower combat zone","Восстановление альбомного режима + чистая нижняя зона боя"],["Manual aim + continuous auto-fire + mobile combat pass","Ручной прицел + непрерывный автоогонь + мобильная доработка боя"],["Three-act LEEKed IN run + final boss","Трёхактный забег LEEKed IN + финальный босс"],["15M LEEK sent to the public void wallet — independent of prototype gameplay","15M LEEK отправлено в публичный void-кошелёк — отдельно от игры прототипа"],
     ["GRAMLEEK // BUILT IN PUBLIC ON GRAM","GRAMLEEK // СТРОИМ ОТКРЫТО НА GRAM"],["PLAY","ИГРАТЬ"],["PROOF","ДОКАЗАТЕЛЬСТВА"],["RANK","РЕЙТИНГ"],["COPY","КОПИРОВАТЬ"],["Quick actions","Быстрые действия"],
     ["Top-down action game. Move with WASD or left joystick, set the automatic firing direction with mouse or right pad.","Экшен с видом сверху. Двигайся WASD или левым стиком, направление автоогня задавай мышью или правым падом."],["Shareable run trophy","Карточка результата для публикации"],["Unlocked run badges","Разблокированные достижения"],["Live GramLeek impact ticker","Live-лента GramLeek"]
   ]);
 
   const RUNTIME_RU=new Map([
-    ["FULLSCREEN ENGAGED","ПОЛНЫЙ ЭКРАН ВКЛЮЧЁН"],["RETURNED TO PAGE","ВОЗВРАТ НА СТРАНИЦУ"],["CHALLENGE DESTROYED","ВЫЗОВ УНИЧТОЖЕН"],["AUTOPSY RELEASED","РЕЗУЛЬТАТ ОПУБЛИКОВАН"],["CHALLENGE LINK COPIED","ССЫЛКА НА ВЫЗОВ СКОПИРОВАНА"],
+    ["FULLSCREEN ENGAGED","ПОЛНЫЙ ЭКРАН ВКЛЮЧЁН"],["INSTALL IS NOT AVAILABLE IN THIS CLIENT","УСТАНОВКА НЕДОСТУПНА В ЭТОМ КЛИЕНТЕ"],["SEALING","ФИКСИРУЕТСЯ"],["COMBO X10","КОМБО X10"],["RETURNED TO PAGE","ВОЗВРАТ НА СТРАНИЦУ"],["CHALLENGE DESTROYED","ВЫЗОВ УНИЧТОЖЕН"],["AUTOPSY RELEASED","РЕЗУЛЬТАТ ОПУБЛИКОВАН"],["CHALLENGE LINK COPIED","ССЫЛКА НА ВЫЗОВ СКОПИРОВАНА"],
     ["READING JETTON MASTER","ЧИТАЕМ JETTON MASTER"],["MASTER RECEIVED","MASTER ПОЛУЧЕН"],["READING HOLDER SET","ЧИТАЕМ СПИСОК ХОЛДЕРОВ"],["CALCULATING CONCENTRATION","СЧИТАЕМ КОНЦЕНТРАЦИЮ"],["CASE SEALED","ДЕЛО ЗАФИКСИРОВАНО"],["VALIDATING CONTRACT","ПРОВЕРЯЕМ КОНТРАКТ"],["SCAN FAILED","СКАН НЕ УДАЛСЯ"],
     ["WHALE ALERT","ТРЕВОГА: КИТ"],["ADMIN PRESENT","АДМИН УКАЗАН"],["ADMIN NOT RETURNED","АДМИН НЕ ВОЗВРАЩЁН API"],["MINTABLE","МИНТ ДОСТУПЕН"],["MINT DISABLED","МИНТ ОТКЛЮЧЁН"],["MINT UNKNOWN","СТАТУС МИНТА НЕИЗВЕСТЕН"],
     ["LOCAL","ЛОКАЛЬНО"],["ANON VEGETABLE","ОВОЩ-АНОНИМ"],["GLOBAL READ ONLINE","ГЛОБАЛЬНАЯ БАЗА ОНЛАЙН"],["GLOBAL READ OFFLINE","ГЛОБАЛЬНАЯ БАЗА ОФЛАЙН"],
@@ -821,7 +821,7 @@
     if(last){
       const stamp=new Date(Number(last.startedAt)||Date.now()).toISOString();
       $("impactLogTime").textContent=stamp.slice(0,10)+" "+stamp.slice(11,19)+" UTC";
-      const hash=last.eventHash?last.eventHash.slice(0,12).toUpperCase():"LOCAL";
+      const hash=last.eventHash?last.eventHash.slice(0,12).toUpperCase():uiText("LOCAL");
       $("impactLogText").innerHTML=currentLang==="ru"?`<b>ЗАБЕГ ${escapeHtml(hash)}</b> · ${Math.round(last.score).toLocaleString()} ОЧКОВ · ${last.kills} УБИЙСТВ · ${last.pool}% ЛИКВИДНОСТИ`:`<b>RUN ${escapeHtml(hash)}</b> · ${Math.round(last.score).toLocaleString()} SCORE · ${last.kills} KILLS · ${last.pool}% LIQUIDITY`;
     }else{
       $("impactLogTime").textContent="—";
@@ -856,6 +856,7 @@
     $("restartBtn").textContent=tr("retry");$("shareBtn").textContent=tr("share");$("challengeBtn").textContent=tr("challengeCopy");
     if(challengeData)renderChallengeCallout();
     renderImpact();refreshHud();renderRanking();
+    if(burnDataReady)$("burnPercent").textContent=(liveBurned/CONFIG.totalSupply*100).toFixed(2)+(currentLang==="ru"?"% СЖЕЖЕНО":"% BURNED");
     if(lastScanData)renderScan(lastScanData);
     if(lastCompletedRun){
       if(!$("gameOverScreen").classList.contains("hidden")){
@@ -981,7 +982,7 @@
       const effective=Math.max(0,CONFIG.totalSupply-burned),pct=burned/CONFIG.totalSupply*100;
       liveBurned=burned;burnDataReady=true;renderImpact();
       $("effectiveSupply").textContent=human(effective)+" LEEK";
-      $("burnPercent").textContent=pct.toFixed(2)+"% BURNED";
+      $("burnPercent").textContent=pct.toFixed(2)+(currentLang==="ru"?"% СЖЕЖЕНО":"% BURNED");
       $("burnWalletAmount").textContent=human(burned)+" · "+pct.toFixed(2)+"%";
       $("burnFill").style.width=clamp(pct,0,100)+"%";
       status.className="status-line";status.innerHTML=`<b>&gt;</b> ${escapeHtml(tr("supplyLive"))}`;
@@ -1086,7 +1087,7 @@
   function renderChallengeCallout(){
     const box=$("challengeCallout");
     if(!challengeData){box.classList.remove("show");box.textContent="";return}
-    box.textContent=tr("challenge")(challengeData.name||"ANOTHER VEGETABLE",challengeData.score);
+    box.textContent=tr("challenge")(challengeData.name||(currentLang==="ru"?"ДРУГОЙ ОВОЩ":"ANOTHER VEGETABLE"),challengeData.score);
     box.classList.add("show");
   }
 
@@ -1825,8 +1826,8 @@
     c.fillStyle="#ff9e1d";c.font="58px Anton, Impact";c.fillText(formatTime(run.duration),555,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText(uiText("SURVIVAL"),555,337);
     c.fillStyle="#25d5ff";c.font="58px Anton, Impact";c.fillText(run.pool+"%",805,302);c.fillStyle="#8f9a90";c.font="22px IBM Plex Mono, monospace";c.fillText(uiText("LIQUIDITY"),805,337);
     c.fillStyle="#8f9a90";c.font="20px IBM Plex Mono, monospace";c.fillText(uiText("CAUSE OF DEATH / FINAL WITNESS"),66,405);c.fillStyle="#f3f6ed";c.font="38px Anton, Impact";cardText(c,uiText(run.cause),66,450,760,43);
-    const runStamp=new Date(Number(run.startedAt)||Date.now()).toISOString().slice(0,19).replace("T"," "),runHash=run.eventHash?run.eventHash.slice(0,12).toUpperCase():"SEALING";
-    c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText(uiText("BEAT THIS VEGETABLE →"),66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(`RUN ${runHash} · ${runStamp} UTC`,66,582);
+    const runStamp=new Date(Number(run.startedAt)||Date.now()).toISOString().slice(0,19).replace("T"," "),runHash=run.eventHash?run.eventHash.slice(0,12).toUpperCase():uiText("SEALING");
+    c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText(uiText("BEAT THIS VEGETABLE →"),66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(currentLang==="ru"?`ЗАБЕГ ${runHash} · ${runStamp} UTC`:`RUN ${runHash} · ${runStamp} UTC`,66,582);
     c.textAlign="right";c.fillStyle="#f3f6ed";c.font="34px Anton, Impact";c.fillText("LEEKed IN",1136,548);c.fillStyle="#c8ff28";c.font="18px IBM Plex Mono, monospace";c.fillText(uiText("PROTOTYPE // GAMEPLAY DOES NOT BURN LEEK"),1136,582);
     c.globalAlpha=.08;c.fillStyle="#fff";for(let y=16;y<618;y+=4)c.fillRect(0,y,1200,1);c.globalAlpha=1;
     return card;

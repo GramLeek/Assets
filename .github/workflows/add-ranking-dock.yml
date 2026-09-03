@@ -1,3 +1,4 @@
+# one-time patch runner
 name: Add ranking dock button
 
 on:
@@ -39,7 +40,6 @@ jobs:
               raise SystemExit(f'Expected one mobile dock nav anchor, found {s.count(old_nav)}')
           s=s.replace(old_nav,new_nav,1)
 
-          # Ensure the existing RU translation map explicitly translates the new label and aria text.
           marker='["PLAY","ИГРАТЬ"],["PROOF","ДОКАЗАТЕЛЬСТВА"],["RANK","РЕЙТИНГ"],["COPY","КОПИРОВАТЬ"]'
           if marker not in s:
               raise SystemExit('Expected RU RANK translation marker not found')

@@ -330,11 +330,6 @@
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.live-chip::before,.ticker-track,.boot-bar::after,.loader-track::after{animation:none}.game-banner,.toast,.meter-fill,.supply-fill,.scan-progress-fill,.boot-sequence{transition:none}}
     html[lang="ru"] .game-terminal::before{content:"НАСТОЯЩАЯ ИГРА // БЕЗ AI-ТРЕЙЛЕРА"}
-    .result-claim{margin-top:12px;padding:11px;border:1px solid rgba(37,213,255,.28);background:rgba(37,213,255,.035);text-align:left}
-    .result-claim-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}.result-claim-head b{color:var(--cold);font-size:.7rem;letter-spacing:.1em}.result-claim-head span{max-width:260px;color:var(--muted);font-size:.62rem;line-height:1.35;text-align:right}
-    .result-claim-form{display:grid;grid-template-columns:minmax(120px,1fr) minmax(116px,.78fr) auto;gap:6px}.result-claim-form .rank-input,.result-claim-form .rank-country{min-width:0;height:38px;padding:0 9px}.result-claim-form .rank-submit{min-height:38px;padding:0 10px;font-size:.66rem;white-space:nowrap}
-    .result-status{min-height:18px;margin-top:7px;color:var(--muted);font-size:.62rem;line-height:1.35}.result-status.good{color:var(--acid)}.result-status.error{color:var(--danger)}
-    @media(max-width:620px){.result-claim{padding:8px;margin-top:8px}.result-claim-head{display:block}.result-claim-head span{display:block;max-width:none;margin-top:3px;text-align:left}.result-claim-form{grid-template-columns:1fr 1fr}.result-claim-form .rank-submit{grid-column:1/-1;width:100%}}
   </style>
 </head>
 <body>
@@ -446,15 +441,6 @@
                 <p id="gameOverText">The vegetable has fallen.</p>
                 <canvas class="trophy-preview" id="trophyPreview" width="1200" height="630" aria-label="Shareable run trophy"></canvas>
                 <div class="run-badges" id="runBadges" aria-label="Unlocked run badges"></div>
-                <div class="result-claim" id="resultClaim">
-                  <div class="result-claim-head"><b id="resultClaimTitle">CLAIM THIS RUN</b><span id="resultClaimHint">Save it to the global wall. Sharing stays available.</span></div>
-                  <div class="result-claim-form">
-                    <input class="rank-input" id="resultName" maxlength="18" autocomplete="nickname" placeholder="YOUR SIGNATURE" aria-label="Signature" />
-                    <select class="rank-country" id="resultCountry" aria-label="Country"><option value="">COUNTRY</option></select>
-                    <button class="rank-submit" id="resultSubmit" type="button" disabled>ADD TO GLOBAL RANKING</button>
-                  </div>
-                  <div class="result-status" id="resultStatus" aria-live="polite">Result is being sealed…</div>
-                </div>
                 <div class="screen-actions">
                   <button class="screen-btn acid" id="restartBtn" type="button">RUN IT BACK →</button>
                   <button class="screen-btn primary" id="shareBtn" type="button">SHARE TROPHY</button>
@@ -697,7 +683,7 @@
       paused:"PAUSED",resumed:"BACK INTO THE DEN",challenge:(name,score)=>`${name} scored ${score.toLocaleString()}. Beat the vegetable.`,
       rugged:"RUGGED.",cleared:"DEN CLEARED.",liquidityGone:"LIQUIDITY DRAINED.",
       runText:r=>`Kills: <b>${r.kills}</b> · Score: <b>${r.score.toLocaleString()}</b> · Time: <b>${formatTime(r.duration)}</b><br>Cause: <b>${escapeHtml(r.cause)}</b>`,
-      share:"SHARE RESULT",challengeCopy:"COPY CHALLENGE",retry:"RUN IT BACK →",resultClaim:"CLAIM THIS RUN",resultHint:"Save it to the global wall. Sharing stays available.",resultSealing:"Result is being sealed…",resultAdded:"✓ ADDED TO GLOBAL RANKING",postX:"POST ON X",
+      share:"SHARE TROPHY",challengeCopy:"COPY CHALLENGE",retry:"RUN IT BACK →",
       runReady:r=>`Run sealed: ${r.score.toLocaleString()} pts · ${r.kills} kills. Add signature and country.`,
       shortName:"Signature needs at least 2 characters.",chooseCountry:"Choose a country first.",verifying:"Saving the run…",verified:"Run accepted. Shame is now global.",verifyError:"Database rejected the run. Result remains local and shareable.",
       dbOnline:"GLOBAL READ ONLINE",dbError:"GLOBAL READ OFFLINE",empty:"NO VERIFIED RUNS YET.",loading:"Loading the wall…",
@@ -721,7 +707,7 @@
       paused:"ПАУЗА",resumed:"ОБРАТНО В ЛОГОВО",challenge:(name,score)=>`${name} набрал ${score.toLocaleString()}. Победи овощ.`,
       rugged:"ТЕБЯ ЗАРАГАЛИ.",cleared:"ЛОГОВО ЗАЧИЩЕНО.",liquidityGone:"ЛИКВИДНОСТЬ УКРАЛИ.",
       runText:r=>`Убийства: <b>${r.kills}</b> · Счёт: <b>${r.score.toLocaleString()}</b> · Время: <b>${formatTime(r.duration)}</b><br>Причина: <b>${escapeHtml(uiText(r.cause))}</b>`,
-      share:"ПОДЕЛИТЬСЯ РЕЗУЛЬТАТОМ",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",resultClaim:"СОХРАНИТЬ ЭТОТ ЗАБЕГ",resultHint:"Добавь результат в глобальный рейтинг. Возможность поделиться останется.",resultSealing:"Фиксируем результат…",resultAdded:"✓ ДОБАВЛЕНО В РЕЙТИНГ",postX:"ОПУБЛИКОВАТЬ В X",
+      share:"ПОДЕЛИТЬСЯ РЕЗУЛЬТАТОМ",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",
       runReady:r=>`Забег зафиксирован: ${r.score.toLocaleString()} очков · ${r.kills} убийств. Добавь подпись и страну.`,
       shortName:"Минимум 2 символа.",chooseCountry:"Сначала выбери страну.",verifying:"Сохраняем забег…",verified:"Забег принят. Позор стал глобальным.",verifyError:"База отклонила забег. Результат остаётся локальным, им можно поделиться.",
       dbOnline:"ГЛОБАЛЬНАЯ БАЗА ОНЛАЙН",dbError:"ГЛОБАЛЬНАЯ БАЗА ОФЛАЙН",empty:"ПОКА НЕТ ПОДТВЕРЖДЁННЫХ ЗАБЕГОВ.",loading:"Загружаем стену…",
@@ -867,8 +853,7 @@
     $("rankSubmit").textContent=tr("rankSubmit");
     if(!lastCompletedRun)$("rankStatus").textContent=tr("finish");
     $("copyContract").textContent=tr("copy");$("installBtn").textContent=tr("install");
-    $("restartBtn").textContent=tr("retry");$("shareBtn").textContent=tr("share");$("challengeBtn").textContent=tr("challengeCopy");$("xShareBtn").textContent=tr("postX");
-    $("resultClaimTitle").textContent=tr("resultClaim");$("resultClaimHint").textContent=tr("resultHint");$("resultName").placeholder=tr("rankName");
+    $("restartBtn").textContent=tr("retry");$("shareBtn").textContent=tr("share");$("challengeBtn").textContent=tr("challengeCopy");
     if(challengeData)renderChallengeCallout();
     renderImpact();refreshHud();renderRanking();
     if(burnDataReady)$("burnPercent").textContent=(liveBurned/CONFIG.totalSupply*100).toFixed(2)+(currentLang==="ru"?"% СЖЕЖЕНО":"% BURNED");
@@ -881,7 +866,7 @@
       }
       renderShareCard(lastCompletedRun,$("trophyPreview"));renderRunBadges(lastCompletedRun);
     }
-    applyStaticLanguage(currentLang);syncIdentity("rank");syncResultSubmitUi();
+    applyStaticLanguage(currentLang);
   }
 
   $("langEn").addEventListener("click",()=>setLanguage("en"));
@@ -1708,8 +1693,8 @@
     run.eventHash=await digestRun(run);
     if(lastCompletedRun!==run)return;
     localStorage.setItem("leeked-last-run",JSON.stringify(run));lastImpactRun=run;renderShareCard(run,$("trophyPreview"));renderImpact();
-    runProofPending=false;$("rankSubmit").disabled=false;$("resultSubmit").disabled=false;$("shareBtn").disabled=false;$("xShareBtn").disabled=false;
-    $("rankStatus").className="rank-status good";$("rankStatus").textContent=tr("runReady")(run);syncResultSubmitUi();
+    runProofPending=false;$("rankSubmit").disabled=false;$("shareBtn").disabled=false;$("xShareBtn").disabled=false;
+    $("rankStatus").className="rank-status good";$("rankStatus").textContent=tr("runReady")(run);
     renderRanking();
   }
 
@@ -1736,8 +1721,7 @@
       runId:state.runId,seed:state.seed,day:dailyCode,startedAt:state.startedAt,duration:Number(duration.toFixed(2)),score:Math.max(0,Math.round(state.score)),kills:state.kills,combo:state.bestCombo,
       shots:state.shots,hits:state.hits,accuracy:state.shots?Math.round(state.hits/state.shots*100):0,pool:Math.round(state.pool.hp),boss:victory,cause:state.cause,eventHash:""
     };
-    lastImpactRun=lastCompletedRun;localStorage.setItem("leeked-last-run",JSON.stringify(lastCompletedRun));$("shareBtn").disabled=true;$("xShareBtn").disabled=true;$("resultSubmit").disabled=true;
-    syncIdentity("rank");$("resultStatus").className="result-status";$("resultStatus").textContent=tr("resultSealing");
+    lastImpactRun=lastCompletedRun;localStorage.setItem("leeked-last-run",JSON.stringify(lastCompletedRun));$("shareBtn").disabled=true;$("xShareBtn").disabled=true;
     const screen=$("gameOverScreen");$("gameOverKicker").textContent=victory?tr("victory"):uiText("RUN AUTOPSY");$("gameOverTitle").textContent=victory?tr("cleared"):state.pool.hp<=0?tr("liquidityGone"):tr("rugged");$("gameOverText").innerHTML=tr("runText")(lastCompletedRun);screen.classList.remove("hidden");
     renderShareCard(lastCompletedRun,$("trophyPreview"));renderRunBadges(lastCompletedRun);renderImpact();
     if(challengeData&&lastCompletedRun.score>challengeData.score){setTimeout(()=>showBanner("CHALLENGE DESTROYED",1250),120)}
@@ -1864,16 +1848,12 @@
     }catch(error){if(error?.name!=="AbortError")copyText(link,"CHALLENGE LINK COPIED")}
   }
 
-  async function shareRunOnX(){
+  function shareRunOnX(){
     if(!lastCompletedRun)return;const run=lastCompletedRun,link=challengeUrl(run);
-    const lead=run.boss?(currentLang==="ru"?"Я пережил Admin 64H.":"I survived Admin 64H."):(currentLang==="ru"?`Меня зарага́ли после ${run.kills} убийств.`:`I got rugged after ${run.kills} kills.`);
-    const text=currentLang==="ru"?`${lead} ${run.score.toLocaleString()} очков в LEEKed IN. Побей этот результат.`:`${lead} ${run.score.toLocaleString()} score in LEEKed IN. Beat this vegetable.`;
-    if(navigator.share){
-      try{await navigator.share({title:"LEEKed IN",text,url:link});toast(currentLang==="ru"?"МЕНЮ ПУБЛИКАЦИИ ОТКРЫТО":"SHARE SHEET OPENED");return}
-      catch(error){if(error?.name==="AbortError")return}
-    }
-    const intent=`https://twitter.com/intent/tweet?text=${encodeURIComponent(text+" "+link)}`;
-    try{if(isTelegramMiniApp&&tg?.openLink)tg.openLink(intent,{try_instant_view:false});else window.location.href=intent}catch(_){window.open(intent,"_blank","noopener,noreferrer")}
+    const lead=currentLang==="ru"?(run.boss?"Я пережил Admin 64H.":`Меня зарагали после ${run.kills} убийств.`):(run.boss?"I survived Admin 64H.":`I got rugged after ${run.kills} kills.`);
+    const text=currentLang==="ru"?`${lead} ${run.score.toLocaleString()} очков в LEEKed IN. Победи этот овощ.`:`${lead} ${run.score.toLocaleString()} score in LEEKed IN. Beat this vegetable.`;
+    const intent=`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(link)}`;
+    window.open(intent,"_blank","noopener,noreferrer");
   }
 
   $("shareBtn").addEventListener("click",shareRun);$("xShareBtn").addEventListener("click",shareRunOnX);$("challengeBtn").addEventListener("click",()=>lastCompletedRun&&copyText(challengeUrl(lastCompletedRun),"CHALLENGE LINK COPIED"));
@@ -1946,21 +1926,14 @@
   ];
 
   function flagEmoji(code){return /^[A-Z]{2}$/.test(code)?String.fromCodePoint(...[...code].map(char=>127397+char.charCodeAt())):"🌍"}
-  function populateCountrySelect(select,previous){
-    if(!select)return;
-    select.innerHTML="";
+  function populateCountries(){
+    const select=$("rankCountry"),previous=select.value||localStorage.getItem("leeked-country")||"";select.innerHTML="";
     const first=document.createElement("option");first.value="";first.textContent=tr("rankCountry");select.appendChild(first);
     let names=null;try{names=new Intl.DisplayNames([currentLang==="ru"?"ru":"en"],{type:"region"})}catch(_){ }
     COUNTRY_CODES.map(code=>({code,name:names?.of(code)||code})).sort((a,b)=>a.name.localeCompare(b.name,currentLang)).forEach(country=>{
       const option=document.createElement("option");option.value=country.code;option.textContent=`${flagEmoji(country.code)} ${country.name}`;select.appendChild(option);
     });
     if(previous)select.value=previous;
-  }
-
-  function populateCountries(){
-    const previous=$("rankCountry")?.value||$("resultCountry")?.value||localStorage.getItem("leeked-country")||"";
-    populateCountrySelect($("rankCountry"),previous);
-    populateCountrySelect($("resultCountry"),previous);
   }
 
   function supabaseHeaders(extra={}){
@@ -1989,26 +1962,6 @@
 
   function setDbState(ok){
     const el=$("rankDbState");el.classList.toggle("error",!ok);el.innerHTML=`${uiText("DATABASE")}<b>${escapeHtml(uiText(ok?tr("dbOnline"):tr("dbError")))}</b>`;
-  }
-
-  function syncIdentity(source="rank"){
-    const fromResult=source==="result",nameSource=fromResult?$("resultName"):$("rankName"),countrySource=fromResult?$("resultCountry"):$("rankCountry");
-    const name=(nameSource?.value||"").slice(0,18),country=countrySource?.value||"";
-    if($("rankName")&&$("rankName")!==nameSource)$("rankName").value=name;
-    if($("resultName")&&$("resultName")!==nameSource)$("resultName").value=name;
-    if($("rankCountry")&&$("rankCountry")!==countrySource)$("rankCountry").value=country;
-    if($("resultCountry")&&$("resultCountry")!==countrySource)$("resultCountry").value=country;
-  }
-
-  function syncResultSubmitUi(){
-    const resultButton=$("resultSubmit"),rankButton=$("rankSubmit"),resultStatus=$("resultStatus"),rankStatus=$("rankStatus");
-    if(!resultButton)return;
-    resultButton.disabled=!!rankButton?.disabled;
-    resultButton.textContent=runSubmitted?tr("resultAdded"):tr("rankSubmit");
-    if(resultStatus&&rankStatus){
-      resultStatus.className="result-status"+(rankStatus.classList.contains("error")?" error":rankStatus.classList.contains("good")?" good":"");
-      resultStatus.textContent=rankStatus.textContent||tr("resultSealing");
-    }
   }
 
   function renderCareer(){
@@ -2052,7 +2005,7 @@
     button.disabled=true;
     button.textContent="…";
     status.className="rank-status";
-    status.textContent=tr("verifying");syncResultSubmitUi();
+    status.textContent=tr("verifying");
 
     const runId=lastCompletedRun.runId||lastCompletedRun.run_id;
     if(!runId){
@@ -2094,22 +2047,17 @@
       button.disabled=false;
     }finally{
       button.textContent=tr("rankSubmit");
-      if(runSubmitted)button.disabled=true;syncResultSubmitUi();
+      if(runSubmitted)button.disabled=true;
     }
   }
 
-  $("rankSubmit").addEventListener("click",async()=>{syncIdentity("rank");await submitVerifiedRun();syncResultSubmitUi()});
-  $("resultSubmit").addEventListener("click",async()=>{syncIdentity("result");await submitVerifiedRun();syncResultSubmitUi()});
-  $("rankCountry").addEventListener("change",event=>{localStorage.setItem("leeked-country",event.target.value);syncIdentity("rank");renderRanking()});
-  $("resultCountry").addEventListener("change",event=>{localStorage.setItem("leeked-country",event.target.value);syncIdentity("result");renderRanking()});
-  $("rankName").addEventListener("input",()=>{syncIdentity("rank");renderRanking()});
-  $("resultName").addEventListener("input",()=>{syncIdentity("result");renderRanking()});
+  $("rankSubmit").addEventListener("click",submitVerifiedRun);$("rankCountry").addEventListener("change",event=>{localStorage.setItem("leeked-country",event.target.value);renderRanking()});$("rankName").addEventListener("input",renderRanking);
 
   /* ===================== INIT ===================== */
   function init(){
     setupBoot();
     $("rankName").value=localStorage.getItem("leeked-signature")||"";
-    setupTelegram();populateCountries();resetGame();setLanguage(currentLang);syncIdentity("rank");syncResultSubmitUi();loadSupply();refreshGlobalData();requestAnimationFrame(frame);
+    setupTelegram();populateCountries();resetGame();setLanguage(currentLang);loadSupply();refreshGlobalData();requestAnimationFrame(frame);
   }
   init();
   </script>

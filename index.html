@@ -171,6 +171,8 @@
     .screen-card.hidden{display:none}.screen-kicker{color:var(--hot);font-size:.72rem;letter-spacing:.13em}.screen-card h2{margin:5px 0 0;color:var(--acid);font-family:Anton,Impact,sans-serif;font-size:clamp(2.5rem,7vw,4.4rem);font-style:italic;font-weight:400;line-height:.96}.screen-card p{margin:10px auto 0;max-width:430px;color:#aab4aa;font-size:.8rem;line-height:1.6}.screen-card p b{color:#fff;font-weight:500}.screen-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px}.screen-btn{min-height:44px;padding:0 14px;border:1px solid var(--line);background:#090d09;color:#fff;font-size:.74rem;font-weight:500;cursor:pointer}.screen-btn.primary{border-color:var(--hot);background:rgba(255,43,145,.08);box-shadow:4px 4px 0 rgba(255,43,145,.28)}.screen-btn.acid{border-color:var(--acid);background:var(--acid);color:#071006}.screen-btn:hover{border-color:var(--acid);color:var(--acid)}.screen-btn.acid:hover{color:#071006}.challenge-callout{display:none;margin-top:12px;padding:9px 10px;border-left:3px solid var(--cold);background:rgba(37,213,255,.06);color:#c5edf6;font-size:.74rem;text-align:left}.challenge-callout.show{display:block}
     .mobile-controls{display:none;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border-top:1px solid var(--line);background:#050705;touch-action:none;user-select:none;-webkit-user-select:none}
     .pad-wrap{display:flex;align-items:center;gap:10px}.control-label{color:var(--dim);font-size:.66rem;letter-spacing:.08em}.control-label b{display:block;color:#fff;font-weight:500}.joystick,.aim-pad{position:relative;width:94px;height:94px;flex:0 0 94px;border-radius:50%;touch-action:none}.joystick{border:1px solid rgba(200,255,40,.35);background:radial-gradient(circle,rgba(200,255,40,.07),transparent 62%)}.aim-pad{border:1px solid rgba(255,43,145,.55);background:radial-gradient(circle,rgba(255,43,145,.08),transparent 62%)}.stick,.aim-stick{position:absolute;left:50%;top:50%;width:38px;height:38px;border-radius:50%;transform:translate(-50%,-50%);background:#111611;border:1px solid rgba(200,255,40,.5);box-shadow:0 0 16px rgba(200,255,40,.08);pointer-events:none}.aim-stick{border-color:rgba(255,43,145,.65);display:grid;place-items:center;color:var(--hot)}.aim-stick::after{content:"▲";font-size:.9rem;transform:rotate(var(--aim-rot,90deg))}.aim-pad.active{border-color:var(--acid);box-shadow:0 0 20px rgba(200,255,40,.12)}.aim-pad.active .aim-stick{border-color:var(--acid);color:var(--acid)}
+    .aim-pad.armed{border-color:rgba(200,255,40,.55);box-shadow:inset 0 0 22px rgba(200,255,40,.055)}.aim-pad.armed .aim-stick{border-color:rgba(200,255,40,.72);color:var(--acid)}
+    .auto-fire-state{flex:0 0 auto;min-width:82px;padding:8px 7px;border:1px solid rgba(200,255,40,.28);background:rgba(200,255,40,.035);text-align:center;line-height:1.15}.auto-fire-state span,.auto-fire-state small{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.06em}.auto-fire-state b{display:block;margin-top:4px;color:var(--acid);font-size:.72rem;font-weight:500;letter-spacing:.09em}.auto-fire-state small{display:none;margin-top:6px;color:var(--cold)}
     .terminal-foot{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
     .mini-stat{padding:11px 8px;border-right:1px solid var(--line);text-align:center}.mini-stat:last-child{border-right:0}.mini-stat span{display:block;color:var(--dim);font-size:.64rem;letter-spacing:.07em}.mini-stat b{display:block;margin-top:3px;color:var(--acid);font-size:.95rem;font-weight:500}.mini-stat:nth-child(2) b{color:var(--hot)}.mini-stat:nth-child(3) b{color:var(--warn)}.mini-stat:nth-child(4) b{color:var(--cold)}
 
@@ -222,7 +224,7 @@
     @keyframes blink{50%{opacity:.25}}
     @keyframes marquee{to{transform:translateX(-50%)}}
     @media(hover:hover) and (pointer:fine){.mobile-controls{display:none!important}}
-    @media(hover:none),(pointer:coarse){.mobile-controls{display:flex}}
+    @media(hover:none),(pointer:coarse){.mobile-controls{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.pad-wrap:last-child{justify-self:end}}
     @media(max-width:1040px){
       .hero{grid-template-columns:minmax(230px,.64fr) minmax(520px,1.36fr);gap:24px}
       .nav-signal{display:none}.site-nav{grid-template-columns:auto 1fr}.nav-actions{justify-self:end}
@@ -236,12 +238,21 @@
     @media(max-width:620px){
       .shell{padding-inline:max(11px,var(--safe-left)) max(11px,var(--safe-right))}.site-nav{min-height:66px;gap:9px}.brand-orb{width:39px;height:39px;flex-basis:39px}.brand-copy span,.live-chip{display:none}.nav-actions{gap:4px}.icon-btn{min-width:38px;padding:0 8px}.lang-btn{min-width:36px;padding:0 7px}
       .hero{padding-top:34px;gap:32px}.hero-copy{padding-inline:3px}h1{font-size:clamp(5rem,25vw,7.2rem)}.hero-line{font-size:.9rem}.game-terminal{margin-inline:-4px;box-shadow:8px 8px 0 rgba(0,0,0,.48)}.game-terminal::before{font-size:.62rem}
-      .terminal-title span{display:none}.terminal-actions button{padding-inline:7px}.hud-center{top:48px}.hud-bottom{grid-template-columns:1fr}.hud-meter:first-child{display:none}.screen-card{width:90%;padding:18px 14px}.screen-card p{font-size:.72rem}.screen-actions{gap:6px}.screen-btn{min-height:42px;padding-inline:10px;font-size:.68rem}
-      .mobile-controls{padding:8px}.joystick,.aim-pad{width:82px;height:82px;flex-basis:82px}.control-label{display:none}.stick,.aim-stick{width:34px;height:34px}.terminal-foot{display:none}
+      .terminal-title span{display:none}.terminal-actions button{padding-inline:7px}.hud-left{left:6px;top:6px;display:grid;grid-template-columns:auto auto;gap:1px 9px;padding:5px 7px}.hud-left .hud-row{margin:0;gap:4px;font-size:.62rem}.hud-center{display:none}.hud-right{right:6px;top:6px;padding:5px 7px}.hud-right span{font-size:.55rem}.hud-right b{font-size:.76rem}.hud-bottom{left:6px;right:6px;bottom:6px;grid-template-columns:1fr}.hud-meter:first-child{display:block}.hud-meter:last-child{display:none}.hud-meter{padding:5px 7px}.meter-copy{margin-bottom:3px}.screen-card{width:92%;max-height:94%;overflow-y:auto;padding:13px 12px}.screen-card h2{font-size:2.05rem}.screen-card p{margin-top:6px;font-size:.68rem;line-height:1.42}.screen-actions{gap:6px;margin-top:9px}.screen-btn{min-height:44px;padding-inline:9px;font-size:.66rem}.game-banner{top:38%}
+      .mobile-controls{padding:9px;gap:7px}.joystick,.aim-pad{width:82px;height:82px;flex-basis:82px}.control-label{display:none}.stick,.aim-stick{width:34px;height:34px}.auto-fire-state{min-width:68px;padding:7px 5px}.auto-fire-state span{font-size:.56rem}.auto-fire-state b{font-size:.66rem}.terminal-foot{display:none}
       .content{padding-top:38px}.panel,.case-intro,.scanner,.build-tape{padding:20px 16px}.scan-form{grid-template-columns:1fr}.scan-summary,.career-grid{grid-template-columns:1fr}.link-row{grid-template-columns:1fr}.ranking-head{align-items:flex-start}.rank-form{grid-template-columns:1fr 112px}.rank-submit{grid-column:1/-1}.rank-row{grid-template-columns:34px minmax(0,1fr) 62px 78px;padding-inline:4px}.manifest-quote{padding:24px 18px}footer{flex-direction:column}
     }
     @media(max-width:390px){
-      .brand-copy strong{font-size:1.08rem}.game-terminal::before{display:none}.hud-left{left:6px;top:6px}.hud-right{right:6px;top:6px}.hud-center{top:44px}.hud-bottom{left:6px;right:6px;bottom:6px}.screen-card h2{font-size:2.35rem}.joystick,.aim-pad{width:76px;height:76px;flex-basis:76px}
+      .brand-copy strong{font-size:1.08rem}.game-terminal::before{display:none}.hud-left{left:6px;top:6px}.hud-right{right:6px;top:6px}.hud-center{top:44px}.hud-bottom{left:6px;right:6px;bottom:6px}.screen-card h2{font-size:1.85rem}.joystick,.aim-pad{width:76px;height:76px;flex-basis:76px}
+    }
+    @media(max-width:840px) and (orientation:portrait){
+      .game-terminal.game-fullscreen .terminal-head{min-height:42px;padding:6px 9px}
+      .game-terminal.game-fullscreen .game-frame{flex:0 0 auto;align-items:flex-start;width:100%}
+      .game-terminal.game-fullscreen .playfield{width:100%;height:auto}
+      .game-terminal.game-fullscreen .mobile-controls{flex:1 1 auto;align-content:center;min-height:180px;padding:18px 12px;background:radial-gradient(circle at 50% 42%,rgba(200,255,40,.055),transparent 42%),#050705}
+      .game-terminal.game-fullscreen .joystick,.game-terminal.game-fullscreen .aim-pad{width:clamp(82px,25vw,116px);height:clamp(82px,25vw,116px);flex-basis:clamp(82px,25vw,116px)}
+      .game-terminal.game-fullscreen .stick,.game-terminal.game-fullscreen .aim-stick{width:clamp(36px,10vw,44px);height:clamp(36px,10vw,44px)}
+      .game-terminal.game-fullscreen .auto-fire-state{min-width:76px;padding:10px 7px}.game-terminal.game-fullscreen .auto-fire-state small{display:block}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.live-chip::before,.ticker-track{animation:none}.game-banner,.toast,.meter-fill,.supply-fill{transition:none}}
   </style>
@@ -254,7 +265,7 @@
       <span class="brand-orb" id="brandOrb"><img src="Logo.png" alt="" id="brandLogo" /><span class="brand-fallback">L</span></span>
       <span class="brand-copy"><strong>GRAMLEEK</strong><span>PLAYABLE CULTURE ON GRAM</span></span>
     </a>
-    <div class="nav-signal">PIRATE BUILD <b>0.8.0</b> // TRUST NOTHING</div>
+    <div class="nav-signal">PIRATE BUILD <b>0.8.1</b> // TRUST NOTHING</div>
     <div class="nav-actions">
       <span class="live-chip" id="navLive">RUG DEN LIVE</span>
       <button class="icon-btn" id="installBtn" type="button" aria-label="Add game to home screen" hidden>INSTALL</button>
@@ -316,7 +327,7 @@
               <div class="screen-card" id="startScreen">
                 <div class="screen-kicker" id="startKicker">DAILY CASE // <span id="dailySeedText">00000000</span></div>
                 <h2 id="startTitle">PROTECT THE POOL</h2>
-                <p id="startCopy">Three acts. One sleeping admin. No second chances.<br><b>Desktop:</b> WASD + hold mouse. <b>Touch:</b> twin sticks.</p>
+                <p id="startCopy">Three acts. One sleeping admin. No second chances.<br><b>Move:</b> WASD or left stick. <b>Aim:</b> mouse or right pad. Fire is automatic.</p>
                 <div class="challenge-callout" id="challengeCallout"></div>
                 <div class="screen-actions"><button class="screen-btn acid" id="startBtn" type="button">ENTER THE DEN →</button></div>
               </div>
@@ -343,8 +354,9 @@
           </div>
 
           <div class="mobile-controls">
-            <div class="pad-wrap"><div class="joystick" id="joystick"><div class="stick" id="stick"></div></div><div class="control-label"><b>MOVE</b>drag</div></div>
-            <div class="pad-wrap"><div class="control-label"><b>AIM + FIRE</b>hold</div><div class="aim-pad" id="aimPad" aria-label="Aim and fire"><div class="aim-stick" id="aimStick"></div></div></div>
+            <div class="pad-wrap"><div class="joystick" id="joystick"><div class="stick" id="stick"></div></div><div class="control-label"><b id="moveControlTitle">MOVE</b><span id="moveControlHint">drag</span></div></div>
+            <div class="auto-fire-state" aria-live="polite"><span id="autoFireLabel">AUTO-FIRE</span><b id="autoFireState">ARMED</b><small id="rotateHint">ROTATE FOR MORE ROOM</small></div>
+            <div class="pad-wrap"><div class="control-label"><b id="aimControlTitle">AIM</b><span id="aimControlHint">set direction</span></div><div class="aim-pad armed" id="aimPad" aria-label="Set firing direction"><div class="aim-stick" id="aimStick"></div></div></div>
           </div>
 
           <div class="terminal-foot">
@@ -437,7 +449,7 @@
 
       <section class="manifest">
         <div class="manifest-quote"><blockquote>GRAMLEEK TURNS <span>ON-CHAIN NONSENSE</span> INTO GAMES, EVIDENCE AND MEMES.</blockquote><p>Not the official token of someone else's app. Not financial infrastructure cosplay. A transparent community experiment with something people can actually play.</p></div>
-        <div class="build-tape"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>BUILD 07</time><span>Daily seed, challenge cards and Telegram hooks</span></div><div class="tape-row"><time>BUILD 06</time><span>Global ranking separated from insecure browser writes</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
+        <div class="build-tape"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>BUILD 07</time><span>Daily seed, challenge cards and Telegram hooks</span></div><div class="tape-row"><time>BUILD 06</time><span>Global ranking separated from insecure browser writes</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
       </section>
     </div>
   </main>
@@ -474,6 +486,8 @@
   const lerp=(a,b,t)=>a+(b-a)*t;
   const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
   const reducedMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarsePointer=matchMedia("(hover: none), (pointer: coarse)").matches;
+  const portraitCombatLayout=()=>coarsePointer&&innerWidth<=840&&matchMedia("(orientation: portrait)").matches;
   let toastTimer=0;
 
   function toast(message){
@@ -518,9 +532,10 @@
   const TEXT={
     en:{
       live:"RUG DEN LIVE",soundOn:"SOUND ON",soundOff:"SOUND OFF",audio:"AUDIO",fullscreen:"FULLSCREEN ↗",exitFullscreen:"EXIT FULLSCREEN ×",
+      moveControl:"MOVE",moveHint:"drag",aimControl:"AIM",aimHint:"set direction",aimAria:"Set firing direction",autoFire:"AUTO-FIRE",armed:"ARMED",rotate:"ROTATE FOR MORE ROOM",
       stamp:"NOT A VEGETABLE // STILL ALIVE",hero:'<b>A meme with a playable alibi.</b> Protect the liquidity. Delete the scammers. Get fully LEEKed IN.',
       tag1:"DAILY SEEDED RUN",tag2:"NO WALLET REQUIRED",tag3:"1 VERIFIED KILL = 1 PENDING LEEK",
-      terminal:"DAILY DEN // SAME CHAOS FOR EVERYONE",startTitle:"PROTECT THE POOL",startCopy:'Three acts. One sleeping admin. No second chances.<br><b>Desktop:</b> WASD + hold mouse. <b>Touch:</b> twin sticks.',start:"ENTER THE DEN →",
+      terminal:"DAILY DEN // SAME CHAOS FOR EVERYONE",startTitle:"PROTECT THE POOL",startCopy:'Three acts. One sleeping admin. No second chances.<br><b>Move:</b> WASD or left stick. <b>Aim:</b> mouse or right pad. Fire is automatic.',start:"ENTER THE DEN →",
       proofTitle:"TRUST NOTHING.<br>CHECK EVERYTHING.",proofCopy:'Project-controlled wallets are public. The burn address is read directly from TON. <strong>No mystery side-wallet theatre.</strong>',
       scan:"OPEN CASE →",scanInput:"TON JETTON CONTRACT",rankName:"YOUR SIGNATURE",rankCountry:"COUNTRY",rankSubmit:"ADD VERIFIED RUN",finish:"Finish a run to unlock submission.",
       supplyLive:"void wallet synced. population adjusted.",supplyError:"TON API unavailable. scan paused.",
@@ -541,9 +556,10 @@
     },
     ru:{
       live:"RUG DEN В ЭФИРЕ",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
+      moveControl:"ДВИЖЕНИЕ",moveHint:"тяни",aimControl:"ПРИЦЕЛ",aimHint:"задай направление",aimAria:"Задать направление огня",autoFire:"АВТООГОНЬ",armed:"АКТИВЕН",rotate:"ПОВЕРНИ ДЛЯ БОЛЬШЕГО ОБЗОРА",
       stamp:"НЕ ОВОЩ // ВСЁ ЕЩЁ ЖИВ",hero:'<b>Мем с играбельным алиби.</b> Защищай ликвидность. Уничтожай скамеров. Стань полностью LEEKed IN.',
       tag1:"ЕЖЕДНЕВНЫЙ ОДИНАКОВЫЙ RUN",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"1 ПОДТВЕРЖДЁННОЕ УБИЙСТВО = 1 PENDING LEEK",
-      terminal:"DAILY DEN // ОДИН ХАОС ДЛЯ ВСЕХ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Компьютер:</b> WASD + удерживай мышь. <b>Телефон:</b> два стика.',start:"ВОЙТИ В ЛОГОВО →",
+      terminal:"DAILY DEN // ОДИН ХАОС ДЛЯ ВСЕХ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
       proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Кошельки проекта публичны. Burn-адрес читается напрямую из TON. <strong>Никакого театра с тайными кошельками.</strong>',
       scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ RUN",finish:"Заверши run, чтобы открыть отправку результата.",
       supplyLive:"void-кошелёк синхронизирован. supply обновлён.",supplyError:"TON API недоступен. скан приостановлен.",
@@ -581,6 +597,9 @@
     $("soundBtn").textContent=audioEnabled?tr("soundOn"):tr("soundOff");
     $("soundBtnGame").textContent=tr("audio");
     $("fullscreenBtn").textContent=gameFullscreen?tr("exitFullscreen"):tr("fullscreen");
+    $("moveControlTitle").textContent=tr("moveControl");$("moveControlHint").textContent=tr("moveHint");
+    $("aimControlTitle").textContent=tr("aimControl");$("aimControlHint").textContent=tr("aimHint");$("aimPad").setAttribute("aria-label",tr("aimAria"));
+    $("autoFireLabel").textContent=tr("autoFire");$("autoFireState").textContent=tr("armed");$("rotateHint").textContent=tr("rotate");
     $("heroStamp").textContent=tr("stamp");
     $("heroLine").innerHTML=tr("hero");
     $("tagOne").textContent=tr("tag1");$("tagTwo").textContent=tr("tag2");$("tagThree").textContent=tr("tag3");
@@ -726,10 +745,10 @@
 
   function fitGameCanvas(){
     if(!gameFullscreen){playfield.style.width="";playfield.style.height="";return}
-    const rect=gameFrame.getBoundingClientRect();if(!rect.width||!rect.height)return;
+    const rect=gameFrame.getBoundingClientRect(),portrait=portraitCombatLayout();if(!rect.width||(!portrait&&!rect.height))return;
     const ratio=canvas.width/canvas.height;
     let width=rect.width,height=width/ratio;
-    if(height>rect.height){height=rect.height;width=height*ratio}
+    if(!portrait&&height>rect.height){height=rect.height;width=height*ratio}
     playfield.style.width=Math.max(1,Math.floor(width))+"px";playfield.style.height=Math.max(1,Math.floor(height))+"px";
   }
 
@@ -756,8 +775,8 @@
   }
 
   $("fullscreenBtn").addEventListener("click",()=>gameFullscreen?exitFullscreen():enterFullscreen());
-  addEventListener("resize",()=>gameFullscreen&&requestAnimationFrame(fitGameCanvas));
-  addEventListener("orientationchange",()=>{if(gameFullscreen){setTimeout(fitGameCanvas,120);setTimeout(fitGameCanvas,420)}});
+  addEventListener("resize",()=>{if(gameFullscreen)requestAnimationFrame(fitGameCanvas);requestAnimationFrame(renderAimRest)});
+  addEventListener("orientationchange",()=>{if(gameFullscreen){setTimeout(fitGameCanvas,120);setTimeout(fitGameCanvas,420)}setTimeout(renderAimRest,160)});
   if(isTelegramMiniApp){
     tg.onEvent?.("fullscreenChanged",()=>{
       if(gameFullscreen&&!tg.isFullscreen){gameFullscreen=false;gameTerminal.classList.remove("game-fullscreen");document.documentElement.classList.remove("game-lock");document.body.classList.remove("game-lock");setLanguage(currentLang)}
@@ -880,9 +899,9 @@
 
   let lastFrame=performance.now(),lastCompletedRun=null,runProofPending=false,runSubmitted=false;
   const keys=Object.create(null);
-  const mouse={x:W/2,y:H/2,down:false};
+  const mouse={x:W/2,y:H/2};
   const joy={x:0,y:0};
-  let aimHeld=false,aimVector={x:1,y:0},mobileAim=false,joyPointer=null,aimPointer=null;
+  let aimVector={x:0,y:-1},aimSource="vector",joyPointer=null,aimPointer=null;
 
   function formatTime(seconds){
     const total=Math.max(0,Math.floor(Number(seconds)||0));return `${Math.floor(total/60)}:${String(total%60).padStart(2,"0")}`;
@@ -949,6 +968,7 @@
     state.player={x:480,y:340,r:15,hp:100,vx:0,vy:0,angle:-Math.PI/2,inv:0,muzzle:0};
     state.pool={x:480,y:300,r:48,hp:100,flash:0};state.walls=ACTS[0].walls;
     state.enemies=[];state.bullets=[];state.enemyBullets=[];state.particles=[];state.decals=[];state.floaters=[];state.rugZones=[];state.eventLog=[];
+    aimVector={x:0,y:-1};aimSource="vector";requestAnimationFrame(renderAimRest);
     lastCompletedRun=null;runProofPending=false;runSubmitted=false;
     $("rankSubmit").disabled=true;$("rankStatus").className="rank-status";$("rankStatus").textContent=tr("finish");
     $("gameOverScreen").classList.add("hidden");$("pauseScreen").classList.add("hidden");
@@ -956,6 +976,7 @@
   }
 
   function beginGame(){
+    if(coarsePointer&&!gameFullscreen)enterFullscreen();
     resetGame();ensureAudio();state.running=true;state.phase="between";state.startedAt=Date.now();
     $("startScreen").classList.add("hidden");
     try{if(isTelegramMiniApp){tg.disableVerticalSwipes?.();if(gameFullscreen&&globalThis.screen?.orientation?.type?.startsWith("landscape"))tg.lockOrientation?.()}}catch(_){ }
@@ -1161,8 +1182,10 @@
     if(length<.06){player.vx*=Math.pow(.0007,dt);player.vy*=Math.pow(.0007,dt)}
     moveCircle(player,player.vx*dt,player.vy*dt);
 
-    if(mouse.down)shootDirection(mouse.x-player.x,mouse.y-player.y,false);
-    if(aimHeld)shootDirection(aimVector.x,aimVector.y,true);
+    if(state.phase==="combat"&&state.enemies.length){
+      const dx=aimSource==="mouse"?mouse.x-player.x:aimVector.x,dy=aimSource==="mouse"?mouse.y-player.y:aimVector.y;
+      shootDirection(dx,dy,false);
+    }
 
     if(state.phase==="between"){
       state.betweenClock-=dt;
@@ -1401,7 +1424,7 @@
 
   function endGame(victory,cause){
     if(state.ended)return;state.ended=true;state.running=false;state.phase="ended";state.victory=!!victory;state.cause=cause||state.cause;
-    mouse.down=false;stopAim();resetJoyVisual();
+    stopAim();resetJoyVisual();
     if(victory){state.score+=1500;sfx("win")}else sfx("hurt");
     try{if(isTelegramMiniApp){tg.enableVerticalSwipes?.();tg.unlockOrientation?.()}}catch(_){ }
     logEvent("end",victory?1:0);
@@ -1431,14 +1454,13 @@
   document.addEventListener("visibilitychange",()=>{if(document.hidden&&state.running&&!state.ended)pauseGame()});
 
   canvas.addEventListener("pointermove",event=>{
-    if(event.pointerType!=="mouse")return;const point=canvasPoint(event);mouse.x=point.x;mouse.y=point.y;
+    if(event.pointerType!=="mouse")return;const point=canvasPoint(event);mouse.x=point.x;mouse.y=point.y;aimSource="mouse";
     if(state.player)state.player.angle=Math.atan2(mouse.y-state.player.y,mouse.x-state.player.x);
   });
   canvas.addEventListener("pointerdown",event=>{
-    if(event.pointerType!=="mouse")return;event.preventDefault();const point=canvasPoint(event);mouse.x=point.x;mouse.y=point.y;mouse.down=true;shootCooldown=0;shootDirection(mouse.x-state.player.x,mouse.y-state.player.y,false);
+    if(event.pointerType!=="mouse")return;event.preventDefault();const point=canvasPoint(event);mouse.x=point.x;mouse.y=point.y;aimSource="mouse";shootCooldown=0;
   });
   canvas.addEventListener("contextmenu",event=>event.preventDefault());
-  addEventListener("pointerup",event=>{if(event.pointerType==="mouse")mouse.down=false});
 
   const joyEl=$("joystick"),stickEl=$("stick"),aimPad=$("aimPad"),aimStick=$("aimStick");
   function updateJoy(event){
@@ -1454,18 +1476,24 @@
   function updateAim(event){
     const rect=aimPad.getBoundingClientRect(),cx=rect.left+rect.width/2,cy=rect.top+rect.height/2,max=rect.width*.31;
     let dx=event.clientX-cx,dy=event.clientY-cy,len=Math.hypot(dx,dy);
-    if(len>4){aimVector={x:dx/len,y:dy/len};if(state.player)state.player.angle=Math.atan2(aimVector.y,aimVector.x)}
+    if(len>4){aimVector={x:dx/len,y:dy/len};aimSource="touch";if(state.player)state.player.angle=Math.atan2(aimVector.y,aimVector.x)}
     const visual=Math.min(max,len),nx=len?dx/len:0,ny=len?dy/len:0;
     aimStick.style.transform=`translate(calc(-50% + ${nx*visual}px),calc(-50% + ${ny*visual}px))`;
     aimPad.style.setProperty("--aim-rot",(Math.atan2(aimVector.y,aimVector.x)*180/Math.PI+90)+"deg");
   }
-  function stopAim(){aimPointer=null;aimHeld=false;mobileAim=false;aimPad.classList.remove("active");aimStick.style.transform="translate(-50%,-50%)"}
-  aimPad.addEventListener("pointerdown",event=>{event.preventDefault();aimPointer=event.pointerId;aimHeld=true;mobileAim=true;aimPad.classList.add("active");try{aimPad.setPointerCapture(event.pointerId)}catch(_){ }updateAim(event);shootCooldown=0;shootDirection(aimVector.x,aimVector.y,true)},{passive:false});
+  function renderAimRest(){
+    const rect=aimPad.getBoundingClientRect();if(!rect.width)return;
+    const distance=rect.width*.19,dx=aimVector.x*distance,dy=aimVector.y*distance;
+    aimStick.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
+    aimPad.style.setProperty("--aim-rot",(Math.atan2(aimVector.y,aimVector.x)*180/Math.PI+90)+"deg");aimPad.classList.add("armed");
+  }
+  function stopAim(){aimPointer=null;aimPad.classList.remove("active");renderAimRest()}
+  aimPad.addEventListener("pointerdown",event=>{event.preventDefault();aimPointer=event.pointerId;aimSource="touch";aimPad.classList.add("active");try{aimPad.setPointerCapture(event.pointerId)}catch(_){ }updateAim(event);shootCooldown=0;haptic("light")},{passive:false});
   aimPad.addEventListener("pointermove",event=>{if(event.pointerId===aimPointer){event.preventDefault();updateAim(event)}},{passive:false});
   aimPad.addEventListener("pointerup",event=>{if(event.pointerId===aimPointer)stopAim()});aimPad.addEventListener("pointercancel",stopAim);
 
   function pauseGame(){
-    if(!state.running||state.paused||state.ended)return;state.paused=true;mouse.down=false;stopAim();resetJoyVisual();$("pauseScreen").classList.remove("hidden");logEvent("pause",1);toast(tr("paused"));
+    if(!state.running||state.paused||state.ended)return;state.paused=true;stopAim();resetJoyVisual();$("pauseScreen").classList.remove("hidden");logEvent("pause",1);toast(tr("paused"));
   }
   function resumeGame(){
     if(!state.paused||state.ended)return;state.paused=false;state.startedAt=Date.now()-state.elapsed*1000;lastFrame=performance.now();$("pauseScreen").classList.add("hidden");logEvent("pause",0);toast(tr("resumed"));

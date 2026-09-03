@@ -324,7 +324,7 @@
       body{padding-bottom:calc(66px + var(--safe-bottom))}.content{padding-bottom:34px}.quick-actions{grid-template-columns:1fr 1fr}.quick-action{min-height:48px;padding-inline:8px;font-size:.68rem}
       .impact-head{display:block;padding:17px 15px}.impact-head p{margin-top:9px;text-align:left}.impact-grid{grid-template-columns:1fr 1fr}.impact-stat{padding:14px 13px}.impact-stat strong{font-size:1.12rem}.impact-log{grid-template-columns:1fr;padding:12px 13px;gap:5px}.impact-log time{display:none}.impact-log span{white-space:normal}
       #gameOverScreen{width:96%;max-height:96%;padding:10px}.trophy-preview{margin-top:7px}.run-badges{margin-top:7px}.screen-actions{position:relative;z-index:2}
-      .mobile-dock{position:fixed;left:0;right:0;bottom:0;z-index:9500;display:grid;grid-template-columns:repeat(5,1fr);min-height:calc(62px + var(--safe-bottom));padding:0 max(5px,var(--safe-right)) var(--safe-bottom) max(5px,var(--safe-left));border-top:1px solid rgba(255,230,0,.34);background:rgba(4,6,4,.96);backdrop-filter:blur(14px);box-shadow:0 -12px 34px rgba(0,0,0,.48)}
+      .mobile-dock{position:fixed;left:0;right:0;bottom:0;z-index:9500;display:grid;grid-template-columns:repeat(4,1fr);min-height:calc(62px + var(--safe-bottom));padding:0 max(5px,var(--safe-right)) var(--safe-bottom) max(5px,var(--safe-left));border-top:1px solid rgba(255,230,0,.34);background:rgba(4,6,4,.96);backdrop-filter:blur(14px);box-shadow:0 -12px 34px rgba(0,0,0,.48)}
       .mobile-dock a,.mobile-dock button{min-width:0;min-height:62px;display:grid;place-items:center;align-content:center;gap:3px;padding:5px 3px;border:0;border-right:1px solid var(--line);background:transparent;color:#c6cec5;text-decoration:none;font-size:.6rem;letter-spacing:.055em;cursor:pointer}.mobile-dock>*:last-child{border-right:0}.mobile-dock b{color:var(--acid);font-family:Anton,Impact,sans-serif;font-size:1rem;font-weight:400}.mobile-dock .trade{background:linear-gradient(135deg,var(--signal),var(--acid));color:#071006}.mobile-dock .trade b{color:#071006}.mobile-dock .copy b{color:var(--cold)}
       html.game-lock .mobile-dock,body.game-lock .mobile-dock{display:none}.toast{bottom:calc(78px + var(--safe-bottom))}
     }
@@ -590,7 +590,6 @@
 
   <nav class="mobile-dock" aria-label="Quick actions">
     <a href="#play"><b>▶</b><span>PLAY</span></a>
-    <a href="#ranking" class="rank-shortcut" aria-label="Ranking"><b>🏆</b><span>RANK</span></a>
     <button class="copy" id="mobileCopyContract" type="button"><b>CA</b><span>COPY</span></button>
     <a class="trade" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer"><b>↗</b><span>DeDust</span></a>
     <a href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer"><b>☕</b><span>CAFÉ</span></a>
@@ -755,7 +754,7 @@
     ["Global scores are written to Supabase with the public publishable key. Row-level security controls anonymous access. If the database is unavailable, your result remains local and shareable.","Глобальные результаты записываются в Supabase с публичным ключом. Политики доступа на уровне строк контролируют анонимную запись. Если база недоступна, результат остаётся локальным и им можно поделиться."],
     ["WE'RE NOT A VEGETABLE.","МЫ НЕ ОВОЩ."],["WE'RE THE THING THAT EATS VEGETABLES.","МЫ ТО, ЧТО ЕСТ ОВОЩИ."],["Playable prototype. Public wallets. Chain data. No fake utility.","Играбельный прототип. Публичные кошельки. Данные блокчейна. Никакой выдуманной пользы."],["PUBLIC BUILD TAPE","ПУБЛИЧНЫЙ ЖУРНАЛ СБОРОК"],
     ["Proof of play, trophy cards, case files and combat juice","Подтверждение игры, карточки результатов, дела и больше боевого драйва"],["Landscape screen recovery + clear lower combat zone","Восстановление альбомного режима + чистая нижняя зона боя"],["Manual aim + continuous auto-fire + mobile combat pass","Ручной прицел + непрерывный автоогонь + мобильная доработка боя"],["Three-act LEEKed IN run + final boss","Трёхактный забег LEEKed IN + финальный босс"],["15M LEEK sent to the public void wallet — independent of prototype gameplay","15M LEEK отправлено в публичный void-кошелёк — отдельно от игры прототипа"],
-    ["GRAMLEEK // BUILT IN PUBLIC ON GRAM","GRAMLEEK // СТРОИМ ОТКРЫТО НА GRAM"],["PLAY","ИГРАТЬ"],["PROOF","ДОКАЗАТЕЛЬСТВА"],["RANK","РЕЙТИНГ"],["COPY","КОПИРОВАТЬ"],["Ranking","Рейтинг"],["Quick actions","Быстрые действия"],
+    ["GRAMLEEK // BUILT IN PUBLIC ON GRAM","GRAMLEEK // СТРОИМ ОТКРЫТО НА GRAM"],["PLAY","ИГРАТЬ"],["PROOF","ДОКАЗАТЕЛЬСТВА"],["RANK","РЕЙТИНГ"],["COPY","КОПИРОВАТЬ"],["Quick actions","Быстрые действия"],
     ["Top-down action game. Move with WASD or left joystick, set the automatic firing direction with mouse or right pad.","Экшен с видом сверху. Двигайся WASD или левым стиком, направление автоогня задавай мышью или правым падом."],["Shareable run trophy","Карточка результата для публикации"],["Unlocked run badges","Разблокированные достижения"],["Live GramLeek impact ticker","Live-лента GramLeek"]
   ]);
 

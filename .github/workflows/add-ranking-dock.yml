@@ -1,0 +1,74 @@
+name: Add ranking dock button
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-ranking-dock.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Backup and add ranking shortcut
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import shutil, re
+
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          backup=Path('backups/index-before-ranking-dock-2026-09-04.html')
+          backup.parent.mkdir(parents=True,exist_ok=True)
+          if not backup.exists():
+              shutil.copyfile(p,backup)
+
+          old='.mobile-dock{position:fixed;left:0;right:0;bottom:0;z-index:9500;display:grid;grid-template-columns:repeat(4,1fr);'
+          new='.mobile-dock{position:fixed;left:0;right:0;bottom:0;z-index:9500;display:grid;grid-template-columns:repeat(5,1fr);'
+          if s.count(old)!=1:
+              raise SystemExit(f'Expected one mobile dock grid anchor, found {s.count(old)}')
+          s=s.replace(old,new,1)
+
+          old_nav='''    <a href="#play"><b>▶</b><span>PLAY</span></a>\n    <button class="copy" id="mobileCopyContract" type="button"><b>CA</b><span>COPY</span></button>'''
+          new_nav='''    <a href="#play"><b>▶</b><span>PLAY</span></a>\n    <a href="#ranking" class="rank-shortcut" aria-label="Ranking"><b>🏆</b><span>RANK</span></a>\n    <button class="copy" id="mobileCopyContract" type="button"><b>CA</b><span>COPY</span></button>'''
+          if s.count(old_nav)!=1:
+              raise SystemExit(f'Expected one mobile dock nav anchor, found {s.count(old_nav)}')
+          s=s.replace(old_nav,new_nav,1)
+
+          # Ensure the existing RU translation map explicitly translates the new label and aria text.
+          marker='["PLAY","ИГРАТЬ"],["PROOF","ДОКАЗАТЕЛЬСТВА"],["RANK","РЕЙТИНГ"],["COPY","КОПИРОВАТЬ"]'
+          if marker not in s:
+              raise SystemExit('Expected RU RANK translation marker not found')
+          aria_marker='["Quick actions","Быстрые действия"]'
+          if aria_marker not in s:
+              raise SystemExit('Expected RU aria translation marker not found')
+          s=s.replace(aria_marker,'["Ranking","Рейтинг"],'+aria_marker,1)
+
+          p.write_text(s,encoding='utf-8')
+
+          if 'grid-template-columns:repeat(5,1fr)' not in s or 'href="#ranking" class="rank-shortcut"' not in s:
+              raise SystemExit('Ranking dock verification failed')
+          PY
+      - name: Validate JavaScript
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('index.html').read_text(encoding='utf-8')
+          inline='\n'.join(x for x in re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',s,flags=re.S|re.I) if x.strip() and 'telegram.org/js/' not in x)
+          Path('/tmp/check.js').write_text(inline,encoding='utf-8')
+          PY
+          node --check /tmp/check.js
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name "GramLeek"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html backups/index-before-ranking-dock-2026-09-04.html
+          git commit -m "Add ranking shortcut to mobile dock"
+          git push

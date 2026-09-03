@@ -15,7 +15,7 @@ export class MenuScene extends Phaser.Scene {
 
     this.add.text(width / 2, 212, 'LEEKed IN', {
       fontFamily: 'Impact, sans-serif', fontSize: '94px', color: '#c8ff28', stroke: '#050705', strokeThickness: 8,
-    }).setOrigin(0.5).setSkew(-0.08, 0);
+    }).setOrigin(0.5);
 
     this.add.text(width / 2, 295, 'PHASER 4 VERTICAL SLICE // NO TOKEN BURN', {
       fontFamily: 'monospace', fontSize: '16px', color: '#aab5aa',

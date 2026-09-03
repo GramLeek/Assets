@@ -557,11 +557,11 @@
         <div class="rank-form">
           <label class="sr-only" for="rankName">Signature</label><input class="rank-input" id="rankName" maxlength="18" autocomplete="nickname" placeholder="YOUR SIGNATURE" />
           <label class="sr-only" for="rankCountry">Country</label><select class="rank-country" id="rankCountry"><option value="">COUNTRY</option></select>
-          <button class="rank-submit" id="rankSubmit" type="button" disabled>ADD VERIFIED RUN</button>
+          <button class="rank-submit" id="rankSubmit" type="button" disabled>ADD GLOBAL RUN</button>
         </div>
         <div class="rank-status" id="rankStatus">Finish a run to unlock submission.</div>
         <div class="rank-list" id="rankList"><div class="rank-empty">Loading the wall…</div></div>
-        <p class="fineprint">Global scores are accepted only through the verification endpoint. The browser never writes scores directly to the database. If verification is unavailable, your result remains local and shareable.</p>
+        <p class="fineprint">Global scores are written to Supabase with the public publishable key. Row-level security controls anonymous access. If the database is unavailable, your result remains local and shareable.</p>
       </section>
 
       <section class="manifest">
@@ -589,7 +589,7 @@
   /* =========================================================
      GRAMLEEK CONFIG
      The Supabase publishable key is intentionally public.
-     Global score WRITES go only through an Edge Function.
+     Global score reads and writes use Supabase REST under RLS.
      Set telegramBotUsername after configuring the Main Mini App.
   ========================================================= */
   const CONFIG={
@@ -600,7 +600,6 @@
     toncenter:"https://toncenter.com/api/v3",
     supabaseUrl:"https://iicdizirejrnxwcuncff.supabase.co",
     supabaseKey:"sb_publishable_4wv5GJKS0Z_mxq-2or9icQ_lYdcK1VJ",
-    secureScoreEndpoint:"https://iicdizirejrnxwcuncff.supabase.co/functions/v1/leeked-score",
     telegramBotUsername:"",
     maxEventLog:1800
   };
@@ -677,7 +676,7 @@
       tag1:"DAILY SEEDED RUN",tag2:"NO WALLET REQUIRED",tag3:"1 VERIFIED KILL = 1 PENDING LEEK",
       terminal:"DAILY RUN // AUTO-FIRE READY",startTitle:"PROTECT THE POOL",startCopy:'Three acts. One sleeping admin. No second chances.<br><b>Move:</b> WASD or left stick. <b>Aim:</b> mouse or right pad. Fire is automatic.',start:"ENTER THE DEN →",
       proofTitle:"TRUST NOTHING.<br>CHECK EVERYTHING.",proofCopy:'Public wallets. Live burn balance. Links to the chain. <strong>Read it yourself.</strong>',
-      scan:"OPEN CASE →",scanInput:"TON JETTON CONTRACT",rankName:"YOUR SIGNATURE",rankCountry:"COUNTRY",rankSubmit:"ADD VERIFIED RUN",finish:"Finish a run to unlock submission.",
+      scan:"OPEN CASE →",scanInput:"TON JETTON CONTRACT",rankName:"YOUR SIGNATURE",rankCountry:"COUNTRY",rankSubmit:"ADD GLOBAL RUN",finish:"Finish a run to unlock submission.",
       supplyLive:"void wallet synced. population adjusted.",supplyError:"TON API unavailable. scan paused.",
       copy:"COPY CA",copied:"CA COPIED.",install:"INSTALL GAME",installed:"ADDED TO HOME SCREEN",
       paused:"PAUSED",resumed:"BACK INTO THE DEN",challenge:(name,score)=>`${name} scored ${score.toLocaleString()}. Beat the vegetable.`,
@@ -685,7 +684,7 @@
       runText:r=>`Kills: <b>${r.kills}</b> · Score: <b>${r.score.toLocaleString()}</b> · Time: <b>${formatTime(r.duration)}</b><br>Cause: <b>${escapeHtml(r.cause)}</b>`,
       share:"SHARE TROPHY",challengeCopy:"COPY CHALLENGE",retry:"RUN IT BACK →",
       runReady:r=>`Run sealed: ${r.score.toLocaleString()} pts · ${r.kills} kills. Add signature and country.`,
-      shortName:"Signature needs at least 2 characters.",chooseCountry:"Choose a country first.",verifying:"Verifying the run…",verified:"Run accepted. Shame is now global.",verifyError:"Verification endpoint rejected or is not deployed. Result remains local and shareable.",
+      shortName:"Signature needs at least 2 characters.",chooseCountry:"Choose a country first.",verifying:"Saving the run…",verified:"Run accepted. Shame is now global.",verifyError:"Database rejected the run. Result remains local and shareable.",
       dbOnline:"GLOBAL READ ONLINE",dbError:"GLOBAL READ OFFLINE",empty:"NO VERIFIED RUNS YET.",loading:"Loading the wall…",
       scanLoading:"Interrogating the chain…",scanInvalid:"That does not look like a TON jetton address.",scanFailed:"TON did not answer cleanly. Wait a moment and retry.",
       verdictLow:"WIDELY CHOPPED",verdictMid:"CROWDED KITCHEN",verdictHigh:"WHALES IN THE PANTRY",
@@ -709,7 +708,7 @@
       runText:r=>`Убийства: <b>${r.kills}</b> · Счёт: <b>${r.score.toLocaleString()}</b> · Время: <b>${formatTime(r.duration)}</b><br>Причина: <b>${escapeHtml(r.cause)}</b>`,
       share:"ПОДЕЛИТЬСЯ TROPHY",challengeCopy:"СКОПИРОВАТЬ ВЫЗОВ",retry:"ЕЩЁ РАЗ →",
       runReady:r=>`Run сохранён: ${r.score.toLocaleString()} очков · ${r.kills} убийств. Добавь подпись и страну.`,
-      shortName:"Минимум 2 символа.",chooseCountry:"Сначала выбери страну.",verifying:"Проверяем run…",verified:"Run принят. Позор стал глобальным.",verifyError:"Endpoint проверки отклонил запрос или ещё не развёрнут. Результат остаётся локальным и доступным для sharing.",
+      shortName:"Минимум 2 символа.",chooseCountry:"Сначала выбери страну.",verifying:"Сохраняем run…",verified:"Run принят. Позор стал глобальным.",verifyError:"База отклонила run. Результат остаётся локальным и доступным для sharing.",
       dbOnline:"GLOBAL READ ONLINE",dbError:"GLOBAL READ OFFLINE",empty:"ПОКА НЕТ ПОДТВЕРЖДЁННЫХ RUNS.",loading:"Загружаем стену…",
       scanLoading:"Допрашиваем блокчейн…",scanInvalid:"Это не похоже на адрес TON jetton.",scanFailed:"TON ответил невнятно. Подожди и попробуй снова.",
       verdictLow:"ХОРОШО НАРЕЗАНО",verdictMid:"ТЕСНАЯ КУХНЯ",verdictHigh:"КИТЫ В КЛАДОВКЕ",
@@ -1861,6 +1860,21 @@
     if(!response.ok)throw new Error("DB_"+response.status);return response.json();
   }
 
+  async function dbWrite(table,payload){
+    const response=await fetch(`${CONFIG.supabaseUrl}/rest/v1/${table}`,{
+      method:"POST",
+      headers:supabaseHeaders({"Content-Type":"application/json",Prefer:"return=minimal"}),
+      body:JSON.stringify(payload)
+    });
+    if(!response.ok){
+      const detail=await response.text().catch(()=>"");
+      const error=new Error("DB_WRITE_"+response.status+(detail?":"+detail:""));
+      error.status=response.status;
+      throw error;
+    }
+    return true;
+  }
+
   function setDbState(ok){
     const el=$("rankDbState");el.classList.toggle("error",!ok);el.innerHTML=`DATABASE<b>${escapeHtml(ok?tr("dbOnline"):tr("dbError"))}</b>`;
   }
@@ -1900,15 +1914,56 @@
     const name=$("rankName").value.trim().slice(0,18),country=$("rankCountry").value,status=$("rankStatus"),button=$("rankSubmit");
     if(name.length<2){status.className="rank-status error";status.textContent=tr("shortName");return}
     if(!country){status.className="rank-status error";status.textContent=tr("chooseCountry");return}
-    localStorage.setItem("leeked-signature",name);localStorage.setItem("leeked-country",country);button.disabled=true;button.textContent="…";status.className="rank-status";status.textContent=tr("verifying");
-    const headers={"Content-Type":"application/json",apikey:CONFIG.supabaseKey};if(/^eyJ/.test(CONFIG.supabaseKey))headers.Authorization=`Bearer ${CONFIG.supabaseKey}`;
-    const payload={action:"submit_run",telegram_init_data:tg?.initData||"",player:{name,country},run:{...lastCompletedRun,events:state.eventLog}};
+
+    localStorage.setItem("leeked-signature",name);
+    localStorage.setItem("leeked-country",country);
+    button.disabled=true;
+    button.textContent="…";
+    status.className="rank-status";
+    status.textContent=tr("verifying");
+
+    const runId=lastCompletedRun.runId||lastCompletedRun.run_id;
+    if(!runId){
+      status.className="rank-status error";
+      status.textContent=tr("verifyError");
+      button.disabled=false;
+      button.textContent=tr("rankSubmit");
+      return;
+    }
+
     try{
-      const response=await fetch(CONFIG.secureScoreEndpoint,{method:"POST",headers,body:JSON.stringify(payload)});
-      const result=await response.json().catch(()=>({}));if(!response.ok||result.ok===false)throw new Error(result.error||"VERIFY_"+response.status);
-      runSubmitted=true;status.className="rank-status good";status.textContent=tr("verified");await refreshGlobalData();haptic("success");
-    }catch(error){console.warn("Secure score submission unavailable:",error);status.className="rank-status error";status.textContent=tr("verifyError");button.disabled=false}
-    finally{button.textContent=tr("rankSubmit");if(runSubmitted)button.disabled=true}
+      try{
+        await dbWrite("leeked_in_runs",{
+          run_id:runId,
+          score:Math.max(0,Math.round(Number(lastCompletedRun.score)||0)),
+          kills:Math.max(0,Math.round(Number(lastCompletedRun.kills)||0)),
+          combo:Math.max(0,Math.round(Number(lastCompletedRun.combo)||0)),
+          accuracy:Math.max(0,Math.min(100,Math.round(Number(lastCompletedRun.accuracy)||0)))
+        });
+      }catch(error){
+        if(error.status!==409&&!String(error.message).includes("23505"))throw error;
+      }
+
+      try{
+        await dbWrite("leeked_in_scores",{run_id:runId,name,country});
+      }catch(error){
+        if(error.status!==409&&!String(error.message).includes("23505"))throw error;
+      }
+
+      runSubmitted=true;
+      status.className="rank-status good";
+      status.textContent=tr("verified");
+      await refreshGlobalData();
+      haptic("success");
+    }catch(error){
+      console.warn("Global score write unavailable:",error);
+      status.className="rank-status error";
+      status.textContent=tr("verifyError");
+      button.disabled=false;
+    }finally{
+      button.textContent=tr("rankSubmit");
+      if(runSubmitted)button.disabled=true;
+    }
   }
 
   $("rankSubmit").addEventListener("click",submitVerifiedRun);$("rankCountry").addEventListener("change",event=>{localStorage.setItem("leeked-country",event.target.value);renderRanking()});$("rankName").addEventListener("input",renderRanking);

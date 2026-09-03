@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
   <meta name="theme-color" content="#060806" />
-  <meta name="description" content="No roadmap. No promises. Just a gun, a pool and receipts on-chain. Play LEEKed IN on GRAM." />
+  <meta name="description" content="Play the public prototype of LEEKed IN on GRAM. Gameplay is off-chain for now; the token-burn mechanic is not live. Public TON wallet data is shown separately." />
   <title>GramLeek — LEEKed IN</title>
   <script src="https://telegram.org/js/telegram-web-app.js?63"></script>
   <style>
@@ -337,8 +337,8 @@
     <div class="boot-core">
       <div class="boot-head"><span>GRAMLEEK <b>BOOT_09</b></span><button class="boot-skip" id="bootSkip" type="button">SKIP</button></div>
       <div class="boot-lines">
-        <span>LEEKed IN <b>READY</b></span>
-        <span>TON BURN WALLET <b>CONNECTING</b></span>
+        <span>LEEKed IN <b>PROTOTYPE</b></span>
+        <span>VOID WALLET DATA <b>READ-ONLY</b></span>
         <span>GLOBAL RANKING <b>CONNECTING</b></span>
         <span>GRAMLEAKS <b>READY</b></span>
       </div>
@@ -351,9 +351,9 @@
   <header class="shell site-nav">
     <a class="brand" href="#play" aria-label="GramLeek home">
       <span class="brand-orb" id="brandOrb"><img src="Logo.png" alt="" id="brandLogo" /><span class="brand-fallback">L</span></span>
-      <span class="brand-copy"><strong>GRAMLEEK</strong><span>GAME // PROOF // RECEIPTS</span></span>
+      <span class="brand-copy"><strong>GRAMLEEK</strong><span>GAME // PROTOTYPE // CHAIN DATA</span></span>
     </a>
-    <div class="nav-signal">PUBLIC BUILD <b>0.9</b> // NOTHING TO HIDE</div>
+    <div class="nav-signal">PUBLIC PROTOTYPE <b>0.9</b> // BUILDING IN THE OPEN</div>
     <div class="nav-actions">
       <a class="nav-direct trade" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">TRADE</a>
       <a class="nav-direct" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">CAFÉ</a>
@@ -370,11 +370,11 @@
   <main>
     <section class="shell hero" id="play">
       <div class="hero-copy">
-        <div class="build-stamp" id="heroStamp">NO ROADMAP // NO PROMISES</div>
+        <div class="build-stamp" id="heroStamp">PUBLIC PROTOTYPE // BURN NOT LIVE</div>
         <h1><span>LEEKed</span><strong>IN</strong></h1>
-        <p class="hero-line" id="heroLine"><b>No roadmap. No promises.</b><br>Just a gun and a pool.</p>
+        <p class="hero-line" id="heroLine"><b>Playable prototype. No fake utility.</b><br>Kills score points. They do not burn LEEK yet.</p>
         <div class="hero-tags" aria-label="Game features">
-          <span id="tagOne">DAILY SEEDED RUN</span><span id="tagTwo">NO WALLET REQUIRED</span><span id="tagThree">1 VERIFIED KILL = 1 PENDING LEEK</span>
+          <span id="tagOne">DAILY SEEDED RUN</span><span id="tagTwo">NO WALLET REQUIRED</span><span id="tagThree">BURN MECHANIC // NOT LIVE</span>
         </div>
         <div class="contract-mini">
           <b>LEEK CA</b>
@@ -410,7 +410,7 @@
                   <div class="hud-row">HP <b id="hudHp">100</b></div>
                 </div>
                 <div class="hud-center"><span id="hudActLabel">ACT I</span><b id="hudAct">LIQUIDITY ALLEY</b></div>
-                <div class="hud-right"><span>PENDING BURN</span><b id="hudBurn">0 LEEK</b></div>
+                <div class="hud-right"><span>GAME BURN</span><b id="hudBurn">NOT LIVE</b></div>
                 <div class="hud-bottom">
                   <div class="hud-meter"><div class="meter-copy"><span>LIQUIDITY</span><b id="hudLiquidity">100%</b></div><div class="meter-track"><div class="meter-fill liquidity" id="liquidityFill"></div></div></div>
                   <div class="hud-meter"><div class="meter-copy"><span>LOCKED IN</span><b id="hudLocked">0%</b></div><div class="meter-track"><div class="meter-fill locked" id="lockedFill"></div></div></div>
@@ -467,16 +467,16 @@
       </section>
     </section>
 
-    <div class="ticker" aria-label="Live GramLeek impact ticker"><div class="ticker-track" id="tickerTrack">THIS RUN: 0 KILLS → 0 PENDING LEEK&nbsp;&nbsp; ✦ &nbsp;&nbsp;BURN WALLET: CONNECTING&nbsp;&nbsp; ✦ &nbsp;&nbsp;</div></div>
+    <div class="ticker" aria-label="Live GramLeek impact ticker"><div class="ticker-track" id="tickerTrack">THIS RUN: 0 KILLS&nbsp;&nbsp; ✦ &nbsp;&nbsp;GAME BURN: NOT LIVE&nbsp;&nbsp; ✦ &nbsp;&nbsp;VOID WALLET DATA: READ-ONLY&nbsp;&nbsp; ✦ &nbsp;&nbsp;</div></div>
 
     <section class="shell live-impact" id="impact" aria-labelledby="impactTitle">
       <div class="impact-head">
-        <div><div class="section-kicker acid">PROOF OF PLAY</div><h2 id="impactTitle">THE GAME LEAVES A RECEIPT.</h2></div>
-        <p>Kills are pending LEEK. A burn becomes real only when the disclosed wallet sends the public transaction.</p>
+        <div><div class="section-kicker acid">PROTOTYPE TELEMETRY</div><h2 id="impactTitle">THE GAME LEAVES A SCORE.</h2></div>
+        <p>Kills are gameplay data only. This prototype does not burn LEEK or trigger token transactions. The burn mechanic is planned, not live.</p>
       </div>
       <div class="impact-grid">
         <div class="impact-stat"><span>THIS RUN // KILLS</span><strong id="impactRunKills">0</strong></div>
-        <div class="impact-stat"><span>THIS RUN // PENDING</span><strong id="impactPendingBurn">0 LEEK</strong></div>
+        <div class="impact-stat"><span>GAME BURN STATUS</span><strong id="impactPendingBurn">NOT LIVE</strong></div>
         <div class="impact-stat"><span>ALL RECORDED KILLS</span><strong id="impactGlobalKills">CONNECTING</strong></div>
         <div class="impact-stat"><span>LAST SEALED RUN</span><strong id="impactLastScore">NONE</strong></div>
       </div>
@@ -486,9 +486,9 @@
     <div class="shell content">
       <section class="section-grid" id="proof">
         <div class="panel acid">
-          <div class="section-kicker acid">THE RECEIPT // ON-CHAIN</div>
+          <div class="section-kicker acid">ON-CHAIN DATA // SEPARATE FROM GAME</div>
           <h2 class="section-title" id="proofTitle">TRUST NOTHING.<br>CHECK EVERYTHING.</h2>
-          <p class="section-copy" id="proofCopy">Public wallets. Live burn balance. Links to the chain. <strong>Read it yourself.</strong></p>
+          <p class="section-copy" id="proofCopy">Public wallets. Live void-wallet balance. Current gameplay does not create burn transactions. <strong>Read it yourself.</strong></p>
           <div class="proof-list">
             <div class="proof-row"><div class="proof-main"><div class="proof-name">DEV WALLET</div><a class="proof-address" href="https://tonviewer.com/UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn" target="_blank" rel="noopener noreferrer">UQBpzR3SC97np5KuE49giY3nDR8_sf7j5V1XkwLsSuq_-7Hn</a></div><div class="proof-value">50M · 5%</div></div>
             <div class="proof-row"><div class="proof-main"><div class="proof-name">COMMUNITY FUND</div><a class="proof-address" href="https://tonviewer.com/UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy" target="_blank" rel="noopener noreferrer">UQCEorxBr91yJDWj2QwWTB_ofVQaSf3OFOh9wRt0hKUgSSsy</a></div><div class="proof-value">50M · 5%</div></div>
@@ -505,7 +505,7 @@
             <a class="big-link primary" href="https://dedust.io/coins/EQAmoQqDz6woBJ1dvwFl14PHdD6CE3eVMd58INFRKp3n9Ycw" target="_blank" rel="noopener noreferrer">TRADE ON DeDust →</a>
             <a class="big-link" href="https://t.me/LeekCafe" target="_blank" rel="noopener noreferrer">LEEK CAFÉ →</a>
           </div>
-          <p class="fineprint">Gameplay kills are tracked separately. They become real burns only after a public batch transaction from a disclosed project wallet.</p>
+          <p class="fineprint">The void wallet is real on-chain data and is not connected to current gameplay. No kill in this prototype burns LEEK.</p>
         </div>
       </section>
 
@@ -565,8 +565,8 @@
       </section>
 
       <section class="manifest">
-        <div class="manifest-quote"><blockquote>WE'RE NOT A VEGETABLE. <span>WE'RE THE THING THAT EATS VEGETABLES.</span></blockquote><p>Game. Public wallets. Receipts. Everything else is noise.</p></div>
-        <div class="build-tape" id="builds"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 09</time><span>Proof of play, trophy cards, case files and combat juice</span></div><div class="tape-row"><time>BUILD 08.2</time><span>Landscape screen recovery + clear lower combat zone</span></div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
+        <div class="manifest-quote"><blockquote>WE'RE NOT A VEGETABLE. <span>WE'RE THE THING THAT EATS VEGETABLES.</span></blockquote><p>Playable prototype. Public wallets. Chain data. No fake utility.</p></div>
+        <div class="build-tape" id="builds"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 09</time><span>Proof of play, trophy cards, case files and combat juice</span></div><div class="tape-row"><time>BUILD 08.2</time><span>Landscape screen recovery + clear lower combat zone</span></div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet — independent of prototype gameplay</span></div></div>
       </section>
     </div>
   </main>
@@ -672,12 +672,12 @@
     en:{
       live:"KILLS THIS RUN",soundOn:"SOUND ON",soundOff:"SOUND OFF",audio:"AUDIO",fullscreen:"FULLSCREEN ↗",exitFullscreen:"EXIT FULLSCREEN ×",
       moveControl:"MOVE",moveHint:"drag",aimControl:"AIM",aimHint:"set direction",aimAria:"Set firing direction",autoFire:"AUTO-FIRE",armed:"ARMED",rotate:"ROTATE FOR MORE ROOM",
-      stamp:"NO ROADMAP // NO PROMISES",hero:'<b>No roadmap. No promises.</b><br>Just a gun and a pool.',
-      tag1:"DAILY SEEDED RUN",tag2:"NO WALLET REQUIRED",tag3:"1 VERIFIED KILL = 1 PENDING LEEK",
+      stamp:"PUBLIC PROTOTYPE // BURN NOT LIVE",hero:'<b>Playable prototype. No fake utility.</b><br>Kills score points. They do not burn LEEK yet.',
+      tag1:"DAILY SEEDED RUN",tag2:"NO WALLET REQUIRED",tag3:"BURN MECHANIC // NOT LIVE",
       terminal:"DAILY RUN // AUTO-FIRE READY",startTitle:"PROTECT THE POOL",startCopy:'Three acts. One sleeping admin. No second chances.<br><b>Move:</b> WASD or left stick. <b>Aim:</b> mouse or right pad. Fire is automatic.',start:"ENTER THE DEN →",
-      proofTitle:"TRUST NOTHING.<br>CHECK EVERYTHING.",proofCopy:'Public wallets. Live burn balance. Links to the chain. <strong>Read it yourself.</strong>',
+      proofTitle:"TRUST NOTHING.<br>CHECK EVERYTHING.",proofCopy:'Public wallets. Live void-wallet balance. Current gameplay does not create burn transactions. <strong>Read it yourself.</strong>',
       scan:"OPEN CASE →",scanInput:"TON JETTON CONTRACT",rankName:"YOUR SIGNATURE",rankCountry:"COUNTRY",rankSubmit:"ADD GLOBAL RUN",finish:"Finish a run to unlock submission.",
-      supplyLive:"void wallet synced. population adjusted.",supplyError:"TON API unavailable. scan paused.",
+      supplyLive:"void wallet synced. gameplay link: not live.",supplyError:"TON API unavailable. scan paused.",
       copy:"COPY CA",copied:"CA COPIED.",install:"INSTALL GAME",installed:"ADDED TO HOME SCREEN",
       paused:"PAUSED",resumed:"BACK INTO THE DEN",challenge:(name,score)=>`${name} scored ${score.toLocaleString()}. Beat the vegetable.`,
       rugged:"RUGGED.",cleared:"DEN CLEARED.",liquidityGone:"LIQUIDITY DRAINED.",
@@ -689,19 +689,19 @@
       scanLoading:"Interrogating the chain…",scanInvalid:"That does not look like a TON jetton address.",scanFailed:"TON did not answer cleanly. Wait a moment and retry.",
       verdictLow:"WIDELY CHOPPED",verdictMid:"CROWDED KITCHEN",verdictHigh:"WHALES IN THE PANTRY",
       verdictLowText:"The visible top ten do not dominate the issued supply.",verdictMidText:"Ownership is meaningfully concentrated. Inspect the addresses before inventing a story.",verdictHighText:"A small group controls a large share. That is a fact, not automatically a rug verdict.",
-      ticker:burned=>["1 KILL = 1 PENDING LEEK",`${human(burned)} SENT INTO THE VOID`,"NO WALLET REQUIRED","NO ROADMAP FANFICTION","GAMEPLAY FIRST"],
+      ticker:burned=>["GAME BURN = NOT LIVE",`VOID WALLET: ${human(burned)} LEEK // NOT FROM GAMEPLAY`,"NO WALLET REQUIRED","PUBLIC PROTOTYPE","GAMEPLAY FIRST"],
       act:["LIQUIDITY ALLEY","KOL FACTORY","ADMIN'S BEDROOM"],actLabel:["ACT I","ACT II","FINAL ACT"],
       wave:"WAVE",locked:"FULLY LEEKED IN",bossWake:"ADMIN FINALLY WOKE UP",bossIncoming:"SLEEPING ADMIN // 64H LATER",victory:"LIQUIDITY SURVIVED",poolHit:"LIQUIDITY HIT",playerHit:"YOU GOT SHILLED"
     },
     ru:{
       live:"УБИЙСТВ В RUN",soundOn:"ЗВУК ВКЛ",soundOff:"ЗВУК ВЫКЛ",audio:"ЗВУК",fullscreen:"НА ВЕСЬ ЭКРАН ↗",exitFullscreen:"ВЫЙТИ ×",
       moveControl:"ДВИЖЕНИЕ",moveHint:"тяни",aimControl:"ПРИЦЕЛ",aimHint:"задай направление",aimAria:"Задать направление огня",autoFire:"АВТООГОНЬ",armed:"АКТИВЕН",rotate:"ПОВЕРНИ ДЛЯ БОЛЬШЕГО ОБЗОРА",
-      stamp:"БЕЗ ROADMAP // БЕЗ ОБЕЩАНИЙ",hero:'<b>Без roadmap. Без обещаний.</b><br>Только оружие и пул.',
-      tag1:"ЕЖЕДНЕВНЫЙ ОДИНАКОВЫЙ RUN",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"1 ПОДТВЕРЖДЁННОЕ УБИЙСТВО = 1 PENDING LEEK",
+      stamp:"ПУБЛИЧНЫЙ ПРОТОТИП // BURN НЕ АКТИВЕН",hero:'<b>Играбельный прототип. Без фальшивой utility.</b><br>Убийства дают очки. LEEK пока не сжигается игрой.',
+      tag1:"ЕЖЕДНЕВНЫЙ ОДИНАКОВЫЙ RUN",tag2:"КОШЕЛЁК НЕ НУЖЕН",tag3:"BURN-МЕХАНИКА // НЕ АКТИВНА",
       terminal:"DAILY RUN // АВТООГОНЬ ГОТОВ",startTitle:"ЗАЩИТИ ЛИКВИДНОСТЬ",startCopy:'Три акта. Один спящий админ. Вторых шансов нет.<br><b>Движение:</b> WASD или левый стик. <b>Прицел:</b> мышь или правый пад. Огонь автоматический.',start:"ВОЙТИ В ЛОГОВО →",
-      proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Публичные кошельки. Live burn balance. Ссылки на блокчейн. <strong>Проверь сам.</strong>',
+      proofTitle:"НИКОМУ НЕ ВЕРЬ.<br>ПРОВЕРЯЙ ВСЁ.",proofCopy:'Публичные кошельки. Live-баланс void-кошелька. Текущий gameplay не создаёт burn-транзакции. <strong>Проверь сам.</strong>',
       scan:"ОТКРЫТЬ ДЕЛО →",scanInput:"КОНТРАКТ TON JETTON",rankName:"ТВОЯ ПОДПИСЬ",rankCountry:"СТРАНА",rankSubmit:"ДОБАВИТЬ RUN",finish:"Заверши run, чтобы открыть отправку результата.",
-      supplyLive:"void-кошелёк синхронизирован. supply обновлён.",supplyError:"TON API недоступен. скан приостановлен.",
+      supplyLive:"void-кошелёк синхронизирован. связь с gameplay: не активна.",supplyError:"TON API недоступен. скан приостановлен.",
       copy:"КОПИРОВАТЬ CA",copied:"CA СКОПИРОВАН.",install:"УСТАНОВИТЬ ИГРУ",installed:"ДОБАВЛЕНО НА ЭКРАН",
       paused:"ПАУЗА",resumed:"ОБРАТНО В ЛОГОВО",challenge:(name,score)=>`${name} набрал ${score.toLocaleString()}. Победи овощ.`,
       rugged:"ТЕБЯ ЗАРАГАЛИ.",cleared:"ЛОГОВО ЗАЧИЩЕНО.",liquidityGone:"ЛИКВИДНОСТЬ УКРАЛИ.",
@@ -713,7 +713,7 @@
       scanLoading:"Допрашиваем блокчейн…",scanInvalid:"Это не похоже на адрес TON jetton.",scanFailed:"TON ответил невнятно. Подожди и попробуй снова.",
       verdictLow:"ХОРОШО НАРЕЗАНО",verdictMid:"ТЕСНАЯ КУХНЯ",verdictHigh:"КИТЫ В КЛАДОВКЕ",
       verdictLowText:"Видимые топ-10 не контролируют основную часть выпущенного supply.",verdictMidText:"Владение заметно сконцентрировано. Сначала проверь адреса, потом сочиняй теорию.",verdictHighText:"Небольшая группа контролирует крупную долю. Это факт, но ещё не автоматический rug verdict.",
-      ticker:burned=>["1 УБИЙСТВО = 1 PENDING LEEK",`${human(burned)} ОТПРАВЛЕНО В ПУСТОТУ`,"КОШЕЛЁК НЕ НУЖЕН","БЕЗ ROADMAP-ФАНФИКОВ","СНАЧАЛА ГЕЙМПЛЕЙ"],
+      ticker:burned=>["GAME BURN = НЕ АКТИВЕН",`VOID WALLET: ${human(burned)} LEEK // НЕ ИЗ GAMEPLAY`,"КОШЕЛЁК НЕ НУЖЕН","ПУБЛИЧНЫЙ ПРОТОТИП","СНАЧАЛА ГЕЙМПЛЕЙ"],
       act:["АЛЛЕЯ ЛИКВИДНОСТИ","ФАБРИКА KOL","СПАЛЬНЯ АДМИНА"],actLabel:["АКТ I","АКТ II","ФИНАЛ"],
       wave:"ВОЛНА",locked:"FULLY LEEKED IN",bossWake:"АДМИН НАКОНЕЦ ПРОСНУЛСЯ",bossIncoming:"СПЯЩИЙ АДМИН // 64 ЧАСА СПУСТЯ",victory:"ЛИКВИДНОСТЬ ВЫЖИЛА",poolHit:"ЛИКВИДНОСТЬ АТАКОВАНА",playerHit:"ТЕБЯ ЗАШИЛЛИЛИ"
     }
@@ -722,15 +722,15 @@
   let liveBurned=15_000_000,burnDataReady=false,tickerSignature="";
 
   function renderTicker(){
-    const kills=Number(state?.kills)||0,pending=Number(state?.pendingBurn)||0,total=Number(globalStats?.totalBurned)||0,last=lastImpactRun;
+    const kills=Number(state?.kills)||0,total=Number(globalStats?.totalBurned)||0,last=lastImpactRun;
     const items=currentLang==="ru"?[
-      `ЭТОТ RUN: ${kills} УБИЙСТВ → ${pending} PENDING LEEK`,
-      burnDataReady?`${human(liveBurned)} СГОРЕЛО ON-CHAIN`:"BURN WALLET: ПОДКЛЮЧЕНИЕ",
+      `ЭТОТ RUN: ${kills} УБИЙСТВ`,
+      burnDataReady?`VOID WALLET: ${human(liveBurned)} LEEK // GAMEPLAY НЕ ПОДКЛЮЧЕН`:"VOID WALLET: ПОДКЛЮЧЕНИЕ",
       globalDataReady?`ВСЕ RUNS: ${human(total)} УБИЙСТВ`:"GLOBAL RUNS: ПОДКЛЮЧЕНИЕ",
       last?`ПОСЛЕДНИЙ RUN: ${Math.round(Number(last.score)||0).toLocaleString()} SCORE · ${Math.round(Number(last.kills)||0)} KILLS`:"ПОСЛЕДНИЙ RUN: НЕТ"
     ]:[
-      `THIS RUN: ${kills} KILLS → ${pending} PENDING LEEK`,
-      burnDataReady?`${human(liveBurned)} BURNED ON-CHAIN`:"BURN WALLET: CONNECTING",
+      `THIS RUN: ${kills} KILLS`,
+      burnDataReady?`VOID WALLET: ${human(liveBurned)} LEEK // GAMEPLAY LINK OFF`:"VOID WALLET: CONNECTING",
       globalDataReady?`ALL RUNS: ${human(total)} RECORDED KILLS`:"GLOBAL RUNS: CONNECTING",
       last?`LAST RUN: ${Math.round(Number(last.score)||0).toLocaleString()} SCORE · ${Math.round(Number(last.kills)||0)} KILLS`:"LAST RUN: NONE"
     ];
@@ -740,9 +740,9 @@
   }
 
   function renderImpact(){
-    const kills=Number(state?.kills)||0,pending=Number(state?.pendingBurn)||0,last=lastImpactRun;
+    const kills=Number(state?.kills)||0,last=lastImpactRun;
     $("impactRunKills").textContent=kills.toLocaleString();
-    $("impactPendingBurn").textContent=pending.toLocaleString()+" LEEK";
+    $("impactPendingBurn").textContent=currentLang==="ru"?"НЕ АКТИВЕН":"NOT LIVE";
     $("impactGlobalKills").textContent=globalDataReady?Math.round(Number(globalStats.totalBurned)||0).toLocaleString():"CONNECTING";
     $("impactLastScore").textContent=last?Math.round(last.score).toLocaleString():"NONE";
     $("navLive").textContent=`${kills.toLocaleString()} ${tr("live")}`;
@@ -1587,7 +1587,7 @@
 
   function refreshHud(){
     $("hudScore").textContent=Math.round(state.score).toLocaleString();$("hudKills").textContent=state.kills;$("hudCombo").textContent=state.combo+"X";$("hudHp").textContent=Math.round(state.player?.hp??100);
-    $("hudBurn").textContent=state.pendingBurn+" LEEK";$("hudActLabel").textContent=tr("actLabel")[state.actIndex]||tr("actLabel")[0];$("hudAct").textContent=tr("act")[state.actIndex]||tr("act")[0];
+    $("hudBurn").textContent=currentLang==="ru"?"НЕ АКТИВЕН":"NOT LIVE";$("hudActLabel").textContent=tr("actLabel")[state.actIndex]||tr("actLabel")[0];$("hudAct").textContent=tr("act")[state.actIndex]||tr("act")[0];
     $("hudLiquidity").textContent=Math.round(state.pool.hp)+"%";$("liquidityFill").style.width=clamp(state.pool.hp,0,100)+"%";$("hudLocked").textContent=Math.round(state.locked)+"%";$("lockedFill").style.width=clamp(state.locked,0,100)+"%";
     $("statKills").textContent=state.kills;$("statCombo").textContent=state.bestCombo+"X";$("statAccuracy").textContent=state.shots?Math.round(state.hits/state.shots*100)+"%":"0%";$("statTime").textContent=formatTime(state.elapsed);
     renderImpact();
@@ -1746,7 +1746,7 @@
     c.fillStyle="#8f9a90";c.font="20px IBM Plex Mono, monospace";c.fillText("CAUSE OF DEATH / FINAL WITNESS",66,405);c.fillStyle="#f3f6ed";c.font="38px Anton, Impact";cardText(c,run.cause,66,450,760,43);
     const runStamp=new Date(Number(run.startedAt)||Date.now()).toISOString().slice(0,19).replace("T"," "),runHash=run.eventHash?run.eventHash.slice(0,12).toUpperCase():"SEALING";
     c.fillStyle="#c8ff28";c.font="24px IBM Plex Mono, monospace";c.fillText("BEAT THIS VEGETABLE →",66,548);c.fillStyle="#8f9a90";c.font="18px IBM Plex Mono, monospace";c.fillText(`RUN ${runHash} · ${runStamp} UTC`,66,582);
-    c.textAlign="right";c.fillStyle="#f3f6ed";c.font="34px Anton, Impact";c.fillText("LEEKed IN",1136,548);c.fillStyle="#c8ff28";c.font="18px IBM Plex Mono, monospace";c.fillText("1 VERIFIED KILL = 1 PENDING LEEK",1136,582);
+    c.textAlign="right";c.fillStyle="#f3f6ed";c.font="34px Anton, Impact";c.fillText("LEEKed IN",1136,548);c.fillStyle="#c8ff28";c.font="18px IBM Plex Mono, monospace";c.fillText("PROTOTYPE // GAMEPLAY DOES NOT BURN LEEK",1136,582);
     c.globalAlpha=.08;c.fillStyle="#fff";for(let y=16;y<618;y+=4)c.fillRect(0,y,1200,1);c.globalAlpha=1;
     return card;
   }

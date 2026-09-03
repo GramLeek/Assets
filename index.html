@@ -243,7 +243,12 @@
       .content{padding-top:38px}.panel,.case-intro,.scanner,.build-tape{padding:20px 16px}.scan-form{grid-template-columns:1fr}.scan-summary,.career-grid{grid-template-columns:1fr}.link-row{grid-template-columns:1fr}.ranking-head{align-items:flex-start}.rank-form{grid-template-columns:1fr 112px}.rank-submit{grid-column:1/-1}.rank-row{grid-template-columns:34px minmax(0,1fr) 62px 78px;padding-inline:4px}.manifest-quote{padding:24px 18px}footer{flex-direction:column}
     }
     @media(max-width:390px){
-      .brand-copy strong{font-size:1.08rem}.game-terminal::before{display:none}.hud-left{left:6px;top:6px}.hud-right{right:6px;top:6px}.hud-center{top:44px}.hud-bottom{left:6px;right:6px;bottom:6px}.screen-card h2{font-size:1.85rem}.joystick,.aim-pad{width:76px;height:76px;flex-basis:76px}
+      .brand-copy strong{font-size:1.08rem}.game-terminal::before{display:none}.hud-left{left:6px;top:6px}.hud-right{right:6px;top:6px}.hud-center{top:44px}.screen-card h2{font-size:1.85rem}.joystick,.aim-pad{width:76px;height:76px;flex-basis:76px}
+    }
+    @media(hover:none),(pointer:coarse){
+      .hud-center{display:none}
+      .hud-bottom{left:50%;right:auto;top:6px;bottom:auto;width:min(35%,190px);transform:translateX(-50%);grid-template-columns:1fr;gap:0}
+      .hud-meter{padding:4px 6px;background:rgba(3,5,4,.74)}.hud-meter:first-child{display:block}.hud-meter:last-child{display:none}.meter-copy{margin-bottom:3px}.meter-track{height:4px}
     }
     @media(max-width:840px) and (orientation:portrait){
       .game-terminal.game-fullscreen .terminal-head{min-height:42px;padding:6px 9px}
@@ -253,6 +258,16 @@
       .game-terminal.game-fullscreen .joystick,.game-terminal.game-fullscreen .aim-pad{width:clamp(82px,25vw,116px);height:clamp(82px,25vw,116px);flex-basis:clamp(82px,25vw,116px)}
       .game-terminal.game-fullscreen .stick,.game-terminal.game-fullscreen .aim-stick{width:clamp(36px,10vw,44px);height:clamp(36px,10vw,44px)}
       .game-terminal.game-fullscreen .auto-fire-state{min-width:76px;padding:10px 7px}.game-terminal.game-fullscreen .auto-fire-state small{display:block}
+    }
+    @media(orientation:landscape) and (max-height:520px) and (hover:none),(orientation:landscape) and (max-height:520px) and (pointer:coarse){
+      .game-terminal.game-fullscreen .terminal-shell{display:grid;grid-template-columns:clamp(82px,12vw,104px) minmax(0,1fr) clamp(82px,12vw,104px);grid-template-rows:38px minmax(0,1fr)}
+      .game-terminal.game-fullscreen .terminal-head{grid-column:1/-1;grid-row:1;z-index:5;min-height:38px;padding:3px 8px}
+      .game-terminal.game-fullscreen .game-frame{grid-column:2;grid-row:2;width:100%;height:100%;min-width:0;min-height:0}
+      .game-terminal.game-fullscreen .mobile-controls{grid-column:1/-1;grid-row:2;z-index:4;display:grid;grid-template-columns:clamp(82px,12vw,104px) minmax(0,1fr) clamp(82px,12vw,104px);align-content:stretch;align-items:end;padding:5px 4px 7px;border:0;background:transparent;pointer-events:none}
+      .game-terminal.game-fullscreen .mobile-controls .pad-wrap{align-self:end;justify-self:center;pointer-events:auto}.game-terminal.game-fullscreen .mobile-controls .pad-wrap:first-child{grid-column:1}.game-terminal.game-fullscreen .mobile-controls .pad-wrap:last-child{grid-column:3}
+      .game-terminal.game-fullscreen .control-label{display:none}.game-terminal.game-fullscreen .joystick,.game-terminal.game-fullscreen .aim-pad{width:clamp(70px,20vh,86px);height:clamp(70px,20vh,86px);flex-basis:clamp(70px,20vh,86px)}
+      .game-terminal.game-fullscreen .stick,.game-terminal.game-fullscreen .aim-stick{width:32px;height:32px}
+      .game-terminal.game-fullscreen .auto-fire-state{grid-column:2;grid-row:1;align-self:start;justify-self:center;min-width:92px;margin-top:5px;padding:4px 8px;background:rgba(5,7,5,.84);pointer-events:none}.game-terminal.game-fullscreen .auto-fire-state small{display:none}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.live-chip::before,.ticker-track{animation:none}.game-banner,.toast,.meter-fill,.supply-fill{transition:none}}
   </style>
@@ -265,7 +280,7 @@
       <span class="brand-orb" id="brandOrb"><img src="Logo.png" alt="" id="brandLogo" /><span class="brand-fallback">L</span></span>
       <span class="brand-copy"><strong>GRAMLEEK</strong><span>PLAYABLE CULTURE ON GRAM</span></span>
     </a>
-    <div class="nav-signal">PIRATE BUILD <b>0.8.1</b> // TRUST NOTHING</div>
+    <div class="nav-signal">PIRATE BUILD <b>0.8.2</b> // TRUST NOTHING</div>
     <div class="nav-actions">
       <span class="live-chip" id="navLive">RUG DEN LIVE</span>
       <button class="icon-btn" id="installBtn" type="button" aria-label="Add game to home screen" hidden>INSTALL</button>
@@ -305,7 +320,7 @@
 
           <div class="game-frame" id="gameFrame">
             <div class="playfield" id="playfield">
-              <canvas id="gameCanvas" width="960" height="600" aria-label="Top-down action game. Move with WASD or left joystick, aim and fire with mouse or right pad."></canvas>
+              <canvas id="gameCanvas" width="960" height="600" aria-label="Top-down action game. Move with WASD or left joystick, set the automatic firing direction with mouse or right pad."></canvas>
               <div class="game-overlay">
               <div class="hud" aria-hidden="true">
                 <div class="hud-left">
@@ -449,7 +464,7 @@
 
       <section class="manifest">
         <div class="manifest-quote"><blockquote>GRAMLEEK TURNS <span>ON-CHAIN NONSENSE</span> INTO GAMES, EVIDENCE AND MEMES.</blockquote><p>Not the official token of someone else's app. Not financial infrastructure cosplay. A transparent community experiment with something people can actually play.</p></div>
-        <div class="build-tape"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>BUILD 07</time><span>Daily seed, challenge cards and Telegram hooks</span></div><div class="tape-row"><time>BUILD 06</time><span>Global ranking separated from insecure browser writes</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
+        <div class="build-tape"><div class="section-kicker acid">PUBLIC BUILD TAPE</div><div class="tape-row"><time>BUILD 08.2</time><span>Landscape screen recovery + clear lower combat zone</span></div><div class="tape-row"><time>BUILD 08.1</time><span>Manual aim + continuous auto-fire + mobile combat pass</span></div><div class="tape-row"><time>BUILD 08</time><span>Three-act LEEKed IN run + final boss</span></div><div class="tape-row"><time>BUILD 07</time><span>Daily seed, challenge cards and Telegram hooks</span></div><div class="tape-row"><time>BUILD 06</time><span>Global ranking separated from insecure browser writes</span></div><div class="tape-row"><time>ON-CHAIN</time><span>15M LEEK sent to the public void wallet</span></div></div>
       </section>
     </div>
   </main>

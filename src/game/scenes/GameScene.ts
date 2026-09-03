@@ -38,8 +38,12 @@ export class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, this.walls);
     this.physics.add.collider(this.enemies, this.walls);
-    this.physics.add.overlap(this.bullets, this.enemies, this.onBulletEnemy, undefined, this);
-    this.physics.add.overlap(this.player, this.enemies, this.onPlayerEnemy, undefined, this);
+    this.physics.add.overlap(this.bullets, this.enemies, (bulletObject, enemyObject) => {
+      this.onBulletEnemy(bulletObject as Phaser.Physics.Arcade.Image, enemyObject as Enemy);
+    });
+    this.physics.add.overlap(this.player, this.enemies, (_playerObject, enemyObject) => {
+      this.onPlayerEnemy(enemyObject as Enemy);
+    });
 
     this.createHud();
     this.spawnEnemy();
@@ -50,10 +54,9 @@ export class GameScene extends Phaser.Scene {
 
   update(time: number): void {
     this.player.update(this.input.activePointer);
-    this.enemies.children.each(child => {
+    this.enemies.getChildren().forEach(child => {
       const enemy = child as Enemy;
       if (enemy.active) enemy.chase(this.player);
-      return true;
     });
 
     if (time >= this.nextShotAt) {
@@ -110,9 +113,7 @@ export class GameScene extends Phaser.Scene {
     this.time.delayedCall(900, () => bullet.active && bullet.destroy());
   }
 
-  private onBulletEnemy(bulletObject: Phaser.Types.Physics.Arcade.GameObjectWithBody, enemyObject: Phaser.Types.Physics.Arcade.GameObjectWithBody): void {
-    const bullet = bulletObject as Phaser.Physics.Arcade.Image;
-    const enemy = enemyObject as Enemy;
+  private onBulletEnemy(bullet: Phaser.Physics.Arcade.Image, enemy: Enemy): void {
     if (!bullet.active || !enemy.active) return;
     bullet.destroy();
     TelegramBridge.hit();
@@ -128,8 +129,7 @@ export class GameScene extends Phaser.Scene {
     this.killsText.setText(`KILLS ${RunState.kills}`);
   }
 
-  private onPlayerEnemy(_playerObject: Phaser.Types.Physics.Arcade.GameObjectWithBody, enemyObject: Phaser.Types.Physics.Arcade.GameObjectWithBody): void {
-    const enemy = enemyObject as Enemy;
+  private onPlayerEnemy(enemy: Enemy): void {
     if (!enemy.active) return;
     enemy.destroy();
     this.cameras.main.flash(80, 255, 43, 145, false);

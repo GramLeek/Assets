@@ -1,0 +1,14 @@
+:root {
+  color-scheme: dark;
+  background: #050705;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --acid: #c8ff28;
+  --signal: #ffe600;
+  --cold: #25d5ff;
+}
+
+* { box-sizing: border-box; }
+html, body, #app, #game-root { width: 100%; height: 100%; margin: 0; }
+html, body { overflow: hidden; overscroll-behavior: none; background: #050705; }
+body { padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+canvas { display: block; margin: 0 auto; touch-action: none; }
